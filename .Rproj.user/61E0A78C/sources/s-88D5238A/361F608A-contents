@@ -1,0 +1,9 @@
+theme = "hugo-academic"
+baseURL = "http://example.org/"
+languageCode = "en-us"
+title = "My New Hugo Site"
+
+ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "\\.Rproj$", "_files$", "_cache$"]
+
+[params]
+        gravatar = "egrommet@gmail.com"
