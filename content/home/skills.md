@@ -33,4 +33,15 @@ weight = 30
   name = "Data Journalism"
   description = ""
 
+[[feature]]
+  icon = "chalkboard-teacher"
+  icon_pack = "fas"
+  name = "Journalism Education"
+  description = ""  
+
+[[feature]]
+  icon = "book-reader"
+  icon_pack = "fas"
+  name = "Author"
+  description = ""    
 +++
