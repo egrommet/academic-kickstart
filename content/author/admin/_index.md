@@ -84,4 +84,4 @@ interests = [
 
 I'm a Senior Lecturer in Data Journalism at Cardiff University's School of Journalism, Media and Culture.
 
-He is co-director of the [MSc in Computational and Data Journalism](https://www.cardiff.ac.uk/study/postgraduate/taught/courses/course/computational-and-data-journalism-msc) and a co-founder of the [European Data and Computational Journalism Conference](http://datajconf.com/). My interests include data journalism, journalism and software development, social media and production journalism.
+I'm the co-director of the [MSc in Computational and Data Journalism](https://www.cardiff.ac.uk/study/postgraduate/taught/courses/course/computational-and-data-journalism-msc) and a co-founder of the [European Data and Computational Journalism Conference](http://datajconf.com/). My interests include data journalism, journalism and software development, social media and production journalism.
