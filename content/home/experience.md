@@ -52,7 +52,7 @@ date_format = "Jan 2006"
   company_url = ""
   location = "Southampton, England"
   date_start = "1997-10-01"
-  date_end = "2002-10-31"
+  date_end = "2002-02-28"
   description = """
   Responsibilities included:
 
