@@ -43,5 +43,11 @@ weight = 30
   icon = "book-reader"
   icon_pack = "fas"
   name = "Author"
-  description = ""    
+  description = ""
+
+[[feature]]
+  icon = "bullhorn"
+  icon_pack = "fas"
+  name = "Commentator"
+  description = ""      
 +++
