@@ -3,6 +3,7 @@
 .RData
 .Ruserdata
 .RData
+.R
 
 #ignore data folder
 data/
