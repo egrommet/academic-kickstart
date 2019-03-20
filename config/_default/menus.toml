@@ -24,9 +24,9 @@
   weight = 20
 
 # [[main]]
-#   name = "Tutorials"
-#   url = "/tutorial/"
-#   weight = 30
+#    name = "Tutorials"
+#    url = "/tutorial/"
+#    weight = 90
 
 [[main]]
    name = "Experience"

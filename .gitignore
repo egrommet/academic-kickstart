@@ -7,3 +7,4 @@
 
 #ignore data folder
 data/
+.Rproj.user

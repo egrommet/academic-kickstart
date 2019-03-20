@@ -1,5 +1,5 @@
 +++
-title = "Overview"
+title = "Test"
 
 date = 2019-03-20T13:53:00
 # lastmod = 2019-03-20T13:53:00
@@ -10,10 +10,10 @@ type = "docs"  # Do not modify.
 
 # Add menu entry to sidebar.
 [menu.tutorial]
-  name = "Overview"
-  weight = 1
+  name = "Test"
+  weight = 2
 
 
 +++
 
-Some stuff about courses
+Some more stuff about courses
