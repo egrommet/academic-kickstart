@@ -1,0 +1,22 @@
+library(tidyverse)
+
+# Read in the data
+workless_child_eth <- read_csv("./intro/data/workless children_ethnicity_working.csv", skip = 3)
+
+# white % mixed asian black chinese other missing
+
+
+# need to solve 2011 - 
+workless_child_eth <- workless_child_eth %>%
+  select(-"X10") %>%
+  slice(2:14) %>%
+  filter(!is.na(Total)) %>%
+  rename("White_per_cent" = X11, "mixed_per_cent" = X12, "asian_per_cent" = X13, 
+         "black_per_cent"= X14, "chinese_per_cent" = X15, 
+         "other_per_cent" = X16, "missing_per_cent" = X17)
+
+
+  
+  
+  
+  
