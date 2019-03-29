@@ -2,7 +2,7 @@
 title: "Mapping the article 50 petition in R and ggplot"
 author: "Glyn Mottershead"
 date: '2019-03-29'
-slug: mapping-in-r-and-ggplot
+slug: mapping-the-article-50-petition-in-r-and-ggplot
 categories: ["R", "Mapping", "Data Visualisation"]
 tags: ["json", "map", "ggplot2"]
 draft: false
@@ -112,7 +112,7 @@ total_sig
 ```
 
 ```
-## [1] 5617244
+## [1] 5617830
 ```
 
 ## Joing the data sets

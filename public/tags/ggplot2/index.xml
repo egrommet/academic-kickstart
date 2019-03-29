@@ -13,10 +13,10 @@
     
     <item>
       <title>Mapping the article 50 petition in R and ggplot</title>
-      <link>https://egrommet.github.io/tutorial/mapping-in-r-and-ggplot/</link>
+      <link>https://egrommet.github.io/tutorial/mapping-the-article-50-petition-in-r-and-ggplot/</link>
       <pubDate>Fri, 29 Mar 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://egrommet.github.io/tutorial/mapping-in-r-and-ggplot/</guid>
+      <guid>https://egrommet.github.io/tutorial/mapping-the-article-50-petition-in-r-and-ggplot/</guid>
       <description>Mapping in R - using ggplot2 The Revoke Article 50 petition got my colleague and all-round codemeister Dr Martin Chorley and I talking.
 We started thinking about ways that we could see what the patterns for people signing were like.
 It was well into the millions when I started playing with ways of visualising where people who voted were located. The site can map all of the signatures (5,962,824 at the time of writing), but it also has an option to get the data in a machine-friendly json format.</description>
