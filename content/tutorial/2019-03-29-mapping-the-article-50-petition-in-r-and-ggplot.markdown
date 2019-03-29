@@ -1,14 +1,13 @@
 ---
-title: Mapping the Article 50 Petition in R and ggplot
-author: 'Glyn Mottershead'
+title: "Mapping the article 50 petition in R and ggplot"
+author: "Glyn Mottershead"
 date: '2019-03-29'
-slug: mapping-the-article-50-petition-in-r-and-ggplot
+slug: mapping-in-r-and-ggplot
 categories: ["R", "Mapping", "Data Visualisation"]
 tags: ["json", "map", "ggplot2"]
-draft: no
-image:
-  caption: ''
-  focal_point: ''
+draft: false
+
+
 ---
 # Mapping in R - using ggplot2
 The [Revoke Article 50 petition](https://petition.parliament.uk/petitions/241584/) got my colleague and all-round codemeister [Dr Martin Chorley](https://twitter.com/martinjc) and I talking.
@@ -93,7 +92,7 @@ json_data <- fromJSON("https://petition.parliament.uk/petitions/241584.json", fl
 
 The next thing we need to do is get the data out of the json file we just imported. If you click on the json_data object in the Environment pane, you'll see it is a list of two - double click to open it up and we cab view the file.  Inside the json-data structure we can see data has a list of three objects inside it, opening that shows us attributes is where the intersting things are happening.  
 
-There's a lot going on but there are two things that interest me for mapping - signatures_by_constiuency and signatures_by_county (this second one is for a later date).  Opening the signatures_by_country list shows it has the following elements **name, ons_code, mp, signature_count** for each of the 650 constituencies in the file.  The ons_code will come in useful later when we want to merge our map and data together.
+There's a lot going on but there are two things that interest me for mapping - signatures_by_constiuency and signatures_by_country (this second one is for a later date).  Opening the signatures_by_country list shows it has the following elements **name, ons_code, mp, signature_count** for each of the 650 constituencies in the file.  The ons_code will come in useful later when we want to merge our map and data together.
 
 We can move through the levels of our json_data object  in this fashion "name$parent_element$child_element". 
 
@@ -113,7 +112,7 @@ total_sig
 ```
 
 ```
-## [1] 5613629
+## [1] 5616996
 ```
 
 ## Joing the data sets
@@ -149,7 +148,7 @@ full_uk_map <- left_join(fort_uk_map, sign_data, by = c("id" = "ons_code"))
 
 
 ## Basic ggplot2 map
-We'll start off with a simple map that shows where the voting has taken place, so we need to load ggplot2 as a function. I'll break down the structure below for what we are doing here.
+We'll start off with a simple map that shows which constituency people are signing from, so we need to load ggplot2 as a function. I'll break down the structure below for what we are doing here.
 
 
 ```r
@@ -165,10 +164,13 @@ ggplot() +
   coord_equal()
 ```
 
-<img src="/tutorial/2019-03-29-mapping-the-article-50-petition-in-r-and-ggplot_files/figure-html/unnamed-chunk-6-1.png" width="672" />
+<div class="figure">
+<img src="/tutorial/2019-03-29-mapping-the-article-50-petition-in-r-and-ggplot_files/figure-html/map-1.png" alt="A simple choropleth map." width="672" />
+<p class="caption">Figure 1 A simple choropleth map.</p>
+</div>
 
 I've also been playing with a great post from Timo Grossenbaher on how to [make beatiful thematic maps with ggplot2](https://timogrossenbacher.ch/2016/12/beautiful-thematic-maps-with-ggplot2-only/) to create something a bit more effective.
 
-Andy Dickinson from Manchester Met has done a [Pandas (Python) look at the data](https://andydickinson.net/2019/03/27/quick-analalysis-of-petitions-data/).
+Andy Dickinson from Manchester Met has done a [Pandas (Python) look at the article 50 and knife crime petitions](https://andydickinson.net/2019/03/27/quick-analalysis-of-petitions-data/).
 
 Link to come in due course.

@@ -23,10 +23,10 @@
   url = "#featured"
   weight = 20
 
-# [[main]]
-#    name = "Tutorials"
-#    url = "/tutorial/"
-#    weight = 90
+[[main]]
+    name = "Tutorials"
+    url = "/tutorial/"
+    weight = 90
 
 [[main]]
    name = "Experience"

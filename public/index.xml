@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Glyn Mottershead on Glyn Mottershead</title>
+    <link>https://egrommet.github.io/</link>
+    <description>Recent content in Glyn Mottershead on Glyn Mottershead</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-gb</language>
+    <lastBuildDate>Thu, 04 Apr 2019 13:30:00 +0100</lastBuildDate>
+    <atom:link href="/" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Data and Computational Journalism</title>
+      <link>https://egrommet.github.io/talk/digital-city/</link>
+      <pubDate>Thu, 04 Apr 2019 13:30:00 +0100</pubDate>
+      
+      <guid>https://egrommet.github.io/talk/digital-city/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Mapping the article 50 petition in R and ggplot</title>
+      <link>https://egrommet.github.io/tutorial/mapping-in-r-and-ggplot/</link>
+      <pubDate>Fri, 29 Mar 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://egrommet.github.io/tutorial/mapping-in-r-and-ggplot/</guid>
+      <description>
+
+&lt;h1 id=&#34;mapping-in-r-using-ggplot2&#34;&gt;Mapping in R - using ggplot2&lt;/h1&gt;
+
+&lt;p&gt;The &lt;a href=&#34;https://petition.parliament.uk/petitions/241584/&#34; target=&#34;_blank&#34;&gt;Revoke Article 50 petition&lt;/a&gt; got my colleague and all-round codemeister &lt;a href=&#34;https://twitter.com/martinjc&#34; target=&#34;_blank&#34;&gt;Dr Martin Chorley&lt;/a&gt; and I talking.&lt;/p&gt;
+
+&lt;p&gt;We started thinking about ways that we could see what the patterns for people signing were like.&lt;/p&gt;
+
+&lt;p&gt;It was well into the millions when I started playing with ways of visualising where people who voted were located. The site can map all of the signatures (5,962,824 at the time of writing), but it also has an option to get the data in a &lt;a href=&#34;https://petition.parliament.uk/petitions/241584.json&#34; target=&#34;_blank&#34;&gt;machine-friendly json format&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;According to the site:&lt;br /&gt;
+&lt;em&gt;The data shows the number of people who have signed the petition by country as well as in the constituency of each Member of Parliament. This data is available for all petitions on the site. It is not a list of people who have signed the petition. The only name that is shared on the site is that of the petition creator.&lt;/em&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;getting-started&#34;&gt;Getting started&lt;/h2&gt;
+
+&lt;p&gt;You&amp;rsquo;ll need to install the following packages:
+install.packages(c(&amp;ldquo;geojsonio&amp;rdquo;, &amp;ldquo;ggplot2&amp;rdquo;, &amp;ldquo;dplyr&amp;rdquo;, &amp;ldquo;jsonlite&amp;rdquo;))&lt;/p&gt;
+
+&lt;h2 id=&#34;getting-the-map-shapes&#34;&gt;Getting the map shapes&lt;/h2&gt;
+
+&lt;p&gt;We&amp;rsquo;re going to use &lt;em&gt;geojsonio&lt;/em&gt; first to get a mapping file from the &lt;a href=&#34;http://geoportal.statistics.gov.uk/&#34; target=&#34;_blank&#34;&gt;ONS Open Geography Portal&lt;/a&gt;. It has a great respository of mapping files. We&amp;rsquo;ll be using the parliamentary wards file. Go to the site and use the menu bar to:
+&lt;em&gt;Boundaries &amp;gt; Electoral Boundaries &amp;gt; Westminster Parliamentary Constituencies &amp;gt; 2017 Boundaries&lt;/em&gt;&lt;br /&gt;
+You can download the file in a variety of formats, but we&amp;rsquo;re going to use the API to import it directly in GeoJSON format.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;NB At the time of writing there appeared to be a glitch in the site, I actually found the right map home page via a search engine.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;First we use the library() function to call geojsonio to handle the file, we&amp;rsquo;ll store the URL as a variable and then read it in to our working environment. The &amp;lsquo;what&amp;rsquo; argument uses &amp;ldquo;sp&amp;rdquo; - spacial class for a mapping file.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;library(geojsonio)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code&gt;## 
+## Attaching package: &#39;geojsonio&#39;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code&gt;## The following object is masked from &#39;package:base&#39;:
+## 
+##     pretty
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;url &amp;lt;- &amp;quot;https://opendata.arcgis.com/datasets/5ce27b980ffb43c39b012c2ebeab92c0_2.geojson&amp;quot;
+
+uk_map &amp;lt;- geojson_read(url, what = &amp;quot;sp&amp;quot;)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;We then need to turn it from the form it is in to something we can map more easily in ggplot2, so we&amp;rsquo;ll call the library here and use the fortify() function.&lt;/p&gt;
+
+&lt;p&gt;By having a look in side the uk_map dataframe we can see our code names for the constituencies are stored in &lt;strong&gt;pcon17cd&lt;/strong&gt;, so we&amp;rsquo;ll add that as our region.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;library(ggplot2)
+
+fort_uk_map &amp;lt;- fortify(uk_map, region = &amp;quot;pcon17cd&amp;quot;)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;getting-the-data-for-our-map&#34;&gt;Getting the data for our map&lt;/h2&gt;
+
+&lt;p&gt;We&amp;rsquo;re now going to read in the data from the Parliament Petition site. We&amp;rsquo;ll use &lt;strong&gt;jsonlite&lt;/strong&gt; to do that.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;library(jsonlite)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code&gt;## 
+## Attaching package: &#39;jsonlite&#39;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code&gt;## The following object is masked from &#39;package:geojsonio&#39;:
+## 
+##     validate
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;json_data &amp;lt;- fromJSON(&amp;quot;https://petition.parliament.uk/petitions/241584.json&amp;quot;, flatten = FALSE)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The next thing we need to do is get the data out of the json file we just imported. If you click on the json_data object in the Environment pane, you&amp;rsquo;ll see it is a list of two - double click to open it up and we cab view the file.  Inside the json-data structure we can see data has a list of three objects inside it, opening that shows us attributes is where the intersting things are happening.&lt;/p&gt;
+
+&lt;p&gt;There&amp;rsquo;s a lot going on but there are two things that interest me for mapping - signatures_by_constiuency and signatures_by_country (this second one is for a later date).  Opening the signatures_by_country list shows it has the following elements &lt;strong&gt;name, ons_code, mp, signature_count&lt;/strong&gt; for each of the 650 constituencies in the file.  The ons_code will come in useful later when we want to merge our map and data together.&lt;/p&gt;
+
+&lt;p&gt;We can move through the levels of our json_data object  in this fashion &amp;ldquo;name$parent_element$child_element&amp;rdquo;.&lt;/p&gt;
+
+&lt;p&gt;So in our case:
+&lt;strong&gt;sign_data &amp;lt;- json_data$data$attributes$signatures_by_constituency&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;We&amp;rsquo;ll store that in a dataframe and while we&amp;rsquo;re at it we&amp;rsquo;ll calculate how many signatures there were at the time of running the code, I&amp;rsquo;ll do this as a dataframe as it will be useful in the second tutorial.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;sign_data &amp;lt;- json_data$data$attributes$signatures_by_constituency
+
+
+total_sig &amp;lt;- sum(sign_data$signature_count)
+
+total_sig
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code&gt;## [1] 5616996
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;joing-the-data-sets&#34;&gt;Joing the data sets&lt;/h2&gt;
+
+&lt;p&gt;This is where &lt;strong&gt;dplyr&lt;/strong&gt; comes into its own as a data-wrangling toolkit. We&amp;rsquo;ll call the library and then use a &lt;strong&gt;left_join()&lt;/strong&gt; to merge them together into a new dataframe called &lt;strong&gt;full_uk_map&lt;/strong&gt;. There&amp;rsquo;s an explanation of join types on the &lt;a href=&#34;https://dplyr.tidyverse.org/reference/join.html&#34; target=&#34;_blank&#34;&gt;tidyverse site&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;To do the join we have to tell the function where our common columns are in the &amp;lsquo;by&amp;rsquo; element &amp;ndash; &lt;strong&gt;left_join(dataset1, dataset2, by = c(&amp;ldquo;a_column&amp;rdquo; = &amp;ldquo;the_equivalent_column&amp;rdquo;))&lt;/strong&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;library(dplyr)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code&gt;## 
+## Attaching package: &#39;dplyr&#39;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code&gt;## The following objects are masked from &#39;package:stats&#39;:
+## 
+##     filter, lag
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code&gt;## The following objects are masked from &#39;package:base&#39;:
+## 
+##     intersect, setdiff, setequal, union
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;full_uk_map &amp;lt;- left_join(fort_uk_map, sign_data, by = c(&amp;quot;id&amp;quot; = &amp;quot;ons_code&amp;quot;))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;basic-ggplot2-map&#34;&gt;Basic ggplot2 map&lt;/h2&gt;
+
+&lt;p&gt;We&amp;rsquo;ll start off with a simple map that shows which constituency people are signing from, so we need to load ggplot2 as a function. I&amp;rsquo;ll break down the structure below for what we are doing here.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;# Call ggplot here as a function and use the &#39;+&#39; symbol to denote &#39;and then&#39;
+ggplot() +
+  # We&#39;ll use geom_polygon() and tell it where the data is, what our aesthetics are and what to fill how to create it as a choropleth map.
+  geom_polygon(data = full_uk_map, aes(x = long, y = lat, group = group, fill = signature_count)) +
+  # We&#39;ll put a white stroke on the constituency boundaries
+  geom_path(color = &amp;quot;white&amp;quot;) +
+  # Get rid of the background
+  theme_void() +
+  # And finally let&#39;s use coord_equal to ensure the x and y scales are the same.
+  coord_equal()
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;div class=&#34;figure&#34;&gt;
+&lt;img src=&#34;https://egrommet.github.io/tutorial/2019-03-29-mapping-the-article-50-petition-in-r-and-ggplot_files/figure-html/map-1.png&#34; alt=&#34;A simple choropleth map.&#34; width=&#34;672&#34; /&gt;
+&lt;p class=&#34;caption&#34;&gt;Figure 1 A simple choropleth map.&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;p&gt;I&amp;rsquo;ve also been playing with a great post from Timo Grossenbaher on how to &lt;a href=&#34;https://timogrossenbacher.ch/2016/12/beautiful-thematic-maps-with-ggplot2-only/&#34; target=&#34;_blank&#34;&gt;make beatiful thematic maps with ggplot2&lt;/a&gt; to create something a bit more effective.&lt;/p&gt;
+
+&lt;p&gt;Andy Dickinson from Manchester Met has done a &lt;a href=&#34;https://andydickinson.net/2019/03/27/quick-analalysis-of-petitions-data/&#34; target=&#34;_blank&#34;&gt;Pandas (Python) look at the article 50 and knife crime petitions&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Link to come in due course.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>When a tech company pulls the plug on your story</title>
+      <link>https://egrommet.github.io/publication/nieman-predictions-2019/</link>
+      <pubDate>Sat, 01 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://egrommet.github.io/publication/nieman-predictions-2019/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Are You Talking To Me?: An Analysis of Journalism Conversation on Social Media</title>
+      <link>https://egrommet.github.io/publication/are-you-talking-book-chapter/</link>
+      <pubDate>Sat, 01 Sep 2018 00:00:00 +0100</pubDate>
+      
+      <guid>https://egrommet.github.io/publication/are-you-talking-book-chapter/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>&#39;Can I click it? Yes you can&#39;: Football journalism, Twitter and clickbait</title>
+      <link>https://egrommet.github.io/publication/can-i-click-it/</link>
+      <pubDate>Fri, 09 Mar 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://egrommet.github.io/publication/can-i-click-it/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Recoding journalism  education: mind the  skills gap, please!</title>
+      <link>https://egrommet.github.io/talk/gap_foj/</link>
+      <pubDate>Sat, 02 Sep 2017 00:00:00 +0100</pubDate>
+      
+      <guid>https://egrommet.github.io/talk/gap_foj/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>The First Commit of History: Visualising News on a Deadline</title>
+      <link>https://egrommet.github.io/talk/visualising-on-a-deadline/</link>
+      <pubDate>Wed, 12 Jul 2017 00:00:00 +0100</pubDate>
+      
+      <guid>https://egrommet.github.io/talk/visualising-on-a-deadline/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Now we are three: A perspective on Computational and Data Journalism Education</title>
+      <link>https://egrommet.github.io/talk/now-we-are-three/</link>
+      <pubDate>Thu, 06 Jul 2017 00:00:00 +0100</pubDate>
+      
+      <guid>https://egrommet.github.io/talk/now-we-are-three/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Are You Talking To Me?: An Analysis of Journalism Conversation on Social Media</title>
+      <link>https://egrommet.github.io/publication/are-you-talking-to-me/</link>
+      <pubDate>Sun, 02 Oct 2016 00:00:00 +0100</pubDate>
+      
+      <guid>https://egrommet.github.io/publication/are-you-talking-to-me/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Subediting and production for journalists</title>
+      <link>https://egrommet.github.io/publication/subbing-book/</link>
+      <pubDate>Fri, 28 Aug 2015 00:00:00 +0100</pubDate>
+      
+      <guid>https://egrommet.github.io/publication/subbing-book/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>21st Century Journalism Handbook</title>
+      <link>https://egrommet.github.io/publication/21st-century-journalism-handbook/</link>
+      <pubDate>Sun, 01 Jul 2012 00:00:00 +0100</pubDate>
+      
+      <guid>https://egrommet.github.io/publication/21st-century-journalism-handbook/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Learning and Knowledge Building with Web 2.0 Technologies: Implications for Teacher Education</title>
+      <link>https://egrommet.github.io/publication/learning-and-knowledge-building/</link>
+      <pubDate>Sat, 01 Aug 2009 00:00:00 +0100</pubDate>
+      
+      <guid>https://egrommet.github.io/publication/learning-and-knowledge-building/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>
