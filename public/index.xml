@@ -116,7 +116,7 @@ total_sig &amp;lt;- sum(sign_data$signature_count)
 total_sig
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;pre&gt;&lt;code&gt;## [1] 5616996
+&lt;pre&gt;&lt;code&gt;## [1] 5617244
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;h2 id=&#34;joing-the-data-sets&#34;&gt;Joing the data sets&lt;/h2&gt;
