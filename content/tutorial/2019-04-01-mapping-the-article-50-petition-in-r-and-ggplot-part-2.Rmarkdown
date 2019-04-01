@@ -188,4 +188,4 @@ by_quantile2
 
 At some stage I'm going to play around with the background to declare the plot size (I'm guessing that is why it is breaking the bounds here - but the version at the top is exported from the code run in RStudio), I'll post when I do but for now I'm going to stop here.
 
-Remember, Timo goes on much further to make [a really beatiful map](https://timogrossenbacher.ch/2016/12/beautiful-thematic-maps-with-ggplot2-only/#clear-workspace-and-install-necessary-packages).
+Remember, Timo goes on much further to make [a really beautiful map](https://timogrossenbacher.ch/2016/12/beautiful-thematic-maps-with-ggplot2-only/#clear-workspace-and-install-necessary-packages).

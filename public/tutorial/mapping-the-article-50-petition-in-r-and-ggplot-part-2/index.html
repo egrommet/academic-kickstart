@@ -599,9 +599,9 @@ for(band in 1:length(quantiles)){
 labels
 </code></pre>
 
-<pre><code>##  [1] &quot;1965 – 3874&quot;   &quot;3874 – 4579&quot;   &quot;4579 – 5302&quot;   &quot;5302 – 6478&quot;  
-##  [5] &quot;6478 – 7557&quot;   &quot;7557 – 9025&quot;   &quot;9025 – 9642&quot;   &quot;9642 – 11102&quot; 
-##  [9] &quot;11102 – 36917&quot; &quot;36917 – NA&quot;
+<pre><code>##  [1] &quot;1965 – 3875&quot;   &quot;3875 – 4580&quot;   &quot;4580 – 5302&quot;   &quot;5302 – 6479&quot;  
+##  [5] &quot;6479 – 7557&quot;   &quot;7557 – 9026&quot;   &quot;9026 – 9642&quot;   &quot;9642 – 11104&quot; 
+##  [9] &quot;11104 – 36918&quot; &quot;36918 – NA&quot;
 </code></pre>
 
 <p>And we&rsquo;ve got a problem - the code gives us a final band that looks like &ldquo;36901 - NA&rdquo;, anything over our maximum. We can easily get rid of that as obviously we are limited at the maximum.</p>
@@ -611,9 +611,9 @@ labels
 labels
 </code></pre>
 
-<pre><code>## [1] &quot;1965 – 3874&quot;   &quot;3874 – 4579&quot;   &quot;4579 – 5302&quot;   &quot;5302 – 6478&quot;  
-## [5] &quot;6478 – 7557&quot;   &quot;7557 – 9025&quot;   &quot;9025 – 9642&quot;   &quot;9642 – 11102&quot; 
-## [9] &quot;11102 – 36917&quot;
+<pre><code>## [1] &quot;1965 – 3875&quot;   &quot;3875 – 4580&quot;   &quot;4580 – 5302&quot;   &quot;5302 – 6479&quot;  
+## [5] &quot;6479 – 7557&quot;   &quot;7557 – 9026&quot;   &quot;9026 – 9642&quot;   &quot;9642 – 11104&quot; 
+## [9] &quot;11104 – 36918&quot;
 </code></pre>
 
 <p>Next, we need to add our new number range to the map. We&rsquo;ll do this with the <a href="https://www.rdocumentation.org/packages/base/versions/3.5.3/topics/cut" target="_blank"><code>cut()</code> function</a>, to turn our <a href="https://www.stat.berkeley.edu/~s133/factors.html" target="_blank">number range into a factor</a>.</p>
@@ -693,7 +693,7 @@ by_quantile2
 
 <p>At some stage I&rsquo;m going to play around with the background to declare the plot size (I&rsquo;m guessing that is why it is breaking the bounds here - but the version at the top is exported from the code run in RStudio), I&rsquo;ll post when I do but for now I&rsquo;m going to stop here.</p>
 
-<p>Remember, Timo goes on much further to make <a href="https://timogrossenbacher.ch/2016/12/beautiful-thematic-maps-with-ggplot2-only/#clear-workspace-and-install-necessary-packages" target="_blank">a really beatiful map</a>.</p>
+<p>Remember, Timo goes on much further to make <a href="https://timogrossenbacher.ch/2016/12/beautiful-thematic-maps-with-ggplot2-only/#clear-workspace-and-install-necessary-packages" target="_blank">a really beautiful map</a>.</p>
 
     </div>
 

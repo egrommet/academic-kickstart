@@ -152,9 +152,9 @@ labels
 ```
 
 ```
-##  [1] "1965 – 3874"   "3874 – 4579"   "4579 – 5302"   "5302 – 6478"  
-##  [5] "6478 – 7557"   "7557 – 9025"   "9025 – 9642"   "9642 – 11102" 
-##  [9] "11102 – 36917" "36917 – NA"
+##  [1] "1965 – 3875"   "3875 – 4580"   "4580 – 5302"   "5302 – 6479"  
+##  [5] "6479 – 7557"   "7557 – 9026"   "9026 – 9642"   "9642 – 11104" 
+##  [9] "11104 – 36918" "36918 – NA"
 ```
 
 
@@ -168,9 +168,9 @@ labels
 ```
 
 ```
-## [1] "1965 – 3874"   "3874 – 4579"   "4579 – 5302"   "5302 – 6478"  
-## [5] "6478 – 7557"   "7557 – 9025"   "9025 – 9642"   "9642 – 11102" 
-## [9] "11102 – 36917"
+## [1] "1965 – 3875"   "3875 – 4580"   "4580 – 5302"   "5302 – 6479"  
+## [5] "6479 – 7557"   "7557 – 9026"   "9026 – 9642"   "9642 – 11104" 
+## [9] "11104 – 36918"
 ```
 
 Next, we need to add our new number range to the map. We'll do this with the [`cut()` function](https://www.rdocumentation.org/packages/base/versions/3.5.3/topics/cut), to turn our [number range into a factor](https://www.stat.berkeley.edu/~s133/factors.html).
@@ -259,4 +259,4 @@ by_quantile2
 
 At some stage I'm going to play around with the background to declare the plot size (I'm guessing that is why it is breaking the bounds here - but the version at the top is exported from the code run in RStudio), I'll post when I do but for now I'm going to stop here.
 
-Remember, Timo goes on much further to make [a really beatiful map](https://timogrossenbacher.ch/2016/12/beautiful-thematic-maps-with-ggplot2-only/#clear-workspace-and-install-necessary-packages).
+Remember, Timo goes on much further to make [a really beautiful map](https://timogrossenbacher.ch/2016/12/beautiful-thematic-maps-with-ggplot2-only/#clear-workspace-and-install-necessary-packages).
