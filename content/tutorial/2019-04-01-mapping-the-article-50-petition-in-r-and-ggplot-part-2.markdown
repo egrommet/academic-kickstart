@@ -115,12 +115,11 @@ There is a problem with maps - they often just show where the population is bigg
 I like to use [colorbrewer](http://colorbrewer2.org/#type=sequential&scheme=BuGn&n=3 "Colorbrewer for mapping") when I'm working with maps, you can have a much more nuanced colour range than using R's default (yes it can be done in R default, but I've personally found it to be more fiddly). And, it is also a function that is built into ggplot2 `scale_fill_brewer()` - which will make our life easier.
 
 But this gives us a bit of a problem as our colorbrewer function call only allows us nine shades of blue. If we tried using it as it stands we'd throw an error message similar to this 
-    1: In brewer.pal(n, pal):
-       n too large, allowed maximum for palette....
+`1: In brewer.pal(n, pal): n too large, allowed maximum for palette....`
 
 So, we'll chop our vote range into blocks as per Timo's post, create labels that allow us to explain the blocks, colour it according to our new range and then add a them to make it look good. His post goes into a lot more detail (obviously!).
 
-### There's whole in my bucket
+### There's a whole in my bucket
 We'll start off by declaring how many colour buckets we want to use, we'll store it as a variable.
 
 ```r
@@ -153,8 +152,8 @@ labels
 
 ```
 ##  [1] "1966 – 3875"   "3875 – 4580"   "4580 – 5304"   "5304 – 6479"  
-##  [5] "6479 – 7557"   "7557 – 9027"   "9027 – 9642"   "9642 – 11104" 
-##  [9] "11104 – 36920" "36920 – NA"
+##  [5] "6479 – 7557"   "7557 – 9027"   "9027 – 9642"   "9642 – 11105" 
+##  [9] "11105 – 36921" "36921 – NA"
 ```
 
 
@@ -169,8 +168,8 @@ labels
 
 ```
 ## [1] "1966 – 3875"   "3875 – 4580"   "4580 – 5304"   "5304 – 6479"  
-## [5] "6479 – 7557"   "7557 – 9027"   "9027 – 9642"   "9642 – 11104" 
-## [9] "11104 – 36920"
+## [5] "6479 – 7557"   "7557 – 9027"   "9027 – 9642"   "9642 – 11105" 
+## [9] "11105 – 36921"
 ```
 
 Next, we need to add our new number range to the map. We'll do this with the [`cut()` function](https://www.rdocumentation.org/packages/base/versions/3.5.3/topics/cut), to turn our [number range into a factor](https://www.stat.berkeley.edu/~s133/factors.html).
@@ -184,6 +183,7 @@ full_uk_map$quantiles <- cut(full_uk_map$signature_count,
 ```
 
 
+## Making the map
 Now we can make our map. This time we'll use our new quantiles column as the fill. We'll use `scale_fill_brewer()` to give us our 'European' blue colour range and put the legend at the bottom. we'll use the `labs()` element of ggplot2 to give us a headline, catptions and attribution.
 
 

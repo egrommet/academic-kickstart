@@ -567,12 +567,11 @@ library(dplyr)
 <p>I like to use <a href="http://colorbrewer2.org/#type=sequential&amp;scheme=BuGn&amp;n=3" title="Colorbrewer for mapping" target="_blank">colorbrewer</a> when I&rsquo;m working with maps, you can have a much more nuanced colour range than using R&rsquo;s default (yes it can be done in R default, but I&rsquo;ve personally found it to be more fiddly). And, it is also a function that is built into ggplot2 <code>scale_fill_brewer()</code> - which will make our life easier.</p>
 
 <p>But this gives us a bit of a problem as our colorbrewer function call only allows us nine shades of blue. If we tried using it as it stands we&rsquo;d throw an error message similar to this
-    1: In brewer.pal(n, pal):
-       n too large, allowed maximum for palette&hellip;.</p>
+<code>1: In brewer.pal(n, pal): n too large, allowed maximum for palette....</code></p>
 
 <p>So, we&rsquo;ll chop our vote range into blocks as per Timo&rsquo;s post, create labels that allow us to explain the blocks, colour it according to our new range and then add a them to make it look good. His post goes into a lot more detail (obviously!).</p>
 
-<h3 id="there-s-whole-in-my-bucket">There&rsquo;s whole in my bucket</h3>
+<h3 id="there-s-a-whole-in-my-bucket">There&rsquo;s a whole in my bucket</h3>
 
 <p>We&rsquo;ll start off by declaring how many colour buckets we want to use, we&rsquo;ll store it as a variable.</p>
 
@@ -600,8 +599,8 @@ labels
 </code></pre>
 
 <pre><code>##  [1] &quot;1966 – 3875&quot;   &quot;3875 – 4580&quot;   &quot;4580 – 5304&quot;   &quot;5304 – 6479&quot;  
-##  [5] &quot;6479 – 7557&quot;   &quot;7557 – 9027&quot;   &quot;9027 – 9642&quot;   &quot;9642 – 11104&quot; 
-##  [9] &quot;11104 – 36920&quot; &quot;36920 – NA&quot;
+##  [5] &quot;6479 – 7557&quot;   &quot;7557 – 9027&quot;   &quot;9027 – 9642&quot;   &quot;9642 – 11105&quot; 
+##  [9] &quot;11105 – 36921&quot; &quot;36921 – NA&quot;
 </code></pre>
 
 <p>And we&rsquo;ve got a problem - the code gives us a final band that looks like &ldquo;36901 - NA&rdquo;, anything over our maximum. We can easily get rid of that as obviously we are limited at the maximum.</p>
@@ -612,8 +611,8 @@ labels
 </code></pre>
 
 <pre><code>## [1] &quot;1966 – 3875&quot;   &quot;3875 – 4580&quot;   &quot;4580 – 5304&quot;   &quot;5304 – 6479&quot;  
-## [5] &quot;6479 – 7557&quot;   &quot;7557 – 9027&quot;   &quot;9027 – 9642&quot;   &quot;9642 – 11104&quot; 
-## [9] &quot;11104 – 36920&quot;
+## [5] &quot;6479 – 7557&quot;   &quot;7557 – 9027&quot;   &quot;9027 – 9642&quot;   &quot;9642 – 11105&quot; 
+## [9] &quot;11105 – 36921&quot;
 </code></pre>
 
 <p>Next, we need to add our new number range to the map. We&rsquo;ll do this with the <a href="https://www.rdocumentation.org/packages/base/versions/3.5.3/topics/cut" target="_blank"><code>cut()</code> function</a>, to turn our <a href="https://www.stat.berkeley.edu/~s133/factors.html" target="_blank">number range into a factor</a>.</p>
@@ -623,6 +622,8 @@ labels
                              labels = labels,
                              include.lowest = T)
 </code></pre>
+
+<h2 id="making-the-map">Making the map</h2>
 
 <p>Now we can make our map. This time we&rsquo;ll use our new quantiles column as the fill. We&rsquo;ll use <code>scale_fill_brewer()</code> to give us our &lsquo;European&rsquo; blue colour range and put the legend at the bottom. we&rsquo;ll use the <code>labs()</code> element of ggplot2 to give us a headline, catptions and attribution.</p>
 
