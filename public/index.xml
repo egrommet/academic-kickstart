@@ -147,9 +147,9 @@ for(band in 1:length(quantiles)){
 labels
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;pre&gt;&lt;code&gt;##  [1] &amp;quot;1965 – 3875&amp;quot;   &amp;quot;3875 – 4580&amp;quot;   &amp;quot;4580 – 5302&amp;quot;   &amp;quot;5302 – 6479&amp;quot;  
-##  [5] &amp;quot;6479 – 7557&amp;quot;   &amp;quot;7557 – 9026&amp;quot;   &amp;quot;9026 – 9642&amp;quot;   &amp;quot;9642 – 11104&amp;quot; 
-##  [9] &amp;quot;11104 – 36918&amp;quot; &amp;quot;36918 – NA&amp;quot;
+&lt;pre&gt;&lt;code&gt;##  [1] &amp;quot;1966 – 3875&amp;quot;   &amp;quot;3875 – 4580&amp;quot;   &amp;quot;4580 – 5304&amp;quot;   &amp;quot;5304 – 6479&amp;quot;  
+##  [5] &amp;quot;6479 – 7557&amp;quot;   &amp;quot;7557 – 9027&amp;quot;   &amp;quot;9027 – 9642&amp;quot;   &amp;quot;9642 – 11104&amp;quot; 
+##  [9] &amp;quot;11104 – 36920&amp;quot; &amp;quot;36920 – NA&amp;quot;
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;And we&amp;rsquo;ve got a problem - the code gives us a final band that looks like &amp;ldquo;36901 - NA&amp;rdquo;, anything over our maximum. We can easily get rid of that as obviously we are limited at the maximum.&lt;/p&gt;
@@ -159,9 +159,9 @@ labels
 labels
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;pre&gt;&lt;code&gt;## [1] &amp;quot;1965 – 3875&amp;quot;   &amp;quot;3875 – 4580&amp;quot;   &amp;quot;4580 – 5302&amp;quot;   &amp;quot;5302 – 6479&amp;quot;  
-## [5] &amp;quot;6479 – 7557&amp;quot;   &amp;quot;7557 – 9026&amp;quot;   &amp;quot;9026 – 9642&amp;quot;   &amp;quot;9642 – 11104&amp;quot; 
-## [9] &amp;quot;11104 – 36918&amp;quot;
+&lt;pre&gt;&lt;code&gt;## [1] &amp;quot;1966 – 3875&amp;quot;   &amp;quot;3875 – 4580&amp;quot;   &amp;quot;4580 – 5304&amp;quot;   &amp;quot;5304 – 6479&amp;quot;  
+## [5] &amp;quot;6479 – 7557&amp;quot;   &amp;quot;7557 – 9027&amp;quot;   &amp;quot;9027 – 9642&amp;quot;   &amp;quot;9642 – 11104&amp;quot; 
+## [9] &amp;quot;11104 – 36920&amp;quot;
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;Next, we need to add our new number range to the map. We&amp;rsquo;ll do this with the &lt;a href=&#34;https://www.rdocumentation.org/packages/base/versions/3.5.3/topics/cut&#34; target=&#34;_blank&#34;&gt;&lt;code&gt;cut()&lt;/code&gt; function&lt;/a&gt;, to turn our &lt;a href=&#34;https://www.stat.berkeley.edu/~s133/factors.html&#34; target=&#34;_blank&#34;&gt;number range into a factor&lt;/a&gt;.&lt;/p&gt;
@@ -345,7 +345,7 @@ total_sig &amp;lt;- sum(sign_data$signature_count)
 total_sig
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;pre&gt;&lt;code&gt;## [1] 5678170
+&lt;pre&gt;&lt;code&gt;## [1] 5678383
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;h2 id=&#34;joing-the-data-sets&#34;&gt;Joing the data sets&lt;/h2&gt;
