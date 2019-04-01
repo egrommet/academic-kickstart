@@ -490,7 +490,7 @@ It was well into the millions when I started playing with ways of visualising wh
 <h2 id="getting-started">Getting started</h2>
 
 <p>You&rsquo;ll need to install the following packages:
-install.packages(c(&ldquo;geojsonio&rdquo;, &ldquo;ggplot2&rdquo;, &ldquo;dplyr&rdquo;, &ldquo;jsonlite&rdquo;))</p>
+<code>install.packages(c(&quot;geojsonio&quot;, &quot;ggplot2&quot;, &quot;dplyr&quot;, &quot;jsonlite&quot;))</code></p>
 
 <h2 id="getting-the-map-shapes">Getting the map shapes</h2>
 
@@ -500,7 +500,7 @@ You can download the file in a variety of formats, but we&rsquo;re going to use 
 
 <p><strong>NB At the time of writing there appeared to be a glitch in the site, I actually found the right map home page via a search engine.</strong></p>
 
-<p>First we use the library() function to call geojsonio to handle the file, we&rsquo;ll store the URL as a variable and then read it in to our working environment. The &lsquo;what&rsquo; argument uses &ldquo;sp&rdquo; - spacial class for a mapping file.</p>
+<p>First we use the <code>library()</code> function to call geojsonio to handle the file, we&rsquo;ll store the URL as a variable and then read it in to our working environment. The &lsquo;what&rsquo; argument uses &ldquo;sp&rdquo; - spacial class for a mapping file.</p>
 
 <pre><code class="language-r">library(geojsonio)
 </code></pre>
@@ -519,7 +519,7 @@ You can download the file in a variety of formats, but we&rsquo;re going to use 
 uk_map &lt;- geojson_read(url, what = &quot;sp&quot;)
 </code></pre>
 
-<p>We then need to turn it from the form it is in to something we can map more easily in ggplot2, so we&rsquo;ll call the library here and use the fortify() function.</p>
+<p>We then need to turn it from the form it is in to something we can map more easily in ggplot2, so we&rsquo;ll call the library here and use the <code>fortify()</code> function.</p>
 
 <p>By having a look in side the uk_map dataframe we can see our code names for the constituencies are stored in <strong>pcon17cd</strong>, so we&rsquo;ll add that as our region.</p>
 
@@ -530,7 +530,7 @@ fort_uk_map &lt;- fortify(uk_map, region = &quot;pcon17cd&quot;)
 
 <h2 id="getting-the-data-for-our-map">Getting the data for our map</h2>
 
-<p>We&rsquo;re now going to read in the data from the Parliament Petition site. We&rsquo;ll use <strong>jsonlite</strong> to do that.</p>
+<p>We&rsquo;re now going to read in the data from the Parliament Petitions site. We&rsquo;ll use <strong>jsonlite</strong> to do that.</p>
 
 <pre><code class="language-r">library(jsonlite)
 </code></pre>
@@ -549,12 +549,14 @@ fort_uk_map &lt;- fortify(uk_map, region = &quot;pcon17cd&quot;)
 
 <p>The next thing we need to do is get the data out of the json file we just imported. If you click on the json_data object in the Environment pane, you&rsquo;ll see it is a list of two - double click to open it up and we cab view the file.  Inside the json-data structure we can see data has a list of three objects inside it, opening that shows us attributes is where the intersting things are happening.</p>
 
-<p>There&rsquo;s a lot going on but there are two things that interest me for mapping - signatures_by_constiuency and signatures_by_country (this second one is for a later date).  Opening the signatures_by_country list shows it has the following elements <strong>name, ons_code, mp, signature_count</strong> for each of the 650 constituencies in the file.  The ons_code will come in useful later when we want to merge our map and data together.</p>
+<p>There&rsquo;s a lot going on but there are two things that interest me for mapping - signatures_by_constituency and signatures_by_country (this second one is for a later date).</p>
 
-<p>We can move through the levels of our json_data object  in this fashion &ldquo;name$parent_element$child_element&rdquo;.</p>
+<p>Opening the signatures_by_country list shows it has the following elements <strong>name, ons_code, mp, signature_count</strong> for each of the 650 constituencies in the file.  The ons_code will come in useful later when we want to merge our map and data together.</p>
+
+<p>We can move through the levels of our json_data object  in this fashion <code>name$parent_element$child_element</code>.</p>
 
 <p>So in our case:
-<strong>sign_data &lt;- json_data$data$attributes$signatures_by_constituency</strong></p>
+<code>ign_data &lt;- json_data$data$attributes$signatures_by_constituency</code></p>
 
 <p>We&rsquo;ll store that in a dataframe and while we&rsquo;re at it we&rsquo;ll calculate how many signatures there were at the time of running the code, I&rsquo;ll do this as a dataframe as it will be useful in the second tutorial.</p>
 
@@ -566,14 +568,14 @@ total_sig &lt;- sum(sign_data$signature_count)
 total_sig
 </code></pre>
 
-<pre><code>## [1] 5617830
+<pre><code>## [1] 5677813
 </code></pre>
 
 <h2 id="joing-the-data-sets">Joing the data sets</h2>
 
-<p>This is where <strong>dplyr</strong> comes into its own as a data-wrangling toolkit. We&rsquo;ll call the library and then use a <strong>left_join()</strong> to merge them together into a new dataframe called <strong>full_uk_map</strong>. There&rsquo;s an explanation of join types on the <a href="https://dplyr.tidyverse.org/reference/join.html" target="_blank">tidyverse site</a>.</p>
+<p>This is where <strong>dplyr</strong> comes into its own as a data-wrangling toolkit. We&rsquo;ll call the library and then use a <code>left_join()</code> to merge them together into a new dataframe called <strong>full_uk_map</strong>. There&rsquo;s an explanation of join types on the <a href="https://dplyr.tidyverse.org/reference/join.html" target="_blank">tidyverse site</a>.</p>
 
-<p>To do the join we have to tell the function where our common columns are in the &lsquo;by&rsquo; element &ndash; <strong>left_join(dataset1, dataset2, by = c(&ldquo;a_column&rdquo; = &ldquo;the_equivalent_column&rdquo;))</strong></p>
+<p>To do the join we have to tell the function where our common columns are in the &lsquo;by&rsquo; element &ndash; <code>left_join(dataset1, dataset2, by = c(&quot;a_column&quot; = &quot;the_equivalent_column&quot;))</code></p>
 
 <pre><code class="language-r">library(dplyr)
 </code></pre>
@@ -616,11 +618,15 @@ ggplot() +
 <p class="caption">Figure 1 A simple choropleth map.</p>
 </div>
 
+<h2 id="next-steps">Next steps</h2>
+
 <p>I&rsquo;ve also been playing with a great post from Timo Grossenbaher on how to <a href="https://timogrossenbacher.ch/2016/12/beautiful-thematic-maps-with-ggplot2-only/" target="_blank">make beatiful thematic maps with ggplot2</a> to create something a bit more effective.</p>
 
-<p>Andy Dickinson from Manchester Met has done a <a href="https://andydickinson.net/2019/03/27/quick-analalysis-of-petitions-data/" target="_blank">Pandas (Python) look at the article 50 and knife crime petitions</a>.</p>
+<p>Now pop along to <a href="/tutorial/mapping-the-article-50-petition-in-r-and-ggplot-part-2/" target="_blank">stage two of this tutorial</a> which goes further and looks at making things more interesting.</p>
 
-<p>Link to come in due course.</p>
+<h2 id="more-analysis">More analysis</h2>
+
+<p>Andy Dickinson from Manchester Met has done a <a href="https://andydickinson.net/2019/03/27/quick-analalysis-of-petitions-data" target="_blank">Pandas (Python) look at the article 50 and knife crime petitions</a>.</p>
 
     </div>
 

@@ -19,6 +19,233 @@
     </item>
     
     <item>
+      <title>Mapping the article 50 petition in R and ggplot - part 2</title>
+      <link>https://egrommet.github.io/tutorial/mapping-the-article-50-petition-in-r-and-ggplot-part-2/</link>
+      <pubDate>Mon, 01 Apr 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://egrommet.github.io/tutorial/mapping-the-article-50-petition-in-r-and-ggplot-part-2/</guid>
+      <description>
+
+&lt;p&gt;&lt;img src=&#34;https://egrommet.github.io/tutorial/2019-04-01-mapping-the-article-50-petition-in-r-and-ggplot-part-2_files/Plot_Zoom.png&#34; alt=&#34;The final map&#34; /&gt;&lt;/p&gt;
+
+&lt;h1 id=&#34;mapping-in-r-using-ggplot2-part-two&#34;&gt;Mapping in R - using ggplot2, part two&lt;/h1&gt;
+
+&lt;p&gt;In the previous tutorial we looked at getting data from web APIs in JSON and GeoJSON formats to create a simple map.&lt;/p&gt;
+
+&lt;p&gt;This time we&amp;rsquo;ll be adapting code from &lt;a href=&#34;https://timogrossenbacher.ch/2016/12/beautiful-thematic-maps-with-ggplot2-only/&#34; title=&#34;Timo Grossenbacher&#39;s post on how to make beautiful plots in ggplot2&#34; target=&#34;_blank&#34;&gt;Timo Grossenbacher&lt;/a&gt; to make our map more attractive.&lt;/p&gt;
+
+&lt;h2 id=&#34;getting-started&#34;&gt;Getting started&lt;/h2&gt;
+
+&lt;p&gt;We need to reload the data again, so we&amp;rsquo;re going to get a different number of signatures than last time.&lt;/p&gt;
+
+&lt;p&gt;I&amp;rsquo;m going to run this in one block and assume you can follow along, if not &lt;a href=&#34;https://egrommet.github.io/tutorial/mapping-the-article-50-petition-in-r-and-ggplot/&#34; target=&#34;_blank&#34;&gt;go back to the previous post&lt;/a&gt;.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;# Load the mapping file
+library(geojsonio)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code&gt;## 
+## Attaching package: &#39;geojsonio&#39;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code&gt;## The following object is masked from &#39;package:base&#39;:
+## 
+##     pretty
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;url &amp;lt;- &amp;quot;https://opendata.arcgis.com/datasets/5ce27b980ffb43c39b012c2ebeab92c0_2.geojson&amp;quot;
+uk_map &amp;lt;- geojson_read(url, what = &amp;quot;sp&amp;quot;)
+
+# Convert to a ggplot-friendly format
+library(ggplot2)
+fort_uk_map &amp;lt;- fortify(uk_map, region = &amp;quot;pcon17cd&amp;quot;)
+
+# Get the data from the petition site
+library(jsonlite)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code&gt;## 
+## Attaching package: &#39;jsonlite&#39;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code&gt;## The following object is masked from &#39;package:geojsonio&#39;:
+## 
+##     validate
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;json_data &amp;lt;- fromJSON(&amp;quot;https://petition.parliament.uk/petitions/241584.json&amp;quot;, flatten = FALSE)
+
+# Turn it into a datafram
+sign_data &amp;lt;- json_data$data$attributes$signatures_by_constituency
+
+
+# Store the mumber of signatures for later
+total_sig &amp;lt;- sum(sign_data$signature_count)
+
+# Join the two datasets together
+library(dplyr)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code&gt;## 
+## Attaching package: &#39;dplyr&#39;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code&gt;## The following objects are masked from &#39;package:stats&#39;:
+## 
+##     filter, lag
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code&gt;## The following objects are masked from &#39;package:base&#39;:
+## 
+##     intersect, setdiff, setequal, union
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;full_uk_map &amp;lt;- left_join(fort_uk_map, sign_data, by = c(&amp;quot;id&amp;quot; = &amp;quot;ons_code&amp;quot;))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;One of the things I really liked about Timo&amp;rsquo;s post is that he divided the vote count into bands (buckets) to help make it easier to see what is going on. I like the previous map but it isn&amp;rsquo;t massively easy to read. I&amp;rsquo;m not going to go into a lot on data viz theory here, but I strongly recommend you have a look at the work of &lt;a href=&#34;http://albertocairo.com/&#34; title=&#34;Dataviz guru Alberto Cairo&#39;s site&#34; target=&#34;_blank&#34;&gt;Alberto Cairo&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;blue-is-the-colour&#34;&gt;Blue is the colour&lt;/h2&gt;
+
+&lt;p&gt;What I didn&amp;rsquo;t explain last time is that the default colour of our last map was blue. This time I want it to be intentional and echo the blue background of the European flag, so the deeper blues signify more Europhile constituencies.&lt;/p&gt;
+
+&lt;p&gt;There is a problem with maps - they often just show where the population is biggest, we could go int detail about constituencies to scale it more effectively but it gives us an interesting starting point.
+&lt;em&gt;&amp;ldquo;The Office for National Statistics gives the median total parliamentary electorate across constituencies of about 72,400 in England, 69,000 in Scotland, 66,800 in Northern Ireland and 56,800 in Wales.&amp;rdquo;&lt;/em&gt; &lt;a href=&#34;https://www.parliament.uk/about/how/elections-and-voting/constituencies/&#34; target=&#34;_blank&#34;&gt;Source&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;I like to use &lt;a href=&#34;http://colorbrewer2.org/#type=sequential&amp;amp;scheme=BuGn&amp;amp;n=3&#34; title=&#34;Colorbrewer for mapping&#34; target=&#34;_blank&#34;&gt;colorbrewer&lt;/a&gt; when I&amp;rsquo;m working with maps, you can have a much more nuanced colour range than using R&amp;rsquo;s default (yes it can be done in R default, but I&amp;rsquo;ve personally found it to be more fiddly). And, it is also a function that is built into ggplot2 &lt;code&gt;scale_fill_brewer()&lt;/code&gt; - which will make our life easier.&lt;/p&gt;
+
+&lt;p&gt;But this gives us a bit of a problem as our colorbrewer function call only allows us nine shades of blue. If we tried using it as it stands we&amp;rsquo;d throw an error message similar to this
+    1: In brewer.pal(n, pal):
+       n too large, allowed maximum for palette&amp;hellip;.&lt;/p&gt;
+
+&lt;p&gt;So, we&amp;rsquo;ll chop our vote range into blocks as per Timo&amp;rsquo;s post, create labels that allow us to explain the blocks, colour it according to our new range and then add a them to make it look good. His post goes into a lot more detail (obviously!).&lt;/p&gt;
+
+&lt;h3 id=&#34;there-s-whole-in-my-bucket&#34;&gt;There&amp;rsquo;s whole in my bucket&lt;/h3&gt;
+
+&lt;p&gt;We&amp;rsquo;ll start off by declaring how many colour buckets we want to use, we&amp;rsquo;ll store it as a variable.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;no_classes &amp;lt;- 9
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The next thing to do is then chop our voter range into sections (we want 9), we&amp;rsquo;ll be using &lt;code&gt;quantiles()&lt;/code&gt; to do that. We&amp;rsquo;ll give our function the numbers in the signature count column of our full_uk_map. The &lt;a href=&#34;https://www.rdocumentation.org/packages/stats/versions/3.5.3/topics/quantile&#34; target=&#34;_blank&#34;&gt;probs argument&lt;/a&gt; takes the number of classes and then calculates the bands for us.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;quantiles &amp;lt;- quantile(full_uk_map$signature_count, probs = seq(0, 1, length.out = no_classes + 1))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Next we create an empty vector for the labels for our map legend, essentially an empty box to store the next stage in.&lt;/p&gt;
+
+&lt;p&gt;The second part uses a for loop to run through our number range and create the labels. We&amp;rsquo;ll round to the nearest whole number (as you can&amp;rsquo;t get part of a vote, but our quantiles calculation would give that).&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;labels &amp;lt;- c()
+
+for(band in 1:length(quantiles)){
+  labels &amp;lt;- c(labels, paste0(round(quantiles[band]), 
+                             &amp;quot; – &amp;quot;, 
+                             round(quantiles[band + 1])))
+}
+
+labels
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code&gt;##  [1] &amp;quot;1965 – 3874&amp;quot;   &amp;quot;3874 – 4579&amp;quot;   &amp;quot;4579 – 5302&amp;quot;   &amp;quot;5302 – 6478&amp;quot;  
+##  [5] &amp;quot;6478 – 7557&amp;quot;   &amp;quot;7557 – 9025&amp;quot;   &amp;quot;9025 – 9642&amp;quot;   &amp;quot;9642 – 11102&amp;quot; 
+##  [9] &amp;quot;11102 – 36917&amp;quot; &amp;quot;36917 – NA&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;And we&amp;rsquo;ve got a problem - the code gives us a final band that looks like &amp;ldquo;36901 - NA&amp;rdquo;, anything over our maximum. We can easily get rid of that as obviously we are limited at the maximum.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;labels &amp;lt;- labels[1:length(labels)-1]
+
+labels
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code&gt;## [1] &amp;quot;1965 – 3874&amp;quot;   &amp;quot;3874 – 4579&amp;quot;   &amp;quot;4579 – 5302&amp;quot;   &amp;quot;5302 – 6478&amp;quot;  
+## [5] &amp;quot;6478 – 7557&amp;quot;   &amp;quot;7557 – 9025&amp;quot;   &amp;quot;9025 – 9642&amp;quot;   &amp;quot;9642 – 11102&amp;quot; 
+## [9] &amp;quot;11102 – 36917&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Next, we need to add our new number range to the map. We&amp;rsquo;ll do this with the &lt;a href=&#34;https://www.rdocumentation.org/packages/base/versions/3.5.3/topics/cut&#34; target=&#34;_blank&#34;&gt;&lt;code&gt;cut()&lt;/code&gt; function&lt;/a&gt;, to turn our &lt;a href=&#34;https://www.stat.berkeley.edu/~s133/factors.html&#34; target=&#34;_blank&#34;&gt;number range into a factor&lt;/a&gt;.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;full_uk_map$quantiles &amp;lt;- cut(full_uk_map$signature_count,
+                             breaks = quantiles,
+                             labels = labels,
+                             include.lowest = T)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Now we can make our map. This time we&amp;rsquo;ll use our new quantiles column as the fill. We&amp;rsquo;ll use &lt;code&gt;scale_fill_brewer()&lt;/code&gt; to give us our &amp;lsquo;European&amp;rsquo; blue colour range and put the legend at the bottom. we&amp;rsquo;ll use the &lt;code&gt;labs()&lt;/code&gt; element of ggplot2 to give us a headline, catptions and attribution.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;by_quantile &amp;lt;- ggplot() +
+  geom_polygon(data = full_uk_map, aes(x = long, y = lat, group = group, fill = quantiles)) +
+  geom_path(color = &amp;quot;black&amp;quot;, size = 0.1) +
+  scale_fill_brewer(type = &amp;quot;qual&amp;quot;, palette = &amp;quot;Blues&amp;quot;, guide = &amp;quot;legend&amp;quot;, name = &amp;quot;Signature\nCount&amp;quot;, labels = labels) +
+  
+  # I&#39;ve commmented out theme_void() so you can see what the built-in themes do
+  # theme_void() +
+  
+  theme(legend.position = &amp;quot;bottom&amp;quot;) +
+  labs(x = NULL, 
+       y = NULL, 
+       title = &amp;quot;Signatories of the Revoke Article 50 Petition&amp;quot;, 
+       subtitle = &amp;quot;Let&#39;s investigate where the signatures come from&amp;quot;, 
+       caption = &amp;quot;Geometries: ONS Open Geography Portal; Data: UK Parliament and Government&amp;quot;)
+
+by_quantile
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://egrommet.github.io/tutorial/2019-04-01-mapping-the-article-50-petition-in-r-and-ggplot-part-2_files/figure-html/unnamed-chunk-7-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The next thing we can try is adding a theme. I&amp;rsquo;m just going to use the one from Timo&amp;rsquo;s post but change the font family. It is being stored as a function, so we can call it easily.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;theme_map &amp;lt;- function(...) {
+  theme_minimal() +
+    theme(
+      text = element_text(family = &amp;quot;Helvetica&amp;quot;, color = &amp;quot;#22211d&amp;quot;),
+      axis.line = element_blank(),
+      axis.text.x = element_blank(),
+      axis.text.y = element_blank(),
+      axis.ticks = element_blank(),
+      axis.title.x = element_blank(),
+      axis.title.y = element_blank(),
+      # panel.grid.minor = element_line(color = &amp;quot;#ebebe5&amp;quot;, size = 0.2),
+      panel.grid.major = element_line(color = &amp;quot;#ebebe5&amp;quot;, size = 0.2),
+      panel.grid.minor = element_blank(),
+      plot.background = element_rect(fill = &amp;quot;#f5f5f2&amp;quot;, color = NA), 
+      panel.background = element_rect(fill = &amp;quot;#f5f5f2&amp;quot;, color = NA), 
+      legend.background = element_rect(fill = &amp;quot;#f5f5f2&amp;quot;, color = NA),
+      panel.border = element_blank(),
+      ...
+    )
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;And this time we&amp;rsquo;ll use the theme as part of our final version. We&amp;rsquo;re also going to pull a little trick in the title - remember we saved the number of votes in total earlier on as &lt;code&gt;total_sig&lt;/code&gt;? We can use the &lt;code&gt;paste0()&lt;/code&gt; function to put the number in the text, with the added advantage that the number will automatically update from the API when we run all the code again.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;by_quantile2 &amp;lt;- ggplot() +
+  geom_polygon(data = full_uk_map, aes(x = long, y = lat, group = group, fill = quantiles)) +
+  geom_path(color = &amp;quot;black&amp;quot;, size = 0.1) +
+  scale_fill_brewer(type = &amp;quot;qual&amp;quot;, palette = &amp;quot;Blues&amp;quot;, guide = &amp;quot;legend&amp;quot;, name = &amp;quot;Signature\nCount&amp;quot;, labels = labels) +
+  theme_void() +
+  coord_equal() +
+  theme_map() +
+  theme(legend.position = &amp;quot;bottom&amp;quot;) +
+  labs(x = NULL, 
+       y = NULL, 
+       title = &amp;quot;Signatories of the Revoke Article 50 Petition&amp;quot;, 
+       subtitle = paste0(&amp;quot;Let&#39;s investigate where the &amp;quot;, format(total_sig, big.mark = &amp;quot;,&amp;quot;), &amp;quot; signatures come from&amp;quot;), 
+       caption = &amp;quot;Geometries: ONS Open Geography Portal; Data: UK Parliament and Government&amp;quot;)
+
+by_quantile2
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://egrommet.github.io/tutorial/2019-04-01-mapping-the-article-50-petition-in-r-and-ggplot-part-2_files/figure-html/unnamed-chunk-9-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;At some stage I&amp;rsquo;m going to play around with the background to declare the plot size (I&amp;rsquo;m guessing that is why it is breaking the bounds here - but the version at the top is exported from the code run in RStudio), I&amp;rsquo;ll post when I do but for now I&amp;rsquo;m going to stop here.&lt;/p&gt;
+
+&lt;p&gt;Remember, Timo goes on much further to make &lt;a href=&#34;https://timogrossenbacher.ch/2016/12/beautiful-thematic-maps-with-ggplot2-only/#clear-workspace-and-install-necessary-packages&#34; target=&#34;_blank&#34;&gt;a really beatiful map&lt;/a&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
       <title>Mapping the article 50 petition in R and ggplot</title>
       <link>https://egrommet.github.io/tutorial/mapping-the-article-50-petition-in-r-and-ggplot/</link>
       <pubDate>Fri, 29 Mar 2019 00:00:00 +0000</pubDate>
@@ -40,7 +267,7 @@
 &lt;h2 id=&#34;getting-started&#34;&gt;Getting started&lt;/h2&gt;
 
 &lt;p&gt;You&amp;rsquo;ll need to install the following packages:
-install.packages(c(&amp;ldquo;geojsonio&amp;rdquo;, &amp;ldquo;ggplot2&amp;rdquo;, &amp;ldquo;dplyr&amp;rdquo;, &amp;ldquo;jsonlite&amp;rdquo;))&lt;/p&gt;
+&lt;code&gt;install.packages(c(&amp;quot;geojsonio&amp;quot;, &amp;quot;ggplot2&amp;quot;, &amp;quot;dplyr&amp;quot;, &amp;quot;jsonlite&amp;quot;))&lt;/code&gt;&lt;/p&gt;
 
 &lt;h2 id=&#34;getting-the-map-shapes&#34;&gt;Getting the map shapes&lt;/h2&gt;
 
@@ -50,7 +277,7 @@ You can download the file in a variety of formats, but we&amp;rsquo;re going to 
 
 &lt;p&gt;&lt;strong&gt;NB At the time of writing there appeared to be a glitch in the site, I actually found the right map home page via a search engine.&lt;/strong&gt;&lt;/p&gt;
 
-&lt;p&gt;First we use the library() function to call geojsonio to handle the file, we&amp;rsquo;ll store the URL as a variable and then read it in to our working environment. The &amp;lsquo;what&amp;rsquo; argument uses &amp;ldquo;sp&amp;rdquo; - spacial class for a mapping file.&lt;/p&gt;
+&lt;p&gt;First we use the &lt;code&gt;library()&lt;/code&gt; function to call geojsonio to handle the file, we&amp;rsquo;ll store the URL as a variable and then read it in to our working environment. The &amp;lsquo;what&amp;rsquo; argument uses &amp;ldquo;sp&amp;rdquo; - spacial class for a mapping file.&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;library(geojsonio)
 &lt;/code&gt;&lt;/pre&gt;
@@ -69,7 +296,7 @@ You can download the file in a variety of formats, but we&amp;rsquo;re going to 
 uk_map &amp;lt;- geojson_read(url, what = &amp;quot;sp&amp;quot;)
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;We then need to turn it from the form it is in to something we can map more easily in ggplot2, so we&amp;rsquo;ll call the library here and use the fortify() function.&lt;/p&gt;
+&lt;p&gt;We then need to turn it from the form it is in to something we can map more easily in ggplot2, so we&amp;rsquo;ll call the library here and use the &lt;code&gt;fortify()&lt;/code&gt; function.&lt;/p&gt;
 
 &lt;p&gt;By having a look in side the uk_map dataframe we can see our code names for the constituencies are stored in &lt;strong&gt;pcon17cd&lt;/strong&gt;, so we&amp;rsquo;ll add that as our region.&lt;/p&gt;
 
@@ -80,7 +307,7 @@ fort_uk_map &amp;lt;- fortify(uk_map, region = &amp;quot;pcon17cd&amp;quot;)
 
 &lt;h2 id=&#34;getting-the-data-for-our-map&#34;&gt;Getting the data for our map&lt;/h2&gt;
 
-&lt;p&gt;We&amp;rsquo;re now going to read in the data from the Parliament Petition site. We&amp;rsquo;ll use &lt;strong&gt;jsonlite&lt;/strong&gt; to do that.&lt;/p&gt;
+&lt;p&gt;We&amp;rsquo;re now going to read in the data from the Parliament Petitions site. We&amp;rsquo;ll use &lt;strong&gt;jsonlite&lt;/strong&gt; to do that.&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;library(jsonlite)
 &lt;/code&gt;&lt;/pre&gt;
@@ -99,12 +326,14 @@ fort_uk_map &amp;lt;- fortify(uk_map, region = &amp;quot;pcon17cd&amp;quot;)
 
 &lt;p&gt;The next thing we need to do is get the data out of the json file we just imported. If you click on the json_data object in the Environment pane, you&amp;rsquo;ll see it is a list of two - double click to open it up and we cab view the file.  Inside the json-data structure we can see data has a list of three objects inside it, opening that shows us attributes is where the intersting things are happening.&lt;/p&gt;
 
-&lt;p&gt;There&amp;rsquo;s a lot going on but there are two things that interest me for mapping - signatures_by_constiuency and signatures_by_country (this second one is for a later date).  Opening the signatures_by_country list shows it has the following elements &lt;strong&gt;name, ons_code, mp, signature_count&lt;/strong&gt; for each of the 650 constituencies in the file.  The ons_code will come in useful later when we want to merge our map and data together.&lt;/p&gt;
+&lt;p&gt;There&amp;rsquo;s a lot going on but there are two things that interest me for mapping - signatures_by_constituency and signatures_by_country (this second one is for a later date).&lt;/p&gt;
 
-&lt;p&gt;We can move through the levels of our json_data object  in this fashion &amp;ldquo;name$parent_element$child_element&amp;rdquo;.&lt;/p&gt;
+&lt;p&gt;Opening the signatures_by_country list shows it has the following elements &lt;strong&gt;name, ons_code, mp, signature_count&lt;/strong&gt; for each of the 650 constituencies in the file.  The ons_code will come in useful later when we want to merge our map and data together.&lt;/p&gt;
+
+&lt;p&gt;We can move through the levels of our json_data object  in this fashion &lt;code&gt;name$parent_element$child_element&lt;/code&gt;.&lt;/p&gt;
 
 &lt;p&gt;So in our case:
-&lt;strong&gt;sign_data &amp;lt;- json_data$data$attributes$signatures_by_constituency&lt;/strong&gt;&lt;/p&gt;
+&lt;code&gt;ign_data &amp;lt;- json_data$data$attributes$signatures_by_constituency&lt;/code&gt;&lt;/p&gt;
 
 &lt;p&gt;We&amp;rsquo;ll store that in a dataframe and while we&amp;rsquo;re at it we&amp;rsquo;ll calculate how many signatures there were at the time of running the code, I&amp;rsquo;ll do this as a dataframe as it will be useful in the second tutorial.&lt;/p&gt;
 
@@ -116,14 +345,14 @@ total_sig &amp;lt;- sum(sign_data$signature_count)
 total_sig
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;pre&gt;&lt;code&gt;## [1] 5617830
+&lt;pre&gt;&lt;code&gt;## [1] 5677813
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;h2 id=&#34;joing-the-data-sets&#34;&gt;Joing the data sets&lt;/h2&gt;
 
-&lt;p&gt;This is where &lt;strong&gt;dplyr&lt;/strong&gt; comes into its own as a data-wrangling toolkit. We&amp;rsquo;ll call the library and then use a &lt;strong&gt;left_join()&lt;/strong&gt; to merge them together into a new dataframe called &lt;strong&gt;full_uk_map&lt;/strong&gt;. There&amp;rsquo;s an explanation of join types on the &lt;a href=&#34;https://dplyr.tidyverse.org/reference/join.html&#34; target=&#34;_blank&#34;&gt;tidyverse site&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;This is where &lt;strong&gt;dplyr&lt;/strong&gt; comes into its own as a data-wrangling toolkit. We&amp;rsquo;ll call the library and then use a &lt;code&gt;left_join()&lt;/code&gt; to merge them together into a new dataframe called &lt;strong&gt;full_uk_map&lt;/strong&gt;. There&amp;rsquo;s an explanation of join types on the &lt;a href=&#34;https://dplyr.tidyverse.org/reference/join.html&#34; target=&#34;_blank&#34;&gt;tidyverse site&lt;/a&gt;.&lt;/p&gt;
 
-&lt;p&gt;To do the join we have to tell the function where our common columns are in the &amp;lsquo;by&amp;rsquo; element &amp;ndash; &lt;strong&gt;left_join(dataset1, dataset2, by = c(&amp;ldquo;a_column&amp;rdquo; = &amp;ldquo;the_equivalent_column&amp;rdquo;))&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;To do the join we have to tell the function where our common columns are in the &amp;lsquo;by&amp;rsquo; element &amp;ndash; &lt;code&gt;left_join(dataset1, dataset2, by = c(&amp;quot;a_column&amp;quot; = &amp;quot;the_equivalent_column&amp;quot;))&lt;/code&gt;&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;library(dplyr)
 &lt;/code&gt;&lt;/pre&gt;
@@ -166,11 +395,15 @@ ggplot() +
 &lt;p class=&#34;caption&#34;&gt;Figure 1 A simple choropleth map.&lt;/p&gt;
 &lt;/div&gt;
 
+&lt;h2 id=&#34;next-steps&#34;&gt;Next steps&lt;/h2&gt;
+
 &lt;p&gt;I&amp;rsquo;ve also been playing with a great post from Timo Grossenbaher on how to &lt;a href=&#34;https://timogrossenbacher.ch/2016/12/beautiful-thematic-maps-with-ggplot2-only/&#34; target=&#34;_blank&#34;&gt;make beatiful thematic maps with ggplot2&lt;/a&gt; to create something a bit more effective.&lt;/p&gt;
 
-&lt;p&gt;Andy Dickinson from Manchester Met has done a &lt;a href=&#34;https://andydickinson.net/2019/03/27/quick-analalysis-of-petitions-data/&#34; target=&#34;_blank&#34;&gt;Pandas (Python) look at the article 50 and knife crime petitions&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Now pop along to &lt;a href=&#34;https://egrommet.github.io/tutorial/mapping-the-article-50-petition-in-r-and-ggplot-part-2/&#34; target=&#34;_blank&#34;&gt;stage two of this tutorial&lt;/a&gt; which goes further and looks at making things more interesting.&lt;/p&gt;
 
-&lt;p&gt;Link to come in due course.&lt;/p&gt;
+&lt;h2 id=&#34;more-analysis&#34;&gt;More analysis&lt;/h2&gt;
+
+&lt;p&gt;Andy Dickinson from Manchester Met has done a &lt;a href=&#34;https://andydickinson.net/2019/03/27/quick-analalysis-of-petitions-data&#34; target=&#34;_blank&#34;&gt;Pandas (Python) look at the article 50 and knife crime petitions&lt;/a&gt;.&lt;/p&gt;
 </description>
     </item>
     

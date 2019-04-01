@@ -19,4 +19,7 @@ type = "docs"  # Do not modify.
 
 A place for data journalism tutorials using different tools, but coding will be primarily in [R](https://www.r-project.org/), using the [RStudio IDE](https://www.rstudio.com/products/rstudio/download/). You can have a play with the cloud version of [RStudio](https://www.rstudio.cloud).
 
-[Mapping in R and ggplot]({{< ref "tutorial/2019-03-29-mapping-the-article-50-petition-in-r-and-ggplot.markdown" >}}) - a tutorial renderended from an R markdown file. More on this in second post soon.
+[Mapping in R and ggplot]({{< relref "tutorial/2019-03-29-mapping-the-article-50-petition-in-r-and-ggplot.markdown" >}}) - a tutorial renderended from an R markdown file. 
+
+[The second post]({{< relref "2019-04-01-mapping-the-article-50-petition-in-r-and-ggplot-part-2" >}}) goes further and looks at making things more interesting.
+

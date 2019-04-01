@@ -21,7 +21,7 @@ According to the site:
 
 ## Getting started
 You'll need to install the following packages:
-install.packages(c("geojsonio", "ggplot2", "dplyr", "jsonlite"))
+`install.packages(c("geojsonio", "ggplot2", "dplyr", "jsonlite"))`
 
 ## Getting the map shapes
 We're going to use *geojsonio* first to get a mapping file from the [ONS Open Geography Portal](http://geoportal.statistics.gov.uk/). It has a great respository of mapping files. We'll be using the parliamentary wards file. Go to the site and use the menu bar to:
@@ -30,7 +30,7 @@ You can download the file in a variety of formats, but we're going to use the AP
   
 **NB At the time of writing there appeared to be a glitch in the site, I actually found the right map home page via a search engine.**
 
-First we use the library() function to call geojsonio to handle the file, we'll store the URL as a variable and then read it in to our working environment. The 'what' argument uses "sp" - spacial class for a mapping file.  
+First we use the `library()` function to call geojsonio to handle the file, we'll store the URL as a variable and then read it in to our working environment. The 'what' argument uses "sp" - spacial class for a mapping file.  
 
 ```{r}
 library(geojsonio)
@@ -40,7 +40,7 @@ url <- "https://opendata.arcgis.com/datasets/5ce27b980ffb43c39b012c2ebeab92c0_2.
 uk_map <- geojson_read(url, what = "sp")
 ```
 
-We then need to turn it from the form it is in to something we can map more easily in ggplot2, so we'll call the library here and use the fortify() function. 
+We then need to turn it from the form it is in to something we can map more easily in ggplot2, so we'll call the library here and use the `fortify()` function. 
 
 By having a look in side the uk_map dataframe we can see our code names for the constituencies are stored in **pcon17cd**, so we'll add that as our region.
 
@@ -53,7 +53,7 @@ fort_uk_map <- fortify(uk_map, region = "pcon17cd")
 
 
 ## Getting the data for our map
-We're now going to read in the data from the Parliament Petition site. We'll use **jsonlite** to do that.
+We're now going to read in the data from the Parliament Petitions site. We'll use **jsonlite** to do that.
 
 ```{r}
 library(jsonlite)
@@ -64,12 +64,14 @@ json_data <- fromJSON("https://petition.parliament.uk/petitions/241584.json", fl
 
 The next thing we need to do is get the data out of the json file we just imported. If you click on the json_data object in the Environment pane, you'll see it is a list of two - double click to open it up and we cab view the file.  Inside the json-data structure we can see data has a list of three objects inside it, opening that shows us attributes is where the intersting things are happening.  
 
-There's a lot going on but there are two things that interest me for mapping - signatures_by_constiuency and signatures_by_country (this second one is for a later date).  Opening the signatures_by_country list shows it has the following elements **name, ons_code, mp, signature_count** for each of the 650 constituencies in the file.  The ons_code will come in useful later when we want to merge our map and data together.
+There's a lot going on but there are two things that interest me for mapping - signatures_by_constituency and signatures_by_country (this second one is for a later date).  
 
-We can move through the levels of our json_data object  in this fashion "name$parent_element$child_element". 
+Opening the signatures_by_country list shows it has the following elements **name, ons_code, mp, signature_count** for each of the 650 constituencies in the file.  The ons_code will come in useful later when we want to merge our map and data together.
+
+We can move through the levels of our json_data object  in this fashion `name$parent_element$child_element`. 
 
 So in our case:
-**sign_data <- json_data$data$attributes$signatures_by_constituency**
+`ign_data <- json_data$data$attributes$signatures_by_constituency`
 
 We'll store that in a dataframe and while we're at it we'll calculate how many signatures there were at the time of running the code, I'll do this as a dataframe as it will be useful in the second tutorial.
 
@@ -83,9 +85,9 @@ total_sig
 ```
 
 ## Joing the data sets
-This is where **dplyr** comes into its own as a data-wrangling toolkit. We'll call the library and then use a **left_join()** to merge them together into a new dataframe called **full_uk_map**. There's an explanation of join types on the [tidyverse site](https://dplyr.tidyverse.org/reference/join.html).  
+This is where **dplyr** comes into its own as a data-wrangling toolkit. We'll call the library and then use a `left_join()` to merge them together into a new dataframe called **full_uk_map**. There's an explanation of join types on the [tidyverse site](https://dplyr.tidyverse.org/reference/join.html).  
 
-To do the join we have to tell the function where our common columns are in the 'by' element -- **left_join(dataset1, dataset2, by = c("a_column" = "the_equivalent_column"))**
+To do the join we have to tell the function where our common columns are in the 'by' element -- `left_join(dataset1, dataset2, by = c("a_column" = "the_equivalent_column"))`
 
 ```{r}
 library(dplyr)
@@ -112,8 +114,16 @@ ggplot() +
   coord_equal()
 ```
 
+
+## Next steps
 I've also been playing with a great post from Timo Grossenbaher on how to [make beatiful thematic maps with ggplot2](https://timogrossenbacher.ch/2016/12/beautiful-thematic-maps-with-ggplot2-only/) to create something a bit more effective.
 
-Andy Dickinson from Manchester Met has done a [Pandas (Python) look at the article 50 and knife crime petitions](https://andydickinson.net/2019/03/27/quick-analalysis-of-petitions-data/).
+Now pop along to [stage two of this tutorial]({{< relref "2019-04-01-mapping-the-article-50-petition-in-r-and-ggplot-part-2" >}}) which goes further and looks at making things more interesting.
 
-Link to come in due course.
+## More analysis
+Andy Dickinson from Manchester Met has done a [Pandas (Python) look at the article 50 and knife crime petitions](https://andydickinson.net/2019/03/27/quick-analalysis-of-petitions-data).
+
+
+
+
+

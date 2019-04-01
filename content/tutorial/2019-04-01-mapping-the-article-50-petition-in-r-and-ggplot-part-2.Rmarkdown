@@ -1,0 +1,191 @@
+---
+title: Mapping the article 50 petition in R and ggplot - part 2
+author: Glyn Mottershead
+date: '2019-04-01'
+slug: mapping-the-article-50-petition-in-r-and-ggplot-part-2
+categories:
+  - R
+  - Data Visualisation
+  - Mapping
+tags:
+  - ggplot2
+  - json
+  - map
+image:
+  caption: ''
+  focal_point: ''
+
+---
+![The final map](/tutorial/2019-04-01-mapping-the-article-50-petition-in-r-and-ggplot-part-2_files/Plot_Zoom.png)
+
+# Mapping in R - using ggplot2, part two
+In the previous tutorial we looked at getting data from web APIs in JSON and GeoJSON formats to create a simple map.
+
+This time we'll be adapting code from [Timo Grossenbacher](https://timogrossenbacher.ch/2016/12/beautiful-thematic-maps-with-ggplot2-only/ "Timo Grossenbacher's post on how to make beautiful plots in ggplot2") to make our map more attractive.
+
+## Getting started
+We need to reload the data again, so we're going to get a different number of signatures than last time.
+
+I'm going to run this in one block and assume you can follow along, if not [go back to the previous post]({{< relref "2019-03-29-mapping-the-article-50-petition-in-r-and-ggplot.markdown" >}}).
+
+```{r}
+# Load the mapping file
+library(geojsonio)
+url <- "https://opendata.arcgis.com/datasets/5ce27b980ffb43c39b012c2ebeab92c0_2.geojson"
+uk_map <- geojson_read(url, what = "sp")
+
+# Convert to a ggplot-friendly format
+library(ggplot2)
+fort_uk_map <- fortify(uk_map, region = "pcon17cd")
+
+# Get the data from the petition site
+library(jsonlite)
+json_data <- fromJSON("https://petition.parliament.uk/petitions/241584.json", flatten = FALSE)
+
+# Turn it into a datafram
+sign_data <- json_data$data$attributes$signatures_by_constituency
+
+
+# Store the mumber of signatures for later
+total_sig <- sum(sign_data$signature_count)
+
+# Join the two datasets together
+library(dplyr)
+full_uk_map <- left_join(fort_uk_map, sign_data, by = c("id" = "ons_code"))
+
+```
+
+
+One of the things I really liked about Timo's post is that he divided the vote count into bands (buckets) to help make it easier to see what is going on. I like the previous map but it isn't massively easy to read. I'm not going to go into a lot on data viz theory here, but I strongly recommend you have a look at the work of [Alberto Cairo](http://albertocairo.com/ "Dataviz guru Alberto Cairo's site").
+
+## Blue is the colour
+What I didn't explain last time is that the default colour of our last map was blue. This time I want it to be intentional and echo the blue background of the European flag, so the deeper blues signify more Europhile constituencies.
+
+There is a problem with maps - they often just show where the population is biggest, we could go int detail about constituencies to scale it more effectively but it gives us an interesting starting point.
+*"The Office for National Statistics gives the median total parliamentary electorate across constituencies of about 72,400 in England, 69,000 in Scotland, 66,800 in Northern Ireland and 56,800 in Wales."* [Source](https://www.parliament.uk/about/how/elections-and-voting/constituencies/)
+
+I like to use [colorbrewer](http://colorbrewer2.org/#type=sequential&scheme=BuGn&n=3 "Colorbrewer for mapping") when I'm working with maps, you can have a much more nuanced colour range than using R's default (yes it can be done in R default, but I've personally found it to be more fiddly). And, it is also a function that is built into ggplot2 `scale_fill_brewer()` - which will make our life easier.
+
+But this gives us a bit of a problem as our colorbrewer function call only allows us nine shades of blue. If we tried using it as it stands we'd throw an error message similar to this 
+    1: In brewer.pal(n, pal):
+       n too large, allowed maximum for palette....
+
+So, we'll chop our vote range into blocks as per Timo's post, create labels that allow us to explain the blocks, colour it according to our new range and then add a them to make it look good. His post goes into a lot more detail (obviously!).
+
+### There's whole in my bucket
+We'll start off by declaring how many colour buckets we want to use, we'll store it as a variable.
+```{r}
+no_classes <- 9
+```
+
+The next thing to do is then chop our voter range into sections (we want 9), we'll be using `quantiles()` to do that. We'll give our function the numbers in the signature count column of our full_uk_map. The [probs argument](https://www.rdocumentation.org/packages/stats/versions/3.5.3/topics/quantile) takes the number of classes and then calculates the bands for us.
+
+```{r}
+quantiles <- quantile(full_uk_map$signature_count, probs = seq(0, 1, length.out = no_classes + 1))
+
+```
+
+Next we create an empty vector for the labels for our map legend, essentially an empty box to store the next stage in.
+
+The second part uses a for loop to run through our number range and create the labels. We'll round to the nearest whole number (as you can't get part of a vote, but our quantiles calculation would give that).
+
+```{r}
+labels <- c()
+
+for(band in 1:length(quantiles)){
+  labels <- c(labels, paste0(round(quantiles[band]), 
+                             " – ", 
+                             round(quantiles[band + 1])))
+}
+
+labels
+```
+
+
+And we've got a problem - the code gives us a final band that looks like "36901 - NA", anything over our maximum. We can easily get rid of that as obviously we are limited at the maximum.
+
+```{r}
+labels <- labels[1:length(labels)-1]
+
+labels
+```
+
+Next, we need to add our new number range to the map. We'll do this with the [`cut()` function](https://www.rdocumentation.org/packages/base/versions/3.5.3/topics/cut), to turn our [number range into a factor](https://www.stat.berkeley.edu/~s133/factors.html).
+
+```{r}
+full_uk_map$quantiles <- cut(full_uk_map$signature_count,
+                             breaks = quantiles,
+                             labels = labels,
+                             include.lowest = T)
+```
+
+
+Now we can make our map. This time we'll use our new quantiles column as the fill. We'll use `scale_fill_brewer()` to give us our 'European' blue colour range and put the legend at the bottom. we'll use the `labs()` element of ggplot2 to give us a headline, catptions and attribution.
+
+```{r}
+by_quantile <- ggplot() +
+  geom_polygon(data = full_uk_map, aes(x = long, y = lat, group = group, fill = quantiles)) +
+  geom_path(color = "black", size = 0.1) +
+  scale_fill_brewer(type = "qual", palette = "Blues", guide = "legend", name = "Signature\nCount", labels = labels) +
+  
+  # I've commmented out theme_void() so you can see what the built-in themes do
+  # theme_void() +
+  
+  theme(legend.position = "bottom") +
+  labs(x = NULL, 
+       y = NULL, 
+       title = "Signatories of the Revoke Article 50 Petition", 
+       subtitle = "Let's investigate where the signatures come from", 
+       caption = "Geometries: ONS Open Geography Portal; Data: UK Parliament and Government")
+
+by_quantile
+```
+
+The next thing we can try is adding a theme. I'm just going to use the one from Timo's post but change the font family. It is being stored as a function, so we can call it easily.
+
+```{r}
+theme_map <- function(...) {
+  theme_minimal() +
+    theme(
+      text = element_text(family = "Helvetica", color = "#22211d"),
+      axis.line = element_blank(),
+      axis.text.x = element_blank(),
+      axis.text.y = element_blank(),
+      axis.ticks = element_blank(),
+      axis.title.x = element_blank(),
+      axis.title.y = element_blank(),
+      # panel.grid.minor = element_line(color = "#ebebe5", size = 0.2),
+      panel.grid.major = element_line(color = "#ebebe5", size = 0.2),
+      panel.grid.minor = element_blank(),
+      plot.background = element_rect(fill = "#f5f5f2", color = NA), 
+      panel.background = element_rect(fill = "#f5f5f2", color = NA), 
+      legend.background = element_rect(fill = "#f5f5f2", color = NA),
+      panel.border = element_blank(),
+      ...
+    )
+}
+```
+
+And this time we'll use the theme as part of our final version. We're also going to pull a little trick in the title - remember we saved the number of votes in total earlier on as `total_sig`? We can use the `paste0()` function to put the number in the text, with the added advantage that the number will automatically update from the API when we run all the code again.
+
+```{r}
+by_quantile2 <- ggplot() +
+  geom_polygon(data = full_uk_map, aes(x = long, y = lat, group = group, fill = quantiles)) +
+  geom_path(color = "black", size = 0.1) +
+  scale_fill_brewer(type = "qual", palette = "Blues", guide = "legend", name = "Signature\nCount", labels = labels) +
+  theme_void() +
+  coord_equal() +
+  theme_map() +
+  theme(legend.position = "bottom") +
+  labs(x = NULL, 
+       y = NULL, 
+       title = "Signatories of the Revoke Article 50 Petition", 
+       subtitle = paste0("Let's investigate where the ", format(total_sig, big.mark = ","), " signatures come from"), 
+       caption = "Geometries: ONS Open Geography Portal; Data: UK Parliament and Government")
+
+by_quantile2
+```
+
+At some stage I'm going to play around with the background to declare the plot size (I'm guessing that is why it is breaking the bounds here - but the version at the top is exported from the code run in RStudio), I'll post when I do but for now I'm going to stop here.
+
+Remember, Timo goes on much further to make [a really beatiful map](https://timogrossenbacher.ch/2016/12/beautiful-thematic-maps-with-ggplot2-only/#clear-workspace-and-install-necessary-packages).
