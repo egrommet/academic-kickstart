@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>R on Glyn Mottershead</title>
-    <link>https://egrommet.github.io/categories/r/</link>
+    <link>https://www.glynmottershead.com/categories/r/</link>
     <description>Recent content in R on Glyn Mottershead</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-gb</language>
     <lastBuildDate>Mon, 01 Apr 2019 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://egrommet.github.io/categories/r/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://www.glynmottershead.com/categories/r/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Mapping the article 50 petition in R and ggplot - part 2</title>
-      <link>https://egrommet.github.io/tutorial/mapping-the-article-50-petition-in-r-and-ggplot-part-2/</link>
+      <link>https://www.glynmottershead.com/tutorial/mapping-the-article-50-petition-in-r-and-ggplot-part-2/</link>
       <pubDate>Mon, 01 Apr 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://egrommet.github.io/tutorial/mapping-the-article-50-petition-in-r-and-ggplot-part-2/</guid>
+      <guid>https://www.glynmottershead.com/tutorial/mapping-the-article-50-petition-in-r-and-ggplot-part-2/</guid>
       <description>Mapping in R - using ggplot2, part two In the previous tutorial we looked at getting data from web APIs in JSON and GeoJSON formats to create a simple map.
 This time we&amp;rsquo;ll be adapting code from Timo Grossenbacher to make our map more attractive.
 Getting started We need to reload the data again, so we&amp;rsquo;re going to get a different number of signatures than last time.
@@ -25,10 +25,10 @@ I&amp;rsquo;m going to run this in one block and assume you can follow along, if
     
     <item>
       <title>Mapping the article 50 petition in R and ggplot</title>
-      <link>https://egrommet.github.io/tutorial/mapping-the-article-50-petition-in-r-and-ggplot/</link>
+      <link>https://www.glynmottershead.com/tutorial/mapping-the-article-50-petition-in-r-and-ggplot/</link>
       <pubDate>Fri, 29 Mar 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://egrommet.github.io/tutorial/mapping-the-article-50-petition-in-r-and-ggplot/</guid>
+      <guid>https://www.glynmottershead.com/tutorial/mapping-the-article-50-petition-in-r-and-ggplot/</guid>
       <description>Mapping in R - using ggplot2 The Revoke Article 50 petition got my colleague and all-round codemeister Dr Martin Chorley and I talking.
 We started thinking about ways that we could see what the patterns for people signing were like.
 It was well into the millions when I started playing with ways of visualising where people who voted were located. The site can map all of the signatures (5,962,824 at the time of writing), but it also has an option to get the data in a machine-friendly json format.</description>

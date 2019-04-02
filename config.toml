@@ -1,7 +1,7 @@
 theme = "hugo-academic"
-baseURL = "http://example.org/"
+baseURL = "https://www.glynmottershead.com"
 languageCode = "en-us"
-title = "My New Hugo Site"
+title = "Glyn Mottershead"
 
 ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "\\.Rproj$", "_files$", "_cache$"]
 

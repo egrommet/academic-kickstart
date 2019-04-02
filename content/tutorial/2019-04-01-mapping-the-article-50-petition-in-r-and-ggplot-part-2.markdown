@@ -151,9 +151,9 @@ labels
 ```
 
 ```
-##  [1] "1966 – 3875"   "3875 – 4580"   "4580 – 5304"   "5304 – 6479"  
-##  [5] "6479 – 7557"   "7557 – 9027"   "9027 – 9642"   "9642 – 11105" 
-##  [9] "11105 – 36921" "36921 – NA"
+##  [1] "1972 – 3890"   "3890 – 4590"   "4590 – 5314"   "5314 – 6505"  
+##  [5] "6505 – 7594"   "7594 – 9055"   "9055 – 9665"   "9665 – 11138" 
+##  [9] "11138 – 36974" "36974 – NA"
 ```
 
 
@@ -167,9 +167,9 @@ labels
 ```
 
 ```
-## [1] "1966 – 3875"   "3875 – 4580"   "4580 – 5304"   "5304 – 6479"  
-## [5] "6479 – 7557"   "7557 – 9027"   "9027 – 9642"   "9642 – 11105" 
-## [9] "11105 – 36921"
+## [1] "1972 – 3890"   "3890 – 4590"   "4590 – 5314"   "5314 – 6505"  
+## [5] "6505 – 7594"   "7594 – 9055"   "9055 – 9665"   "9665 – 11138" 
+## [9] "11138 – 36974"
 ```
 
 Next, we need to add our new number range to the map. We'll do this with the [`cut()` function](https://www.rdocumentation.org/packages/base/versions/3.5.3/topics/cut), to turn our [number range into a factor](https://www.stat.berkeley.edu/~s133/factors.html).
@@ -184,7 +184,7 @@ full_uk_map$quantiles <- cut(full_uk_map$signature_count,
 
 
 ## Making the map
-Now we can make our map. This time we'll use our new quantiles column as the fill. We'll use `scale_fill_brewer()` to give us our 'European' blue colour range and put the legend at the bottom. we'll use the `labs()` element of ggplot2 to give us a headline, catptions and attribution.
+Now we can make our map. This time we'll use our new quantiles column as the fill. We'll use `scale_fill_brewer()` to give us our 'European' blue colour range and put the legend at the bottom. we'll use the `labs()` element of ggplot2 to give us a headline, captions and attribution.
 
 
 ```r

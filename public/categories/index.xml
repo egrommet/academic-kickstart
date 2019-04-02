@@ -2,38 +2,38 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Categories on Glyn Mottershead</title>
-    <link>https://egrommet.github.io/categories/</link>
+    <link>https://www.glynmottershead.com/categories/</link>
     <description>Recent content in Categories on Glyn Mottershead</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-gb</language>
     
-	<atom:link href="https://egrommet.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://www.glynmottershead.com/categories/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Data Visualisation</title>
-      <link>https://egrommet.github.io/categories/data-visualisation/</link>
+      <link>https://www.glynmottershead.com/categories/data-visualisation/</link>
       <pubDate>Mon, 01 Apr 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://egrommet.github.io/categories/data-visualisation/</guid>
+      <guid>https://www.glynmottershead.com/categories/data-visualisation/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Mapping</title>
-      <link>https://egrommet.github.io/categories/mapping/</link>
+      <link>https://www.glynmottershead.com/categories/mapping/</link>
       <pubDate>Mon, 01 Apr 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://egrommet.github.io/categories/mapping/</guid>
+      <guid>https://www.glynmottershead.com/categories/mapping/</guid>
       <description></description>
     </item>
     
     <item>
       <title>R</title>
-      <link>https://egrommet.github.io/categories/r/</link>
+      <link>https://www.glynmottershead.com/categories/r/</link>
       <pubDate>Mon, 01 Apr 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://egrommet.github.io/categories/r/</guid>
+      <guid>https://www.glynmottershead.com/categories/r/</guid>
       <description></description>
     </item>
     

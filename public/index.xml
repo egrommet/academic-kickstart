@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Glyn Mottershead on Glyn Mottershead</title>
-    <link>https://egrommet.github.io/</link>
+    <link>https://www.glynmottershead.com/</link>
     <description>Recent content in Glyn Mottershead on Glyn Mottershead</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-gb</language>
@@ -11,22 +11,22 @@
     
     <item>
       <title>Data and Computational Journalism</title>
-      <link>https://egrommet.github.io/talk/digital-city/</link>
+      <link>https://www.glynmottershead.com/talk/digital-city/</link>
       <pubDate>Thu, 04 Apr 2019 13:30:00 +0100</pubDate>
       
-      <guid>https://egrommet.github.io/talk/digital-city/</guid>
+      <guid>https://www.glynmottershead.com/talk/digital-city/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Mapping the article 50 petition in R and ggplot - part 2</title>
-      <link>https://egrommet.github.io/tutorial/mapping-the-article-50-petition-in-r-and-ggplot-part-2/</link>
+      <link>https://www.glynmottershead.com/tutorial/mapping-the-article-50-petition-in-r-and-ggplot-part-2/</link>
       <pubDate>Mon, 01 Apr 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://egrommet.github.io/tutorial/mapping-the-article-50-petition-in-r-and-ggplot-part-2/</guid>
+      <guid>https://www.glynmottershead.com/tutorial/mapping-the-article-50-petition-in-r-and-ggplot-part-2/</guid>
       <description>
 
-&lt;p&gt;&lt;img src=&#34;https://egrommet.github.io/tutorial/2019-04-01-mapping-the-article-50-petition-in-r-and-ggplot-part-2_files/Plot_Zoom.png&#34; alt=&#34;The final map&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://www.glynmottershead.com/tutorial/2019-04-01-mapping-the-article-50-petition-in-r-and-ggplot-part-2_files/Plot_Zoom.png&#34; alt=&#34;The final map&#34; /&gt;&lt;/p&gt;
 
 &lt;h1 id=&#34;mapping-in-r-using-ggplot2-part-two&#34;&gt;Mapping in R - using ggplot2, part two&lt;/h1&gt;
 
@@ -38,7 +38,7 @@
 
 &lt;p&gt;We need to reload the data again, so we&amp;rsquo;re going to get a different number of signatures than last time.&lt;/p&gt;
 
-&lt;p&gt;I&amp;rsquo;m going to run this in one block and assume you can follow along, if not &lt;a href=&#34;https://egrommet.github.io/tutorial/mapping-the-article-50-petition-in-r-and-ggplot/&#34; target=&#34;_blank&#34;&gt;go back to the previous post&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;I&amp;rsquo;m going to run this in one block and assume you can follow along, if not &lt;a href=&#34;https://www.glynmottershead.com/tutorial/mapping-the-article-50-petition-in-r-and-ggplot/&#34; target=&#34;_blank&#34;&gt;go back to the previous post&lt;/a&gt;.&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;# Load the mapping file
 library(geojsonio)
@@ -146,9 +146,9 @@ for(band in 1:length(quantiles)){
 labels
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;pre&gt;&lt;code&gt;##  [1] &amp;quot;1966 – 3875&amp;quot;   &amp;quot;3875 – 4580&amp;quot;   &amp;quot;4580 – 5304&amp;quot;   &amp;quot;5304 – 6479&amp;quot;  
-##  [5] &amp;quot;6479 – 7557&amp;quot;   &amp;quot;7557 – 9027&amp;quot;   &amp;quot;9027 – 9642&amp;quot;   &amp;quot;9642 – 11105&amp;quot; 
-##  [9] &amp;quot;11105 – 36921&amp;quot; &amp;quot;36921 – NA&amp;quot;
+&lt;pre&gt;&lt;code&gt;##  [1] &amp;quot;1972 – 3890&amp;quot;   &amp;quot;3890 – 4590&amp;quot;   &amp;quot;4590 – 5314&amp;quot;   &amp;quot;5314 – 6505&amp;quot;  
+##  [5] &amp;quot;6505 – 7594&amp;quot;   &amp;quot;7594 – 9055&amp;quot;   &amp;quot;9055 – 9665&amp;quot;   &amp;quot;9665 – 11138&amp;quot; 
+##  [9] &amp;quot;11138 – 36974&amp;quot; &amp;quot;36974 – NA&amp;quot;
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;And we&amp;rsquo;ve got a problem - the code gives us a final band that looks like &amp;ldquo;36901 - NA&amp;rdquo;, anything over our maximum. We can easily get rid of that as obviously we are limited at the maximum.&lt;/p&gt;
@@ -158,9 +158,9 @@ labels
 labels
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;pre&gt;&lt;code&gt;## [1] &amp;quot;1966 – 3875&amp;quot;   &amp;quot;3875 – 4580&amp;quot;   &amp;quot;4580 – 5304&amp;quot;   &amp;quot;5304 – 6479&amp;quot;  
-## [5] &amp;quot;6479 – 7557&amp;quot;   &amp;quot;7557 – 9027&amp;quot;   &amp;quot;9027 – 9642&amp;quot;   &amp;quot;9642 – 11105&amp;quot; 
-## [9] &amp;quot;11105 – 36921&amp;quot;
+&lt;pre&gt;&lt;code&gt;## [1] &amp;quot;1972 – 3890&amp;quot;   &amp;quot;3890 – 4590&amp;quot;   &amp;quot;4590 – 5314&amp;quot;   &amp;quot;5314 – 6505&amp;quot;  
+## [5] &amp;quot;6505 – 7594&amp;quot;   &amp;quot;7594 – 9055&amp;quot;   &amp;quot;9055 – 9665&amp;quot;   &amp;quot;9665 – 11138&amp;quot; 
+## [9] &amp;quot;11138 – 36974&amp;quot;
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;Next, we need to add our new number range to the map. We&amp;rsquo;ll do this with the &lt;a href=&#34;https://www.rdocumentation.org/packages/base/versions/3.5.3/topics/cut&#34; target=&#34;_blank&#34;&gt;&lt;code&gt;cut()&lt;/code&gt; function&lt;/a&gt;, to turn our &lt;a href=&#34;https://www.stat.berkeley.edu/~s133/factors.html&#34; target=&#34;_blank&#34;&gt;number range into a factor&lt;/a&gt;.&lt;/p&gt;
@@ -173,7 +173,7 @@ labels
 
 &lt;h2 id=&#34;making-the-map&#34;&gt;Making the map&lt;/h2&gt;
 
-&lt;p&gt;Now we can make our map. This time we&amp;rsquo;ll use our new quantiles column as the fill. We&amp;rsquo;ll use &lt;code&gt;scale_fill_brewer()&lt;/code&gt; to give us our &amp;lsquo;European&amp;rsquo; blue colour range and put the legend at the bottom. we&amp;rsquo;ll use the &lt;code&gt;labs()&lt;/code&gt; element of ggplot2 to give us a headline, catptions and attribution.&lt;/p&gt;
+&lt;p&gt;Now we can make our map. This time we&amp;rsquo;ll use our new quantiles column as the fill. We&amp;rsquo;ll use &lt;code&gt;scale_fill_brewer()&lt;/code&gt; to give us our &amp;lsquo;European&amp;rsquo; blue colour range and put the legend at the bottom. we&amp;rsquo;ll use the &lt;code&gt;labs()&lt;/code&gt; element of ggplot2 to give us a headline, captions and attribution.&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;by_quantile &amp;lt;- ggplot() +
   geom_polygon(data = full_uk_map, aes(x = long, y = lat, group = group, fill = quantiles)) +
@@ -193,7 +193,7 @@ labels
 by_quantile
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;&lt;img src=&#34;https://egrommet.github.io/tutorial/2019-04-01-mapping-the-article-50-petition-in-r-and-ggplot-part-2_files/figure-html/unnamed-chunk-7-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://www.glynmottershead.com/tutorial/2019-04-01-mapping-the-article-50-petition-in-r-and-ggplot-part-2_files/figure-html/unnamed-chunk-7-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;The next thing we can try is adding a theme. I&amp;rsquo;m just going to use the one from Timo&amp;rsquo;s post but change the font family. It is being stored as a function, so we can call it easily.&lt;/p&gt;
 
@@ -238,7 +238,7 @@ by_quantile
 by_quantile2
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;&lt;img src=&#34;https://egrommet.github.io/tutorial/2019-04-01-mapping-the-article-50-petition-in-r-and-ggplot-part-2_files/figure-html/unnamed-chunk-9-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://www.glynmottershead.com/tutorial/2019-04-01-mapping-the-article-50-petition-in-r-and-ggplot-part-2_files/figure-html/unnamed-chunk-9-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;At some stage I&amp;rsquo;m going to play around with the background to declare the plot size (I&amp;rsquo;m guessing that is why it is breaking the bounds here - but the version at the top is exported from the code run in RStudio), I&amp;rsquo;ll post when I do but for now I&amp;rsquo;m going to stop here.&lt;/p&gt;
 
@@ -248,10 +248,10 @@ by_quantile2
     
     <item>
       <title>Mapping the article 50 petition in R and ggplot</title>
-      <link>https://egrommet.github.io/tutorial/mapping-the-article-50-petition-in-r-and-ggplot/</link>
+      <link>https://www.glynmottershead.com/tutorial/mapping-the-article-50-petition-in-r-and-ggplot/</link>
       <pubDate>Fri, 29 Mar 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://egrommet.github.io/tutorial/mapping-the-article-50-petition-in-r-and-ggplot/</guid>
+      <guid>https://www.glynmottershead.com/tutorial/mapping-the-article-50-petition-in-r-and-ggplot/</guid>
       <description>
 
 &lt;h1 id=&#34;mapping-in-r-using-ggplot2&#34;&gt;Mapping in R - using ggplot2&lt;/h1&gt;
@@ -346,7 +346,7 @@ total_sig &amp;lt;- sum(sign_data$signature_count)
 total_sig
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;pre&gt;&lt;code&gt;## [1] 5678594
+&lt;pre&gt;&lt;code&gt;## [1] 5693104
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;h2 id=&#34;joing-the-data-sets&#34;&gt;Joing the data sets&lt;/h2&gt;
@@ -392,7 +392,7 @@ ggplot() +
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;div class=&#34;figure&#34;&gt;
-&lt;img src=&#34;https://egrommet.github.io/tutorial/2019-03-29-mapping-the-article-50-petition-in-r-and-ggplot_files/figure-html/map-1.png&#34; alt=&#34;A simple choropleth map.&#34; width=&#34;672&#34; /&gt;
+&lt;img src=&#34;https://www.glynmottershead.com/tutorial/2019-03-29-mapping-the-article-50-petition-in-r-and-ggplot_files/figure-html/map-1.png&#34; alt=&#34;A simple choropleth map.&#34; width=&#34;672&#34; /&gt;
 &lt;p class=&#34;caption&#34;&gt;Figure 1 A simple choropleth map.&lt;/p&gt;
 &lt;/div&gt;
 
@@ -400,7 +400,7 @@ ggplot() +
 
 &lt;p&gt;I&amp;rsquo;ve also been playing with a great post from Timo Grossenbaher on how to &lt;a href=&#34;https://timogrossenbacher.ch/2016/12/beautiful-thematic-maps-with-ggplot2-only/&#34; target=&#34;_blank&#34;&gt;make beatiful thematic maps with ggplot2&lt;/a&gt; to create something a bit more effective.&lt;/p&gt;
 
-&lt;p&gt;Now pop along to &lt;a href=&#34;https://egrommet.github.io/tutorial/mapping-the-article-50-petition-in-r-and-ggplot-part-2/&#34; target=&#34;_blank&#34;&gt;stage two of this tutorial&lt;/a&gt; which goes further and looks at making things more interesting.&lt;/p&gt;
+&lt;p&gt;Now pop along to &lt;a href=&#34;https://www.glynmottershead.com/tutorial/mapping-the-article-50-petition-in-r-and-ggplot-part-2/&#34; target=&#34;_blank&#34;&gt;stage two of this tutorial&lt;/a&gt; which goes further and looks at making things more interesting.&lt;/p&gt;
 
 &lt;h2 id=&#34;more-analysis&#34;&gt;More analysis&lt;/h2&gt;
 
@@ -410,91 +410,91 @@ ggplot() +
     
     <item>
       <title>When a tech company pulls the plug on your story</title>
-      <link>https://egrommet.github.io/publication/nieman-predictions-2019/</link>
+      <link>https://www.glynmottershead.com/publication/nieman-predictions-2019/</link>
       <pubDate>Sat, 01 Dec 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://egrommet.github.io/publication/nieman-predictions-2019/</guid>
+      <guid>https://www.glynmottershead.com/publication/nieman-predictions-2019/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Are You Talking To Me?: An Analysis of Journalism Conversation on Social Media</title>
-      <link>https://egrommet.github.io/publication/are-you-talking-book-chapter/</link>
+      <link>https://www.glynmottershead.com/publication/are-you-talking-book-chapter/</link>
       <pubDate>Sat, 01 Sep 2018 00:00:00 +0100</pubDate>
       
-      <guid>https://egrommet.github.io/publication/are-you-talking-book-chapter/</guid>
+      <guid>https://www.glynmottershead.com/publication/are-you-talking-book-chapter/</guid>
       <description></description>
     </item>
     
     <item>
       <title>&#39;Can I click it? Yes you can&#39;: Football journalism, Twitter and clickbait</title>
-      <link>https://egrommet.github.io/publication/can-i-click-it/</link>
+      <link>https://www.glynmottershead.com/publication/can-i-click-it/</link>
       <pubDate>Fri, 09 Mar 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://egrommet.github.io/publication/can-i-click-it/</guid>
+      <guid>https://www.glynmottershead.com/publication/can-i-click-it/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Recoding journalism  education: mind the  skills gap, please!</title>
-      <link>https://egrommet.github.io/talk/gap_foj/</link>
+      <link>https://www.glynmottershead.com/talk/gap_foj/</link>
       <pubDate>Sat, 02 Sep 2017 00:00:00 +0100</pubDate>
       
-      <guid>https://egrommet.github.io/talk/gap_foj/</guid>
+      <guid>https://www.glynmottershead.com/talk/gap_foj/</guid>
       <description></description>
     </item>
     
     <item>
       <title>The First Commit of History: Visualising News on a Deadline</title>
-      <link>https://egrommet.github.io/talk/visualising-on-a-deadline/</link>
+      <link>https://www.glynmottershead.com/talk/visualising-on-a-deadline/</link>
       <pubDate>Wed, 12 Jul 2017 00:00:00 +0100</pubDate>
       
-      <guid>https://egrommet.github.io/talk/visualising-on-a-deadline/</guid>
+      <guid>https://www.glynmottershead.com/talk/visualising-on-a-deadline/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Now we are three: A perspective on Computational and Data Journalism Education</title>
-      <link>https://egrommet.github.io/talk/now-we-are-three/</link>
+      <link>https://www.glynmottershead.com/talk/now-we-are-three/</link>
       <pubDate>Thu, 06 Jul 2017 00:00:00 +0100</pubDate>
       
-      <guid>https://egrommet.github.io/talk/now-we-are-three/</guid>
+      <guid>https://www.glynmottershead.com/talk/now-we-are-three/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Are You Talking To Me?: An Analysis of Journalism Conversation on Social Media</title>
-      <link>https://egrommet.github.io/publication/are-you-talking-to-me/</link>
+      <link>https://www.glynmottershead.com/publication/are-you-talking-to-me/</link>
       <pubDate>Sun, 02 Oct 2016 00:00:00 +0100</pubDate>
       
-      <guid>https://egrommet.github.io/publication/are-you-talking-to-me/</guid>
+      <guid>https://www.glynmottershead.com/publication/are-you-talking-to-me/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Subediting and production for journalists</title>
-      <link>https://egrommet.github.io/publication/subbing-book/</link>
+      <link>https://www.glynmottershead.com/publication/subbing-book/</link>
       <pubDate>Fri, 28 Aug 2015 00:00:00 +0100</pubDate>
       
-      <guid>https://egrommet.github.io/publication/subbing-book/</guid>
+      <guid>https://www.glynmottershead.com/publication/subbing-book/</guid>
       <description></description>
     </item>
     
     <item>
       <title>21st Century Journalism Handbook</title>
-      <link>https://egrommet.github.io/publication/21st-century-journalism-handbook/</link>
+      <link>https://www.glynmottershead.com/publication/21st-century-journalism-handbook/</link>
       <pubDate>Sun, 01 Jul 2012 00:00:00 +0100</pubDate>
       
-      <guid>https://egrommet.github.io/publication/21st-century-journalism-handbook/</guid>
+      <guid>https://www.glynmottershead.com/publication/21st-century-journalism-handbook/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Learning and Knowledge Building with Web 2.0 Technologies: Implications for Teacher Education</title>
-      <link>https://egrommet.github.io/publication/learning-and-knowledge-building/</link>
+      <link>https://www.glynmottershead.com/publication/learning-and-knowledge-building/</link>
       <pubDate>Sat, 01 Aug 2009 00:00:00 +0100</pubDate>
       
-      <guid>https://egrommet.github.io/publication/learning-and-knowledge-building/</guid>
+      <guid>https://www.glynmottershead.com/publication/learning-and-knowledge-building/</guid>
       <description></description>
     </item>
     

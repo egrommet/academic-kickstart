@@ -34,7 +34,7 @@ Getting started We need to reload the data again, so we&rsquo;re going to get a 
 I&rsquo;m going to run this in one block and assume you can follow along, if not go back to the previous post.">
 
   
-  <link rel="alternate" hreflang="en-gb" href="https://egrommet.github.io/tutorial/mapping-the-article-50-petition-in-r-and-ggplot-part-2/">
+  <link rel="alternate" hreflang="en-gb" href="https://www.glynmottershead.com/tutorial/mapping-the-article-50-petition-in-r-and-ggplot-part-2/">
 
   
 
@@ -101,7 +101,7 @@ I&rsquo;m going to run this in one block and assume you can follow along, if not
     <script>
       window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
       ga('create', 'UA-136339819-1', 'auto');
-      
+      ga('set', 'anonymizeIp', true);
       ga('require', 'eventTracker');
       ga('require', 'outboundLinkTracker');
       ga('require', 'urlChangeTracker');
@@ -115,15 +115,15 @@ I&rsquo;m going to run this in one block and assume you can follow along, if not
   
 
   
-  <link rel="alternate" href="https://egrommet.github.io/index.xml" type="application/rss+xml" title="Glyn Mottershead">
-  <link rel="feed" href="https://egrommet.github.io/index.xml" type="application/rss+xml" title="Glyn Mottershead">
+  <link rel="alternate" href="https://www.glynmottershead.com/index.xml" type="application/rss+xml" title="Glyn Mottershead">
+  <link rel="feed" href="https://www.glynmottershead.com/index.xml" type="application/rss+xml" title="Glyn Mottershead">
   
 
   <link rel="manifest" href="/site.webmanifest">
   <link rel="icon" type="image/png" href="/img/icon.png">
   <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
 
-  <link rel="canonical" href="https://egrommet.github.io/tutorial/mapping-the-article-50-petition-in-r-and-ggplot-part-2/">
+  <link rel="canonical" href="https://www.glynmottershead.com/tutorial/mapping-the-article-50-petition-in-r-and-ggplot-part-2/">
 
   
   
@@ -138,12 +138,12 @@ I&rsquo;m going to run this in one block and assume you can follow along, if not
   <meta property="twitter:creator" content="@glynmottershead">
   
   <meta property="og:site_name" content="Glyn Mottershead">
-  <meta property="og:url" content="https://egrommet.github.io/tutorial/mapping-the-article-50-petition-in-r-and-ggplot-part-2/">
+  <meta property="og:url" content="https://www.glynmottershead.com/tutorial/mapping-the-article-50-petition-in-r-and-ggplot-part-2/">
   <meta property="og:title" content="Mapping the article 50 petition in R and ggplot - part 2 | Glyn Mottershead">
   <meta property="og:description" content="Mapping in R - using ggplot2, part two In the previous tutorial we looked at getting data from web APIs in JSON and GeoJSON formats to create a simple map.
 This time we&rsquo;ll be adapting code from Timo Grossenbacher to make our map more attractive.
 Getting started We need to reload the data again, so we&rsquo;re going to get a different number of signatures than last time.
-I&rsquo;m going to run this in one block and assume you can follow along, if not go back to the previous post."><meta property="og:image" content="https://egrommet.github.io/img/icon-192.png">
+I&rsquo;m going to run this in one block and assume you can follow along, if not go back to the previous post."><meta property="og:image" content="https://www.glynmottershead.com/img/icon-192.png">
   <meta property="og:locale" content="en-gb">
   
   <meta property="article:published_time" content="2019-04-01T00:00:00&#43;00:00">
@@ -152,6 +152,32 @@ I&rsquo;m going to run this in one block and assume you can follow along, if not
   
 
   
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.js"></script>
+<script>
+  window.addEventListener("load", function(){
+    window.cookieconsent.initialise({
+      "palette": {
+        "popup": {
+          "background": "#2962ff",
+          "text": "#fff"
+        },
+        "button": {
+          "background": "#fff",
+          "text": "#2962ff"
+        }
+      },
+      "theme": "classic",
+      "content": {
+        "message": "This website uses cookies to ensure you get the best experience on our website.",
+        "dismiss": "Got it!",
+        "link": "Learn more",
+        "href": "https://cookies.insites.com"
+      }
+    })});
+</script>
+
 
   
 
@@ -412,35 +438,35 @@ I&rsquo;m going to run this in one block and assume you can follow along, if not
   <ul class="share">
     <li>
       <a class="twitter"
-         href="https://twitter.com/intent/tweet?text=Mapping%20the%20article%2050%20petition%20in%20R%20and%20ggplot%20-%20part%202&amp;url=https%3a%2f%2fegrommet.github.io%2ftutorial%2fmapping-the-article-50-petition-in-r-and-ggplot-part-2%2f"
+         href="https://twitter.com/intent/tweet?text=Mapping%20the%20article%2050%20petition%20in%20R%20and%20ggplot%20-%20part%202&amp;url=https%3a%2f%2fwww.glynmottershead.com%2ftutorial%2fmapping-the-article-50-petition-in-r-and-ggplot-part-2%2f"
          target="_blank" rel="noopener">
         <i class="fab fa-twitter"></i>
       </a>
     </li>
     <li>
       <a class="facebook"
-         href="https://www.facebook.com/sharer.php?u=https%3a%2f%2fegrommet.github.io%2ftutorial%2fmapping-the-article-50-petition-in-r-and-ggplot-part-2%2f"
+         href="https://www.facebook.com/sharer.php?u=https%3a%2f%2fwww.glynmottershead.com%2ftutorial%2fmapping-the-article-50-petition-in-r-and-ggplot-part-2%2f"
          target="_blank" rel="noopener">
         <i class="fab fa-facebook-f"></i>
       </a>
     </li>
     <li>
       <a class="linkedin"
-         href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3a%2f%2fegrommet.github.io%2ftutorial%2fmapping-the-article-50-petition-in-r-and-ggplot-part-2%2f&amp;title=Mapping%20the%20article%2050%20petition%20in%20R%20and%20ggplot%20-%20part%202"
+         href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3a%2f%2fwww.glynmottershead.com%2ftutorial%2fmapping-the-article-50-petition-in-r-and-ggplot-part-2%2f&amp;title=Mapping%20the%20article%2050%20petition%20in%20R%20and%20ggplot%20-%20part%202"
          target="_blank" rel="noopener">
         <i class="fab fa-linkedin-in"></i>
       </a>
     </li>
     <li>
       <a class="weibo"
-         href="http://service.weibo.com/share/share.php?url=https%3a%2f%2fegrommet.github.io%2ftutorial%2fmapping-the-article-50-petition-in-r-and-ggplot-part-2%2f&amp;title=Mapping%20the%20article%2050%20petition%20in%20R%20and%20ggplot%20-%20part%202"
+         href="http://service.weibo.com/share/share.php?url=https%3a%2f%2fwww.glynmottershead.com%2ftutorial%2fmapping-the-article-50-petition-in-r-and-ggplot-part-2%2f&amp;title=Mapping%20the%20article%2050%20petition%20in%20R%20and%20ggplot%20-%20part%202"
          target="_blank" rel="noopener">
         <i class="fab fa-weibo"></i>
       </a>
     </li>
     <li>
       <a class="email"
-         href="mailto:?subject=Mapping%20the%20article%2050%20petition%20in%20R%20and%20ggplot%20-%20part%202&amp;body=https%3a%2f%2fegrommet.github.io%2ftutorial%2fmapping-the-article-50-petition-in-r-and-ggplot-part-2%2f">
+         href="mailto:?subject=Mapping%20the%20article%2050%20petition%20in%20R%20and%20ggplot%20-%20part%202&amp;body=https%3a%2f%2fwww.glynmottershead.com%2ftutorial%2fmapping-the-article-50-petition-in-r-and-ggplot-part-2%2f">
         <i class="fas fa-envelope"></i>
       </a>
     </li>
@@ -598,9 +624,9 @@ for(band in 1:length(quantiles)){
 labels
 </code></pre>
 
-<pre><code>##  [1] &quot;1966 – 3875&quot;   &quot;3875 – 4580&quot;   &quot;4580 – 5304&quot;   &quot;5304 – 6479&quot;  
-##  [5] &quot;6479 – 7557&quot;   &quot;7557 – 9027&quot;   &quot;9027 – 9642&quot;   &quot;9642 – 11105&quot; 
-##  [9] &quot;11105 – 36921&quot; &quot;36921 – NA&quot;
+<pre><code>##  [1] &quot;1972 – 3890&quot;   &quot;3890 – 4590&quot;   &quot;4590 – 5314&quot;   &quot;5314 – 6505&quot;  
+##  [5] &quot;6505 – 7594&quot;   &quot;7594 – 9055&quot;   &quot;9055 – 9665&quot;   &quot;9665 – 11138&quot; 
+##  [9] &quot;11138 – 36974&quot; &quot;36974 – NA&quot;
 </code></pre>
 
 <p>And we&rsquo;ve got a problem - the code gives us a final band that looks like &ldquo;36901 - NA&rdquo;, anything over our maximum. We can easily get rid of that as obviously we are limited at the maximum.</p>
@@ -610,9 +636,9 @@ labels
 labels
 </code></pre>
 
-<pre><code>## [1] &quot;1966 – 3875&quot;   &quot;3875 – 4580&quot;   &quot;4580 – 5304&quot;   &quot;5304 – 6479&quot;  
-## [5] &quot;6479 – 7557&quot;   &quot;7557 – 9027&quot;   &quot;9027 – 9642&quot;   &quot;9642 – 11105&quot; 
-## [9] &quot;11105 – 36921&quot;
+<pre><code>## [1] &quot;1972 – 3890&quot;   &quot;3890 – 4590&quot;   &quot;4590 – 5314&quot;   &quot;5314 – 6505&quot;  
+## [5] &quot;6505 – 7594&quot;   &quot;7594 – 9055&quot;   &quot;9055 – 9665&quot;   &quot;9665 – 11138&quot; 
+## [9] &quot;11138 – 36974&quot;
 </code></pre>
 
 <p>Next, we need to add our new number range to the map. We&rsquo;ll do this with the <a href="https://www.rdocumentation.org/packages/base/versions/3.5.3/topics/cut" target="_blank"><code>cut()</code> function</a>, to turn our <a href="https://www.stat.berkeley.edu/~s133/factors.html" target="_blank">number range into a factor</a>.</p>
@@ -625,7 +651,7 @@ labels
 
 <h2 id="making-the-map">Making the map</h2>
 
-<p>Now we can make our map. This time we&rsquo;ll use our new quantiles column as the fill. We&rsquo;ll use <code>scale_fill_brewer()</code> to give us our &lsquo;European&rsquo; blue colour range and put the legend at the bottom. we&rsquo;ll use the <code>labs()</code> element of ggplot2 to give us a headline, catptions and attribution.</p>
+<p>Now we can make our map. This time we&rsquo;ll use our new quantiles column as the fill. We&rsquo;ll use <code>scale_fill_brewer()</code> to give us our &lsquo;European&rsquo; blue colour range and put the legend at the bottom. we&rsquo;ll use the <code>labs()</code> element of ggplot2 to give us a headline, captions and attribution.</p>
 
 <pre><code class="language-r">by_quantile &lt;- ggplot() +
   geom_polygon(data = full_uk_map, aes(x = long, y = lat, group = group, fill = quantiles)) +
