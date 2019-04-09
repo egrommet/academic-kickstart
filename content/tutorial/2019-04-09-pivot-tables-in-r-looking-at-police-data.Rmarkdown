@@ -14,7 +14,7 @@ image:
 # Looking at police data using Tidyverse tools
 The Tidyverse tools are one of my favourite things and made my R coding experience much simpler. Most of the things I'll be posting will use them in one way or another.
 
-We're going to find out what happens when someone reports a stolen bicycle - a friend seems to believe they do nothing, so let's investigate.
+We're going to find out what happens when someone reports a stolen bicycle - a friend seems to believe the police do nothing, so let's investigate what actuall happens.
 
 ## Downloading the data
 I've downloaded a month's worth of data for South Wales Police from [data.police.uk](https://data.police.uk/data/). 

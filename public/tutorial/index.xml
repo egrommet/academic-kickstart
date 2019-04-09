@@ -18,7 +18,7 @@
       
       <guid>/tutorial/pivot-tables-in-r-looking-at-police-data/</guid>
       <description>Looking at police data using Tidyverse tools The Tidyverse tools are one of my favourite things and made my R coding experience much simpler. Most of the things I&amp;rsquo;ll be posting will use them in one way or another.
-We&amp;rsquo;re going to find out what happens when someone reports a stolen bicycle - a friend seems to believe they do nothing, so let&amp;rsquo;s investigate.
+We&amp;rsquo;re going to find out what happens when someone reports a stolen bicycle - a friend seems to believe the police do nothing, so let&amp;rsquo;s investigate what actuall happens.
 Downloading the data I&amp;rsquo;ve downloaded a month&amp;rsquo;s worth of data for South Wales Police from data.</description>
     </item>
     
