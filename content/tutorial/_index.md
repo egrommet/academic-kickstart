@@ -20,7 +20,7 @@ type = "docs"  # Do not modify.
 A place for data journalism tutorials using different tools, but coding will be primarily in [R](https://www.r-project.org/), using the [RStudio IDE](https://www.rstudio.com/products/rstudio/download/). You can have a play with the cloud version of [RStudio](https://www.rstudio.cloud).
 
 ## Getting started with the Tidyverse
-[Looking at police data using a Tidyverse pivot table]({{< relref "2019-04-09-pivot-tables-in-r-looking-at-police-data.markdown" >}}) 
+[Looking at police data using a Tidyverse pivot table]({{< relref "2019-04-09-pivot-tables-in-r-looking-at-police-data.markdown" >}}), the first of the Tidyverse tutorials 
 
 ## Mapping with ggplot
 [Mapping in R and ggplot]({{< relref "2019-03-29-mapping-the-article-50-petition-in-r-and-ggplot.markdown" >}}) - a tutorial renderended from an R markdown file. 
