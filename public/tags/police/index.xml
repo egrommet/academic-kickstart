@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Police on Glyn Mottershead</title>
+    <link>/tags/police/</link>
+    <description>Recent content in Police on Glyn Mottershead</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-gb</language>
+    <lastBuildDate>Tue, 09 Apr 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/police/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Pivot tables in R - looking at police data</title>
+      <link>/tutorial/pivot-tables-in-r-looking-at-police-data/</link>
+      <pubDate>Tue, 09 Apr 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/tutorial/pivot-tables-in-r-looking-at-police-data/</guid>
+      <description>Looking at police data using Tidyverse tools The Tidyverse tools are one of my favourite things and made my R coding experience much simpler. Most of the things I&amp;rsquo;ll be posting will use them in one way or another.
+We&amp;rsquo;re going to find out what happens when someone reports a stolen bicycle - a friend seems to believe they do nothing, so let&amp;rsquo;s investigate.
+Downloading the data I&amp;rsquo;ve downloaded a month&amp;rsquo;s worth of data for South Wales Police from data.</description>
+    </item>
+    
+  </channel>
+</rss>

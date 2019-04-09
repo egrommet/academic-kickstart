@@ -1,0 +1,966 @@
+<!DOCTYPE html>
+<html lang="en-gb">
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="generator" content="Source Themes Academic 4.1.0">
+  <meta name="generator" content="Hugo 0.55.0" />
+
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  <meta name="author" content="Glyn Mottershead">
+
+  
+  
+  
+    
+  
+  <meta name="description" content="Looking at police data using Tidyverse tools The Tidyverse tools are one of my favourite things and made my R coding experience much simpler. Most of the things I&rsquo;ll be posting will use them in one way or another.
+We&rsquo;re going to find out what happens when someone reports a stolen bicycle - a friend seems to believe they do nothing, so let&rsquo;s investigate.
+Downloading the data I&rsquo;ve downloaded a month&rsquo;s worth of data for South Wales Police from data.">
+
+  
+  <link rel="alternate" hreflang="en-gb" href="/tutorial/pivot-tables-in-r-looking-at-police-data/">
+
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+  
+  <meta name="theme-color" content="#2962ff">
+  
+
+  
+  
+  
+  
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css" integrity="sha256-uFVgMKfistnJAfoCUQigIl+JfUaP47GrRKjf6CTPVmw=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.0/css/all.css" integrity="sha384-aOkxzJ5uQz7WBObEZcHvV5JvRW3TUc2rNPA7pe3AwnsUohiw1Vj2Rgx2KSOkF5+h" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" integrity="sha256-ygkqlh3CYSUri3LhQxzdcm0n1EQvH2Y+U5S2idbLtxs=" crossorigin="anonymous">
+
+    
+    
+    
+      
+    
+    
+      
+      
+        
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" crossorigin="anonymous" title="hl-light">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/dracula.min.css" crossorigin="anonymous" title="hl-dark" disabled>
+        
+      
+    
+
+    
+
+    
+
+  
+
+  
+  
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Montserrat:400,700|Roboto:400,400italic,700|Roboto+Mono">
+  
+
+  <link rel="stylesheet" href="/styles.css">
+  
+
+  
+  
+    <script>
+      window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+      ga('create', 'UA-136339819-1', 'auto');
+      ga('set', 'anonymizeIp', true);
+      ga('require', 'eventTracker');
+      ga('require', 'outboundLinkTracker');
+      ga('require', 'urlChangeTracker');
+      ga('send', 'pageview');
+    </script>
+    <script async src="//www.google-analytics.com/analytics.js"></script>
+    
+    <script async src="https://cdnjs.cloudflare.com/ajax/libs/autotrack/2.4.1/autotrack.js" integrity="sha512-HUmooslVKj4m6OBu0OgzjXXr+QuFYy/k7eLI5jdeEy/F4RSgMn6XRWRGkFi5IFaFgy7uFTkegp3Z0XnJf3Jq+g==" crossorigin="anonymous"></script>
+    
+  
+  
+
+  
+  <link rel="alternate" href="/index.xml" type="application/rss+xml" title="Glyn Mottershead">
+  <link rel="feed" href="/index.xml" type="application/rss+xml" title="Glyn Mottershead">
+  
+
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="icon" type="image/png" href="/img/icon.png">
+  <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
+
+  <link rel="canonical" href="/tutorial/pivot-tables-in-r-looking-at-police-data/">
+
+  
+  
+  
+  
+    
+    
+  
+  <meta property="twitter:card" content="summary">
+  
+  <meta property="twitter:site" content="@glynmottershead">
+  <meta property="twitter:creator" content="@glynmottershead">
+  
+  <meta property="og:site_name" content="Glyn Mottershead">
+  <meta property="og:url" content="/tutorial/pivot-tables-in-r-looking-at-police-data/">
+  <meta property="og:title" content="Pivot tables in R - looking at police data | Glyn Mottershead">
+  <meta property="og:description" content="Looking at police data using Tidyverse tools The Tidyverse tools are one of my favourite things and made my R coding experience much simpler. Most of the things I&rsquo;ll be posting will use them in one way or another.
+We&rsquo;re going to find out what happens when someone reports a stolen bicycle - a friend seems to believe they do nothing, so let&rsquo;s investigate.
+Downloading the data I&rsquo;ve downloaded a month&rsquo;s worth of data for South Wales Police from data."><meta property="og:image" content="/img/icon-192.png">
+  <meta property="og:locale" content="en-gb">
+  
+  <meta property="article:published_time" content="2019-04-09T00:00:00&#43;00:00">
+  
+  <meta property="article:modified_time" content="2019-04-09T00:00:00&#43;00:00">
+  
+
+  
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.js"></script>
+<script>
+  window.addEventListener("load", function(){
+    window.cookieconsent.initialise({
+      "palette": {
+        "popup": {
+          "background": "#2962ff",
+          "text": "#fff"
+        },
+        "button": {
+          "background": "#fff",
+          "text": "#2962ff"
+        }
+      },
+      "theme": "classic",
+      "content": {
+        "message": "This website uses cookies to ensure you get the best experience on our website.",
+        "dismiss": "Got it!",
+        "link": "Learn more",
+        "href": "/privacy/"
+      }
+    })});
+</script>
+
+
+  
+
+  <title>Pivot tables in R - looking at police data | Glyn Mottershead</title>
+
+</head>
+<body id="top" data-spy="scroll" data-target="#TableOfContents" data-offset="71" >
+  <aside class="search-results" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        <input name="q" id="search-query" placeholder="Search..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" role="textbox" spellcheck="false" type="search">
+        
+      </div>
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+<nav class="navbar navbar-light fixed-top navbar-expand-lg py-0" id="navbar-main">
+  <div class="container">
+
+    
+      <a class="navbar-brand" href="/">Glyn Mottershead</a>
+      
+      <button type="button" class="navbar-toggler" data-toggle="collapse"
+              data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+        <span><i class="fas fa-bars"></i></span>
+      </button>
+      
+
+    
+    <div class="collapse navbar-collapse" id="navbar">
+
+      
+      
+      <ul class="navbar-nav mr-auto">
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link" href="/#about">
+            
+            <span>Home</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link" href="/#featured">
+            
+            <span>Publications</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link" href="/#experience">
+            
+            <span>Experience</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link" href="/#contact">
+            
+            <span>Contact</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link" href="/tutorial/">
+            
+            <span>Tutorials</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+      
+      </ul>
+      <ul class="navbar-nav ml-auto">
+      
+
+        
+
+        
+        <li class="nav-item">
+          <a class="nav-link js-search" href="#"><i class="fas fa-search" aria-hidden="true"></i></a>
+        </li>
+        
+
+        
+
+        
+        <li class="nav-item">
+          <a class="nav-link js-dark-toggle" href="#"><i class="fas fa-moon" aria-hidden="true"></i></a>
+        </li>
+        
+
+      </ul>
+
+    </div>
+  </div>
+</nav>
+
+
+<article class="article" itemscope itemtype="http://schema.org/Article">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+  
+  
+<div class="article-container pt-3">
+  <h1 itemprop="name">Pivot tables in R - looking at police data</h1>
+
+  
+
+  
+    
+
+
+
+<meta content="2019-04-09 00:00:00 &#43;0000 UTC" itemprop="datePublished">
+<meta content="2019-04-09 00:00:00 &#43;0000 UTC" itemprop="dateModified">
+
+<div class="article-metadata">
+
+  
+  
+
+  
+  <span class="article-date">
+    
+    
+      
+    
+    <time>Apr 9, 2019</time>
+  </span>
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+  
+  <span class="middot-divider"></span>
+  <span class="article-categories">
+    <i class="fas fa-folder"></i>
+    
+    <a href="/categories/r/">R</a>
+    
+  </span>
+  
+  
+
+  
+    
+<div class="share-box" aria-hidden="true">
+  <ul class="share">
+    <li>
+      <a class="twitter"
+         href="https://twitter.com/intent/tweet?text=Pivot%20tables%20in%20R%20-%20looking%20at%20police%20data&amp;url=%2ftutorial%2fpivot-tables-in-r-looking-at-police-data%2f"
+         target="_blank" rel="noopener">
+        <i class="fab fa-twitter"></i>
+      </a>
+    </li>
+    <li>
+      <a class="facebook"
+         href="https://www.facebook.com/sharer.php?u=%2ftutorial%2fpivot-tables-in-r-looking-at-police-data%2f"
+         target="_blank" rel="noopener">
+        <i class="fab fa-facebook-f"></i>
+      </a>
+    </li>
+    <li>
+      <a class="linkedin"
+         href="https://www.linkedin.com/shareArticle?mini=true&amp;url=%2ftutorial%2fpivot-tables-in-r-looking-at-police-data%2f&amp;title=Pivot%20tables%20in%20R%20-%20looking%20at%20police%20data"
+         target="_blank" rel="noopener">
+        <i class="fab fa-linkedin-in"></i>
+      </a>
+    </li>
+    <li>
+      <a class="weibo"
+         href="http://service.weibo.com/share/share.php?url=%2ftutorial%2fpivot-tables-in-r-looking-at-police-data%2f&amp;title=Pivot%20tables%20in%20R%20-%20looking%20at%20police%20data"
+         target="_blank" rel="noopener">
+        <i class="fab fa-weibo"></i>
+      </a>
+    </li>
+    <li>
+      <a class="email"
+         href="mailto:?subject=Pivot%20tables%20in%20R%20-%20looking%20at%20police%20data&amp;body=%2ftutorial%2fpivot-tables-in-r-looking-at-police-data%2f">
+        <i class="fas fa-envelope"></i>
+      </a>
+    </li>
+  </ul>
+</div>
+
+
+  
+
+</div>
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+</div>
+
+
+
+  <div class="article-container">
+
+    <div class="article-style" itemprop="articleBody">
+      
+
+<h1 id="looking-at-police-data-using-tidyverse-tools">Looking at police data using Tidyverse tools</h1>
+
+<p>The Tidyverse tools are one of my favourite things and made my R coding experience much simpler. Most of the things I&rsquo;ll be posting will use them in one way or another.</p>
+
+<p>We&rsquo;re going to find out what happens when someone reports a stolen bicycle - a friend seems to believe they do nothing, so let&rsquo;s investigate.</p>
+
+<h2 id="downloading-the-data">Downloading the data</h2>
+
+<p>I&rsquo;ve downloaded a month&rsquo;s worth of data for South Wales Police from <a href="https://data.police.uk/data/" target="_blank">data.police.uk</a>.</p>
+
+<p>I&rsquo;m going to do the R equivalent of a pivot table, grouping information together and then analysing it.</p>
+
+<h2 id="getting-started">Getting started</h2>
+
+<p>Open RStudio and go to <strong>FILE &gt; NEW PROJECT</strong> then create it in a new folder. This will give you a chance to choose where you want it to go. I tend to have a project folder and then each individual project is stored inside that.</p>
+
+<p>We&rsquo;ll leave RStudio for a second and head into the computer&rsquo;s file manager to find the folder we just created in RStudio. Inside that I always create a folder called data, I&rsquo;ll then put my downloaded data inside it.</p>
+
+<h2 id="create-a-script">Create a script</h2>
+
+<p>Back inside RStudio, I&rsquo;m going to go to <strong>File menu &gt; New File &gt; R Script</strong>. I&rsquo;m doing this as it allows me to repeat this analysis when I want to. You&rsquo;ll want to give it a name that makes sense and then save it. R files have a <strong>.R</strong> file extension at the end.</p>
+
+<h2 id="installing-your-first-r-package">Installing your first R Package</h2>
+
+<p>A package is a tool, or group of tools, that someone has created to cut out some of the repetition in R. We&rsquo;ll be using the tidyverse by Hadley Wickham. These are a set of really helpful data tools that also make R programming easier to read.</p>
+
+<p>We can install packages by going to the <strong>Tools menu &gt; Install Packages</strong> and type the name into the pop-up box.</p>
+
+<p>Or I can write the command (known as a function) into my script, highlight my line of code and hit the <strong>RUN</strong> button at the top of the script. The other way to do it is a line of code - <code>install.packages(&quot;tidyverse&quot;)</code>.</p>
+
+<p>I then need to load it in my script. This is done by the <code>library()</code> function. Again, run the line of code.</p>
+
+<pre><code class="language-r">library(tidyverse)
+</code></pre>
+
+<h2 id="loading-data">Loading data</h2>
+
+<p>Even though we have the data set in our R project folder we need to load it up.</p>
+
+<p>I&rsquo;m going to use <code>read_csv()</code> from readr to read a CSV file into our RStudio environment.</p>
+
+<p>If you ever want to know how what a package or function does then type <code>?function_name</code> in the console eg <code>?read_csv</code>, and you&rsquo;ll get a help message.</p>
+
+<p>Our function wrapping works like this <code>read_csv()</code>.</p>
+
+<p>We need to put the address (** aka file path**) for our CSV inside quote marks inside the inner pair of brackets.
+It will look like this - <code>read_csv(&quot;file_path&quot;)</code>.</p>
+
+<p>The full syntax (not the working code I want to use) looks like this:
+<code>data_frame_name &lt;- read_csv(&quot;file_path&quot;)</code></p>
+
+<p>The <strong>&lt;-</strong> is an assignment symbol, I tend to think of it as a hosepipe which allows the function to pour into the name we give our data frame.</p>
+
+<p>My file path in the example below says <strong>./</strong> inside the folder we are currently in is a folder called <strong>data</strong> and <strong>/</strong> inside that is a csv file.</p>
+
+<pre><code class="language-r">crimes &lt;- read_csv(&quot;./data/2019-01-south-wales-street.csv&quot;)
+</code></pre>
+
+<pre><code>## Parsed with column specification:
+## cols(
+##   `Crime ID` = col_character(),
+##   Month = col_character(),
+##   `Reported by` = col_character(),
+##   `Falls within` = col_character(),
+##   Longitude = col_double(),
+##   Latitude = col_double(),
+##   Location = col_character(),
+##   `LSOA code` = col_character(),
+##   `LSOA name` = col_character(),
+##   `Crime type` = col_character(),
+##   `Last outcome category` = col_character(),
+##   Context = col_logical()
+## )
+</code></pre>
+
+<p>The output for this will show us what types of columns we have - in this case <code>col_character()</code> means text and <code>col_double()</code> means a number format. All good so far.</p>
+
+<h2 id="filtering-with-dplyr">Filtering with dplyr</h2>
+
+<p>I want to filter the information so it just includes bicycle thefts. I&rsquo;m going to use some dplyr package tricks to do this.</p>
+
+<p>I&rsquo;m going to store it in a new data frame called <strong>bikes</strong>. We&rsquo;ll be using the crimes data frame we made earlier and then filtering it, before assigning the new information to bikes. So <code>bikes &lt;- crimes</code>.</p>
+
+<p>The next bit of the code is <code>%&gt;%</code> a pipe - essentially you can say <strong>and then</strong> to yourself when you write it. Our next function is a filter(), it does a similar job to the Excel function.</p>
+
+<p>Most functions will need you to say which data frame you are working on and then what you want to do. So we could say <code>filter(data_frame, column_name == &quot;text we want back&quot;)</code>.</p>
+
+<p>But dplyr knows we are working on the data frame before the first <code>%&gt;%</code>.</p>
+
+<pre><code class="language-r">bikes &lt;- crimes %&gt;%
+  filter(`Crime type` == &quot;Bicycle theft&quot;) 
+
+# If I use the dataframe name on its own and run that line I can see what is in it
+bikes
+</code></pre>
+
+<pre><code>## # A tibble: 126 x 12
+##    `Crime ID` Month `Reported by` `Falls within` Longitude Latitude
+##    &lt;chr&gt;      &lt;chr&gt; &lt;chr&gt;         &lt;chr&gt;              &lt;dbl&gt;    &lt;dbl&gt;
+##  1 0fad86217… 2019… South Wales … South Wales P…     -3.54     51.5
+##  2 5ea5f1bb3… 2019… South Wales … South Wales P…     -3.19     51.5
+##  3 ab5c7a5c7… 2019… South Wales … South Wales P…     -3.12     51.5
+##  4 44e702929… 2019… South Wales … South Wales P…     -3.23     51.5
+##  5 979ee8076… 2019… South Wales … South Wales P…     -3.09     51.5
+##  6 34490753e… 2019… South Wales … South Wales P…     -3.12     51.5
+##  7 59c9863ef… 2019… South Wales … South Wales P…     -3.12     51.5
+##  8 7029c550b… 2019… South Wales … South Wales P…     -3.22     51.5
+##  9 f8f063bad… 2019… South Wales … South Wales P…     -3.22     51.5
+## 10 cdd878455… 2019… South Wales … South Wales P…     -3.20     51.5
+## # … with 116 more rows, and 6 more variables: Location &lt;chr&gt;, `LSOA
+## #   code` &lt;chr&gt;, `LSOA name` &lt;chr&gt;, `Crime type` &lt;chr&gt;, `Last outcome
+## #   category` &lt;chr&gt;, Context &lt;lgl&gt;
+</code></pre>
+
+<p>The output will show us how many rows (observations) and columns (variables) there are - in this case a 126 x 12. We can start adding some more analysis now.</p>
+
+<h2 id="filtering-and-renaming-for-speed">Filtering and renaming for speed</h2>
+
+<p>You may notice when we printed the data frame that some of the column names have backticks around them. That&rsquo;s because they&rsquo;ve got a space between the words and R is trying to help out. So, if we wanted to work with our Crime ID column we&rsquo;d actually have to type <code>Crime ID</code> with the back ticks.</p>
+
+<p>I&rsquo;m too lazy for things like that. I&rsquo;d rather change the name so I can write something easier. We&rsquo;re going to use <code>rename()</code> to do it. We will tell <code>rename()</code> that our <code>&quot;new column name&quot; = &quot;old column name&quot;</code>  - but make sure you put the quote marks around the names when you do this.</p>
+
+<p>So, I&rsquo;m going to tweak my code from before. I&rsquo;m going to change the name of the <code>Last outcome category</code> and the <code>Crime type</code> columns. I&rsquo;m going to change them to Outcome and Crimes - much shorter to type.</p>
+
+<p>So, we&rsquo;re telling dplyr to take the <strong>crimes</strong> data frame <strong>and then</strong> rename by assigning the new name to the old name. (The comma means we can do more than one rename at once, to do more just add a comma and then say &ldquo;new&rdquo; = &ldquo;old&rdquo; again.) <strong>And then</strong> filter our newly-named <strong>Crimes</strong> column and look for the text inside the quote marks.</p>
+
+<pre><code class="language-r">bikes &lt;- crimes %&gt;%
+  rename(&quot;Outcome&quot; = &quot;Last outcome category&quot;, &quot;Crimes&quot; = &quot;Crime type&quot;) %&gt;%
+  filter(Crimes == &quot;Bicycle theft&quot;) 
+</code></pre>
+
+<h2 id="doing-a-pivot-table-in-dplyr-syntax">Doing a pivot table in dplyr syntax</h2>
+
+<p>Now we can do some digging. I want to know what the police have done about the reported bike thefts.</p>
+
+<p>We can group things together by our Outcome category and count how often each of the outcomes happen. So, we tell <code>group_by()</code> which column we want to work on. <strong>And then</strong> we tell it what to count - in this case it creates a column called outcome_count and uses the <code>n()</code> function to count the Outcome.</p>
+
+<pre><code class="language-r">bikes &lt;- crimes %&gt;%
+  rename(&quot;Outcome&quot; = &quot;Last outcome category&quot;, &quot;Crimes&quot; = &quot;Crime type&quot;) %&gt;%
+  filter(Crimes == &quot;Bicycle theft&quot;) %&gt;%
+  group_by(Outcome) %&gt;%
+  summarise(outcome_count = n())
+
+# Again I'll type the dataframe name here and run this line to see what we have got.
+bikes
+</code></pre>
+
+<pre><code>## # A tibble: 4 x 2
+##   Outcome                                       outcome_count
+##   &lt;chr&gt;                                                 &lt;int&gt;
+## 1 Awaiting court outcome                                    1
+## 2 Investigation complete; no suspect identified            88
+## 3 Unable to prosecute suspect                               1
+## 4 Under investigation                                      36
+</code></pre>
+
+<p>We&rsquo;ve got a pivot table - it has grouped the <strong>Outcome column</strong> and counted how often each one occurs.</p>
+
+<h2 id="tldr-investigation-complete-no-suspect-identified-no-suspect-identified">TLDR: &ldquo;Investigation complete; no suspect identified&rdquo; = &ldquo;No suspect identified&rdquo;</h2>
+
+<p>We&rsquo;re going to change an element by using the <code>mutate()</code> function - we&rsquo;re going to <code>recode()</code> one of our Outcome categories to shorten it. The code would look like this - <code>mutate(Outcome = recode(Outcome, &quot;Investigation complete; no suspect identified&quot; = &quot;No suspect identified&quot;))</code></p>
+
+<p>But I&rsquo;d like to order it in descending order - so we can do one more <strong>and then</strong> <code>%&gt;%</code> at the end of our code. We will <code>arrange()</code> our <strong>outcome_count</strong> in <code>desc()</code> - descending order. You must put <code>desc()</code> inside the <code>arrange()</code> function. And check your brackets.</p>
+
+<pre><code class="language-r">bikes &lt;- crimes %&gt;%
+  rename(&quot;Outcome&quot; = &quot;Last outcome category&quot;, &quot;Crimes&quot; = &quot;Crime type&quot;) %&gt;%
+  filter(Crimes == &quot;Bicycle theft&quot;) %&gt;%
+  mutate(Outcome = recode(Outcome, 
+                          &quot;Investigation complete; no suspect identified&quot; = &quot;No suspect identified&quot;)) %&gt;%
+  group_by(Outcome) %&gt;%
+  summarise(outcome_count = n()) %&gt;%
+  arrange(desc(outcome_count))
+
+# Again I'll type the dataframe name here and run this line to see what we have got.
+bikes
+</code></pre>
+
+<pre><code>## # A tibble: 4 x 2
+##   Outcome                     outcome_count
+##   &lt;chr&gt;                               &lt;int&gt;
+## 1 No suspect identified                  88
+## 2 Under investigation                    36
+## 3 Awaiting court outcome                  1
+## 4 Unable to prosecute suspect             1
+</code></pre>
+
+<p>And we&rsquo;ve got it. A pivot table that tells us what has happened to the bike crimes in the original data set and has put them in descending order.</p>
+
+    </div>
+
+    
+
+
+<div class="article-tags">
+  
+  <a class="badge badge-light" href="/tags/police/">Police</a>
+  
+</div>
+
+
+
+
+    
+      
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+<div class="media author-card" itemscope itemtype="http://schema.org/Person">
+  
+  <img class="portrait mr-3" src="https://s.gravatar.com/avatar/c67894490d5c6dc726cacbeef8342222?s=200')" itemprop="image" alt="Avatar">
+  
+
+  <div class="media-body">
+    <h5 class="card-title" itemprop="name"><a href="/authors/admin">Glyn Mottershead</a></h5>
+    <h6 class="card-subtitle">Senior Lecturer in Data Journalism</h6>
+    <p class="card-text" itemprop="description">I have a keen interest in data journalism and developer/journalism. Human computer interaction and journalistic innovation are also areas of research and teaching practise.</p>
+    <ul class="network-icon" aria-hidden="true">
+      
+      
+      
+      
+        
+      
+      
+      
+      
+      
+        
+      
+      <li>
+        <a itemprop="sameAs" href="/#contact" >
+          <i class="fas fa-envelope"></i>
+        </a>
+      </li>
+      
+      
+      
+      
+        
+      
+      
+      
+      
+      
+        
+      
+      <li>
+        <a itemprop="sameAs" href="https://twitter.com/glynmottershead" target="_blank" rel="noopener">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+      
+      
+      
+      
+      
+      
+      
+      
+        
+      
+      <li>
+        <a itemprop="sameAs" href="https://scholar.google.co.uk/citations?user=WmVvNOEAAAAJ" target="_blank" rel="noopener">
+          <i class="ai ai-google-scholar"></i>
+        </a>
+      </li>
+      
+      
+      
+      
+        
+      
+      
+      
+      
+      
+        
+      
+      <li>
+        <a itemprop="sameAs" href="https://github.com/egrommet" target="_blank" rel="noopener">
+          <i class="fab fa-github"></i>
+        </a>
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+
+
+      
+      
+    
+
+    
+
+    
+
+
+  </div>
+</article>
+
+<div class="container">
+  <footer class="site-footer">
+  
+  <p class="powered-by">
+    <a href="/privacy/">Privacy Policy</a>
+  </p>
+  
+
+  <p class="powered-by">
+    
+
+    Powered by the
+    <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
+    <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
+
+    
+    <span class="float-right" aria-hidden="true">
+      <a href="#" id="back_to_top">
+        <span class="button_icon">
+          <i class="fas fa-chevron-up fa-2x"></i>
+        </span>
+      </a>
+    </span>
+    
+  </p>
+</footer>
+
+</div>
+
+
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+    
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha512-+NqPlbbtM1QqiK8ZAo4Yrj2c4lNQoGv8P79DPtKzj++l5jnN39rHA/xsqn8zE9l0uSoxaCdrOgFs6yjyfbBxSg==" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha256-VsEqElsCHSGmnmHXGQzvoWjWwoznFSZc6hs7ARLRacQ=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" integrity="sha256-X5PoE3KU5l+JcX+w09p/wHl9AzK333C4hJ2I9S5mD4M=" crossorigin="anonymous"></script>
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js" integrity="sha256-/BfiIkHlHoVihZdc6TFuj7MmJ0TWcWsMXkeDFwhi0zw=" crossorigin="anonymous"></script>
+        
+      
+
+      
+      
+    
+
+    
+    
+
+    
+    
+    
+
+    
+    
+    <script>hljs.initHighlightingOnLoad();</script>
+    
+
+    
+    
+    <script>
+      const search_index_filename = "/index.json";
+      const i18n = {
+        'placeholder': "Search...",
+        'results': "results found",
+        'no_results': "No results found"
+      };
+      const content_type = {
+        'post': "Posts",
+        'project': "Projects",
+        'publication' : "Publications",
+        'talk' : "Talks"
+        };
+    </script>
+    
+
+    
+    
+
+    
+    
+    <script id="search-hit-fuse-template" type="text/x-template">
+      <div class="search-hit" id="summary-{{key}}">
+      <div class="search-hit-content">
+        <div class="search-hit-name">
+          <a href="{{relpermalink}}">{{title}}</a>
+          <div class="article-metadata search-hit-type">{{type}}</div>
+          <p class="search-hit-description">{{snippet}}</p>
+        </div>
+      </div>
+      </div>
+    </script>
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.1/fuse.min.js" integrity="sha256-VzgmKYmhsGNNN4Ph1kMW+BjoYJM2jV5i4IlFoeZA9XI=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
+    
+
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+    
+    
+    <script src="/js/academic.min.d7381f2d79e6271d4da28f474f49096c.js"></script>
+
+  </body>
+</html>
+

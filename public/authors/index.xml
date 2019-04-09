@@ -2,83 +2,84 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Authors on Glyn Mottershead</title>
-    <link>https://www.glynmottershead.com/authors/</link>
+    <link>/authors/</link>
     <description>Recent content in Authors on Glyn Mottershead</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-gb</language>
+    <lastBuildDate>Thu, 04 Apr 2019 13:30:00 +0100</lastBuildDate>
     
-	<atom:link href="https://www.glynmottershead.com/authors/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/authors/index.xml" rel="self" type="application/rss+xml" />
     
-    
-    <item>
-      <title>Emma Duke-Williams</title>
-      <link>https://www.glynmottershead.com/authors/emma-duke-williams/</link>
-      <pubDate>Sat, 01 Aug 2009 00:00:00 +0100</pubDate>
-      
-      <guid>https://www.glynmottershead.com/authors/emma-duke-williams/</guid>
-      <description></description>
-    </item>
     
     <item>
       <title>Glyn Mottershead</title>
-      <link>https://www.glynmottershead.com/authors/glyn-mottershead/</link>
+      <link>/authors/glyn-mottershead/</link>
       <pubDate>Thu, 04 Apr 2019 13:30:00 +0100</pubDate>
       
-      <guid>https://www.glynmottershead.com/authors/glyn-mottershead/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Jonathan Cable</title>
-      <link>https://www.glynmottershead.com/authors/jonathan-cable/</link>
-      <pubDate>Fri, 09 Mar 2018 00:00:00 +0000</pubDate>
-      
-      <guid>https://www.glynmottershead.com/authors/jonathan-cable/</guid>
+      <guid>/authors/glyn-mottershead/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Martin Chorley</title>
-      <link>https://www.glynmottershead.com/authors/martin-chorley/</link>
+      <link>/authors/martin-chorley/</link>
       <pubDate>Sat, 01 Dec 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://www.glynmottershead.com/authors/martin-chorley/</guid>
+      <guid>/authors/martin-chorley/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Sarah Hadwin</title>
-      <link>https://www.glynmottershead.com/authors/sarah-hadwin/</link>
-      <pubDate>Sun, 01 Jul 2012 00:00:00 +0100</pubDate>
+      <title>Jonathan Cable</title>
+      <link>/authors/jonathan-cable/</link>
+      <pubDate>Fri, 09 Mar 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://www.glynmottershead.com/authors/sarah-hadwin/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Terry King</title>
-      <link>https://www.glynmottershead.com/authors/terry-king/</link>
-      <pubDate>Sat, 01 Aug 2009 00:00:00 +0100</pubDate>
-      
-      <guid>https://www.glynmottershead.com/authors/terry-king/</guid>
+      <guid>/authors/jonathan-cable/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Tim Holmes</title>
-      <link>https://www.glynmottershead.com/authors/tim-holmes/</link>
+      <link>/authors/tim-holmes/</link>
       <pubDate>Fri, 28 Aug 2015 00:00:00 +0100</pubDate>
       
-      <guid>https://www.glynmottershead.com/authors/tim-holmes/</guid>
+      <guid>/authors/tim-holmes/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Sarah Hadwin</title>
+      <link>/authors/sarah-hadwin/</link>
+      <pubDate>Sun, 01 Jul 2012 00:00:00 +0100</pubDate>
+      
+      <guid>/authors/sarah-hadwin/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Emma Duke-Williams</title>
+      <link>/authors/emma-duke-williams/</link>
+      <pubDate>Sat, 01 Aug 2009 00:00:00 +0100</pubDate>
+      
+      <guid>/authors/emma-duke-williams/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Terry King</title>
+      <link>/authors/terry-king/</link>
+      <pubDate>Sat, 01 Aug 2009 00:00:00 +0100</pubDate>
+      
+      <guid>/authors/terry-king/</guid>
       <description></description>
     </item>
     
     <item>
       <title>admin</title>
-      <link>https://www.glynmottershead.com/authors/admin/</link>
+      <link>/authors/admin/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://www.glynmottershead.com/authors/admin/</guid>
+      <guid>/authors/admin/</guid>
       <description></description>
     </item>
     

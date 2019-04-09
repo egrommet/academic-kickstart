@@ -1,32 +1,229 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Glyn Mottershead on Glyn Mottershead</title>
-    <link>https://www.glynmottershead.com/</link>
+    <link>/</link>
     <description>Recent content in Glyn Mottershead on Glyn Mottershead</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-gb</language>
-    <lastBuildDate>Thu, 04 Apr 2019 13:30:00 +0100</lastBuildDate>
+    <lastBuildDate>Tue, 09 Apr 2019 00:00:00 +0000</lastBuildDate>
     <atom:link href="/" rel="self" type="application/rss+xml" />
     
     <item>
+      <title>Pivot tables in R - looking at police data</title>
+      <link>/tutorial/pivot-tables-in-r-looking-at-police-data/</link>
+      <pubDate>Tue, 09 Apr 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/tutorial/pivot-tables-in-r-looking-at-police-data/</guid>
+      <description>
+
+&lt;h1 id=&#34;looking-at-police-data-using-tidyverse-tools&#34;&gt;Looking at police data using Tidyverse tools&lt;/h1&gt;
+
+&lt;p&gt;The Tidyverse tools are one of my favourite things and made my R coding experience much simpler. Most of the things I&amp;rsquo;ll be posting will use them in one way or another.&lt;/p&gt;
+
+&lt;p&gt;We&amp;rsquo;re going to find out what happens when someone reports a stolen bicycle - a friend seems to believe they do nothing, so let&amp;rsquo;s investigate.&lt;/p&gt;
+
+&lt;h2 id=&#34;downloading-the-data&#34;&gt;Downloading the data&lt;/h2&gt;
+
+&lt;p&gt;I&amp;rsquo;ve downloaded a month&amp;rsquo;s worth of data for South Wales Police from &lt;a href=&#34;https://data.police.uk/data/&#34; target=&#34;_blank&#34;&gt;data.police.uk&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;I&amp;rsquo;m going to do the R equivalent of a pivot table, grouping information together and then analysing it.&lt;/p&gt;
+
+&lt;h2 id=&#34;getting-started&#34;&gt;Getting started&lt;/h2&gt;
+
+&lt;p&gt;Open RStudio and go to &lt;strong&gt;FILE &amp;gt; NEW PROJECT&lt;/strong&gt; then create it in a new folder. This will give you a chance to choose where you want it to go. I tend to have a project folder and then each individual project is stored inside that.&lt;/p&gt;
+
+&lt;p&gt;We&amp;rsquo;ll leave RStudio for a second and head into the computer&amp;rsquo;s file manager to find the folder we just created in RStudio. Inside that I always create a folder called data, I&amp;rsquo;ll then put my downloaded data inside it.&lt;/p&gt;
+
+&lt;h2 id=&#34;create-a-script&#34;&gt;Create a script&lt;/h2&gt;
+
+&lt;p&gt;Back inside RStudio, I&amp;rsquo;m going to go to &lt;strong&gt;File menu &amp;gt; New File &amp;gt; R Script&lt;/strong&gt;. I&amp;rsquo;m doing this as it allows me to repeat this analysis when I want to. You&amp;rsquo;ll want to give it a name that makes sense and then save it. R files have a &lt;strong&gt;.R&lt;/strong&gt; file extension at the end.&lt;/p&gt;
+
+&lt;h2 id=&#34;installing-your-first-r-package&#34;&gt;Installing your first R Package&lt;/h2&gt;
+
+&lt;p&gt;A package is a tool, or group of tools, that someone has created to cut out some of the repetition in R. We&amp;rsquo;ll be using the tidyverse by Hadley Wickham. These are a set of really helpful data tools that also make R programming easier to read.&lt;/p&gt;
+
+&lt;p&gt;We can install packages by going to the &lt;strong&gt;Tools menu &amp;gt; Install Packages&lt;/strong&gt; and type the name into the pop-up box.&lt;/p&gt;
+
+&lt;p&gt;Or I can write the command (known as a function) into my script, highlight my line of code and hit the &lt;strong&gt;RUN&lt;/strong&gt; button at the top of the script. The other way to do it is a line of code - &lt;code&gt;install.packages(&amp;quot;tidyverse&amp;quot;)&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;I then need to load it in my script. This is done by the &lt;code&gt;library()&lt;/code&gt; function. Again, run the line of code.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;library(tidyverse)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;loading-data&#34;&gt;Loading data&lt;/h2&gt;
+
+&lt;p&gt;Even though we have the data set in our R project folder we need to load it up.&lt;/p&gt;
+
+&lt;p&gt;I&amp;rsquo;m going to use &lt;code&gt;read_csv()&lt;/code&gt; from readr to read a CSV file into our RStudio environment.&lt;/p&gt;
+
+&lt;p&gt;If you ever want to know how what a package or function does then type &lt;code&gt;?function_name&lt;/code&gt; in the console eg &lt;code&gt;?read_csv&lt;/code&gt;, and you&amp;rsquo;ll get a help message.&lt;/p&gt;
+
+&lt;p&gt;Our function wrapping works like this &lt;code&gt;read_csv()&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;We need to put the address (** aka file path**) for our CSV inside quote marks inside the inner pair of brackets.
+It will look like this - &lt;code&gt;read_csv(&amp;quot;file_path&amp;quot;)&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;The full syntax (not the working code I want to use) looks like this:
+&lt;code&gt;data_frame_name &amp;lt;- read_csv(&amp;quot;file_path&amp;quot;)&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;The &lt;strong&gt;&amp;lt;-&lt;/strong&gt; is an assignment symbol, I tend to think of it as a hosepipe which allows the function to pour into the name we give our data frame.&lt;/p&gt;
+
+&lt;p&gt;My file path in the example below says &lt;strong&gt;./&lt;/strong&gt; inside the folder we are currently in is a folder called &lt;strong&gt;data&lt;/strong&gt; and &lt;strong&gt;/&lt;/strong&gt; inside that is a csv file.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;crimes &amp;lt;- read_csv(&amp;quot;./data/2019-01-south-wales-street.csv&amp;quot;)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code&gt;## Parsed with column specification:
+## cols(
+##   `Crime ID` = col_character(),
+##   Month = col_character(),
+##   `Reported by` = col_character(),
+##   `Falls within` = col_character(),
+##   Longitude = col_double(),
+##   Latitude = col_double(),
+##   Location = col_character(),
+##   `LSOA code` = col_character(),
+##   `LSOA name` = col_character(),
+##   `Crime type` = col_character(),
+##   `Last outcome category` = col_character(),
+##   Context = col_logical()
+## )
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The output for this will show us what types of columns we have - in this case &lt;code&gt;col_character()&lt;/code&gt; means text and &lt;code&gt;col_double()&lt;/code&gt; means a number format. All good so far.&lt;/p&gt;
+
+&lt;h2 id=&#34;filtering-with-dplyr&#34;&gt;Filtering with dplyr&lt;/h2&gt;
+
+&lt;p&gt;I want to filter the information so it just includes bicycle thefts. I&amp;rsquo;m going to use some dplyr package tricks to do this.&lt;/p&gt;
+
+&lt;p&gt;I&amp;rsquo;m going to store it in a new data frame called &lt;strong&gt;bikes&lt;/strong&gt;. We&amp;rsquo;ll be using the crimes data frame we made earlier and then filtering it, before assigning the new information to bikes. So &lt;code&gt;bikes &amp;lt;- crimes&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;The next bit of the code is &lt;code&gt;%&amp;gt;%&lt;/code&gt; a pipe - essentially you can say &lt;strong&gt;and then&lt;/strong&gt; to yourself when you write it. Our next function is a filter(), it does a similar job to the Excel function.&lt;/p&gt;
+
+&lt;p&gt;Most functions will need you to say which data frame you are working on and then what you want to do. So we could say &lt;code&gt;filter(data_frame, column_name == &amp;quot;text we want back&amp;quot;)&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;But dplyr knows we are working on the data frame before the first &lt;code&gt;%&amp;gt;%&lt;/code&gt;.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;bikes &amp;lt;- crimes %&amp;gt;%
+  filter(`Crime type` == &amp;quot;Bicycle theft&amp;quot;) 
+
+# If I use the dataframe name on its own and run that line I can see what is in it
+bikes
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code&gt;## # A tibble: 126 x 12
+##    `Crime ID` Month `Reported by` `Falls within` Longitude Latitude
+##    &amp;lt;chr&amp;gt;      &amp;lt;chr&amp;gt; &amp;lt;chr&amp;gt;         &amp;lt;chr&amp;gt;              &amp;lt;dbl&amp;gt;    &amp;lt;dbl&amp;gt;
+##  1 0fad86217… 2019… South Wales … South Wales P…     -3.54     51.5
+##  2 5ea5f1bb3… 2019… South Wales … South Wales P…     -3.19     51.5
+##  3 ab5c7a5c7… 2019… South Wales … South Wales P…     -3.12     51.5
+##  4 44e702929… 2019… South Wales … South Wales P…     -3.23     51.5
+##  5 979ee8076… 2019… South Wales … South Wales P…     -3.09     51.5
+##  6 34490753e… 2019… South Wales … South Wales P…     -3.12     51.5
+##  7 59c9863ef… 2019… South Wales … South Wales P…     -3.12     51.5
+##  8 7029c550b… 2019… South Wales … South Wales P…     -3.22     51.5
+##  9 f8f063bad… 2019… South Wales … South Wales P…     -3.22     51.5
+## 10 cdd878455… 2019… South Wales … South Wales P…     -3.20     51.5
+## # … with 116 more rows, and 6 more variables: Location &amp;lt;chr&amp;gt;, `LSOA
+## #   code` &amp;lt;chr&amp;gt;, `LSOA name` &amp;lt;chr&amp;gt;, `Crime type` &amp;lt;chr&amp;gt;, `Last outcome
+## #   category` &amp;lt;chr&amp;gt;, Context &amp;lt;lgl&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The output will show us how many rows (observations) and columns (variables) there are - in this case a 126 x 12. We can start adding some more analysis now.&lt;/p&gt;
+
+&lt;h2 id=&#34;filtering-and-renaming-for-speed&#34;&gt;Filtering and renaming for speed&lt;/h2&gt;
+
+&lt;p&gt;You may notice when we printed the data frame that some of the column names have backticks around them. That&amp;rsquo;s because they&amp;rsquo;ve got a space between the words and R is trying to help out. So, if we wanted to work with our Crime ID column we&amp;rsquo;d actually have to type &lt;code&gt;Crime ID&lt;/code&gt; with the back ticks.&lt;/p&gt;
+
+&lt;p&gt;I&amp;rsquo;m too lazy for things like that. I&amp;rsquo;d rather change the name so I can write something easier. We&amp;rsquo;re going to use &lt;code&gt;rename()&lt;/code&gt; to do it. We will tell &lt;code&gt;rename()&lt;/code&gt; that our &lt;code&gt;&amp;quot;new column name&amp;quot; = &amp;quot;old column name&amp;quot;&lt;/code&gt;  - but make sure you put the quote marks around the names when you do this.&lt;/p&gt;
+
+&lt;p&gt;So, I&amp;rsquo;m going to tweak my code from before. I&amp;rsquo;m going to change the name of the &lt;code&gt;Last outcome category&lt;/code&gt; and the &lt;code&gt;Crime type&lt;/code&gt; columns. I&amp;rsquo;m going to change them to Outcome and Crimes - much shorter to type.&lt;/p&gt;
+
+&lt;p&gt;So, we&amp;rsquo;re telling dplyr to take the &lt;strong&gt;crimes&lt;/strong&gt; data frame &lt;strong&gt;and then&lt;/strong&gt; rename by assigning the new name to the old name. (The comma means we can do more than one rename at once, to do more just add a comma and then say &amp;ldquo;new&amp;rdquo; = &amp;ldquo;old&amp;rdquo; again.) &lt;strong&gt;And then&lt;/strong&gt; filter our newly-named &lt;strong&gt;Crimes&lt;/strong&gt; column and look for the text inside the quote marks.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;bikes &amp;lt;- crimes %&amp;gt;%
+  rename(&amp;quot;Outcome&amp;quot; = &amp;quot;Last outcome category&amp;quot;, &amp;quot;Crimes&amp;quot; = &amp;quot;Crime type&amp;quot;) %&amp;gt;%
+  filter(Crimes == &amp;quot;Bicycle theft&amp;quot;) 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;doing-a-pivot-table-in-dplyr-syntax&#34;&gt;Doing a pivot table in dplyr syntax&lt;/h2&gt;
+
+&lt;p&gt;Now we can do some digging. I want to know what the police have done about the reported bike thefts.&lt;/p&gt;
+
+&lt;p&gt;We can group things together by our Outcome category and count how often each of the outcomes happen. So, we tell &lt;code&gt;group_by()&lt;/code&gt; which column we want to work on. &lt;strong&gt;And then&lt;/strong&gt; we tell it what to count - in this case it creates a column called outcome_count and uses the &lt;code&gt;n()&lt;/code&gt; function to count the Outcome.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;bikes &amp;lt;- crimes %&amp;gt;%
+  rename(&amp;quot;Outcome&amp;quot; = &amp;quot;Last outcome category&amp;quot;, &amp;quot;Crimes&amp;quot; = &amp;quot;Crime type&amp;quot;) %&amp;gt;%
+  filter(Crimes == &amp;quot;Bicycle theft&amp;quot;) %&amp;gt;%
+  group_by(Outcome) %&amp;gt;%
+  summarise(outcome_count = n())
+
+# Again I&#39;ll type the dataframe name here and run this line to see what we have got.
+bikes
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code&gt;## # A tibble: 4 x 2
+##   Outcome                                       outcome_count
+##   &amp;lt;chr&amp;gt;                                                 &amp;lt;int&amp;gt;
+## 1 Awaiting court outcome                                    1
+## 2 Investigation complete; no suspect identified            88
+## 3 Unable to prosecute suspect                               1
+## 4 Under investigation                                      36
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;We&amp;rsquo;ve got a pivot table - it has grouped the &lt;strong&gt;Outcome column&lt;/strong&gt; and counted how often each one occurs.&lt;/p&gt;
+
+&lt;h2 id=&#34;tldr-investigation-complete-no-suspect-identified-no-suspect-identified&#34;&gt;TLDR: &amp;ldquo;Investigation complete; no suspect identified&amp;rdquo; = &amp;ldquo;No suspect identified&amp;rdquo;&lt;/h2&gt;
+
+&lt;p&gt;We&amp;rsquo;re going to change an element by using the &lt;code&gt;mutate()&lt;/code&gt; function - we&amp;rsquo;re going to &lt;code&gt;recode()&lt;/code&gt; one of our Outcome categories to shorten it. The code would look like this - &lt;code&gt;mutate(Outcome = recode(Outcome, &amp;quot;Investigation complete; no suspect identified&amp;quot; = &amp;quot;No suspect identified&amp;quot;))&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;But I&amp;rsquo;d like to order it in descending order - so we can do one more &lt;strong&gt;and then&lt;/strong&gt; &lt;code&gt;%&amp;gt;%&lt;/code&gt; at the end of our code. We will &lt;code&gt;arrange()&lt;/code&gt; our &lt;strong&gt;outcome_count&lt;/strong&gt; in &lt;code&gt;desc()&lt;/code&gt; - descending order. You must put &lt;code&gt;desc()&lt;/code&gt; inside the &lt;code&gt;arrange()&lt;/code&gt; function. And check your brackets.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;bikes &amp;lt;- crimes %&amp;gt;%
+  rename(&amp;quot;Outcome&amp;quot; = &amp;quot;Last outcome category&amp;quot;, &amp;quot;Crimes&amp;quot; = &amp;quot;Crime type&amp;quot;) %&amp;gt;%
+  filter(Crimes == &amp;quot;Bicycle theft&amp;quot;) %&amp;gt;%
+  mutate(Outcome = recode(Outcome, 
+                          &amp;quot;Investigation complete; no suspect identified&amp;quot; = &amp;quot;No suspect identified&amp;quot;)) %&amp;gt;%
+  group_by(Outcome) %&amp;gt;%
+  summarise(outcome_count = n()) %&amp;gt;%
+  arrange(desc(outcome_count))
+
+# Again I&#39;ll type the dataframe name here and run this line to see what we have got.
+bikes
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code&gt;## # A tibble: 4 x 2
+##   Outcome                     outcome_count
+##   &amp;lt;chr&amp;gt;                               &amp;lt;int&amp;gt;
+## 1 No suspect identified                  88
+## 2 Under investigation                    36
+## 3 Awaiting court outcome                  1
+## 4 Unable to prosecute suspect             1
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;And we&amp;rsquo;ve got it. A pivot table that tells us what has happened to the bike crimes in the original data set and has put them in descending order.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
       <title>Data and Computational Journalism</title>
-      <link>https://www.glynmottershead.com/talk/digital-city/</link>
+      <link>/talk/digital-city/</link>
       <pubDate>Thu, 04 Apr 2019 13:30:00 +0100</pubDate>
       
-      <guid>https://www.glynmottershead.com/talk/digital-city/</guid>
+      <guid>/talk/digital-city/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Mapping the article 50 petition in R and ggplot - part 2</title>
-      <link>https://www.glynmottershead.com/tutorial/mapping-the-article-50-petition-in-r-and-ggplot-part-2/</link>
+      <link>/tutorial/mapping-the-article-50-petition-in-r-and-ggplot-part-2/</link>
       <pubDate>Mon, 01 Apr 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://www.glynmottershead.com/tutorial/mapping-the-article-50-petition-in-r-and-ggplot-part-2/</guid>
+      <guid>/tutorial/mapping-the-article-50-petition-in-r-and-ggplot-part-2/</guid>
       <description>
 
-&lt;p&gt;&lt;img src=&#34;https://www.glynmottershead.com/tutorial/2019-04-01-mapping-the-article-50-petition-in-r-and-ggplot-part-2_files/Plot_Zoom.png&#34; alt=&#34;The final map&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/tutorial/2019-04-01-mapping-the-article-50-petition-in-r-and-ggplot-part-2_files/Plot_Zoom.png&#34; alt=&#34;The final map&#34; /&gt;&lt;/p&gt;
 
 &lt;h1 id=&#34;mapping-in-r-using-ggplot2-part-two&#34;&gt;Mapping in R - using ggplot2, part two&lt;/h1&gt;
 
@@ -38,7 +235,7 @@
 
 &lt;p&gt;We need to reload the data again, so we&amp;rsquo;re going to get a different number of signatures than last time.&lt;/p&gt;
 
-&lt;p&gt;I&amp;rsquo;m going to run this in one block and assume you can follow along, if not &lt;a href=&#34;https://www.glynmottershead.com/tutorial/mapping-the-article-50-petition-in-r-and-ggplot/&#34; target=&#34;_blank&#34;&gt;go back to the previous post&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;I&amp;rsquo;m going to run this in one block and assume you can follow along, if not &lt;a href=&#34;/tutorial/mapping-the-article-50-petition-in-r-and-ggplot/&#34; target=&#34;_blank&#34;&gt;go back to the previous post&lt;/a&gt;.&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;# Load the mapping file
 library(geojsonio)
@@ -146,9 +343,9 @@ for(band in 1:length(quantiles)){
 labels
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;pre&gt;&lt;code&gt;##  [1] &amp;quot;1972 – 3890&amp;quot;   &amp;quot;3890 – 4590&amp;quot;   &amp;quot;4590 – 5314&amp;quot;   &amp;quot;5314 – 6505&amp;quot;  
-##  [5] &amp;quot;6505 – 7594&amp;quot;   &amp;quot;7594 – 9055&amp;quot;   &amp;quot;9055 – 9665&amp;quot;   &amp;quot;9665 – 11138&amp;quot; 
-##  [9] &amp;quot;11138 – 36974&amp;quot; &amp;quot;36974 – NA&amp;quot;
+&lt;pre&gt;&lt;code&gt;##  [1] &amp;quot;1981 – 3909&amp;quot;   &amp;quot;3909 – 4602&amp;quot;   &amp;quot;4602 – 5333&amp;quot;   &amp;quot;5333 – 6531&amp;quot;  
+##  [5] &amp;quot;6531 – 7630&amp;quot;   &amp;quot;7630 – 9088&amp;quot;   &amp;quot;9088 – 9702&amp;quot;   &amp;quot;9702 – 11172&amp;quot; 
+##  [9] &amp;quot;11172 – 37066&amp;quot; &amp;quot;37066 – NA&amp;quot;
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;And we&amp;rsquo;ve got a problem - the code gives us a final band that looks like &amp;ldquo;36901 - NA&amp;rdquo;, anything over our maximum. We can easily get rid of that as obviously we are limited at the maximum.&lt;/p&gt;
@@ -158,9 +355,9 @@ labels
 labels
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;pre&gt;&lt;code&gt;## [1] &amp;quot;1972 – 3890&amp;quot;   &amp;quot;3890 – 4590&amp;quot;   &amp;quot;4590 – 5314&amp;quot;   &amp;quot;5314 – 6505&amp;quot;  
-## [5] &amp;quot;6505 – 7594&amp;quot;   &amp;quot;7594 – 9055&amp;quot;   &amp;quot;9055 – 9665&amp;quot;   &amp;quot;9665 – 11138&amp;quot; 
-## [9] &amp;quot;11138 – 36974&amp;quot;
+&lt;pre&gt;&lt;code&gt;## [1] &amp;quot;1981 – 3909&amp;quot;   &amp;quot;3909 – 4602&amp;quot;   &amp;quot;4602 – 5333&amp;quot;   &amp;quot;5333 – 6531&amp;quot;  
+## [5] &amp;quot;6531 – 7630&amp;quot;   &amp;quot;7630 – 9088&amp;quot;   &amp;quot;9088 – 9702&amp;quot;   &amp;quot;9702 – 11172&amp;quot; 
+## [9] &amp;quot;11172 – 37066&amp;quot;
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;Next, we need to add our new number range to the map. We&amp;rsquo;ll do this with the &lt;a href=&#34;https://www.rdocumentation.org/packages/base/versions/3.5.3/topics/cut&#34; target=&#34;_blank&#34;&gt;&lt;code&gt;cut()&lt;/code&gt; function&lt;/a&gt;, to turn our &lt;a href=&#34;https://www.stat.berkeley.edu/~s133/factors.html&#34; target=&#34;_blank&#34;&gt;number range into a factor&lt;/a&gt;.&lt;/p&gt;
@@ -193,7 +390,7 @@ labels
 by_quantile
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;&lt;img src=&#34;https://www.glynmottershead.com/tutorial/2019-04-01-mapping-the-article-50-petition-in-r-and-ggplot-part-2_files/figure-html/unnamed-chunk-7-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/tutorial/2019-04-01-mapping-the-article-50-petition-in-r-and-ggplot-part-2_files/figure-html/unnamed-chunk-7-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;The next thing we can try is adding a theme. I&amp;rsquo;m just going to use the one from Timo&amp;rsquo;s post but change the font family. It is being stored as a function, so we can call it easily.&lt;/p&gt;
 
@@ -238,7 +435,7 @@ by_quantile
 by_quantile2
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;&lt;img src=&#34;https://www.glynmottershead.com/tutorial/2019-04-01-mapping-the-article-50-petition-in-r-and-ggplot-part-2_files/figure-html/unnamed-chunk-9-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/tutorial/2019-04-01-mapping-the-article-50-petition-in-r-and-ggplot-part-2_files/figure-html/unnamed-chunk-9-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;At some stage I&amp;rsquo;m going to play around with the background to declare the plot size (I&amp;rsquo;m guessing that is why it is breaking the bounds here - but the version at the top is exported from the code run in RStudio), I&amp;rsquo;ll post when I do but for now I&amp;rsquo;m going to stop here.&lt;/p&gt;
 
@@ -248,10 +445,10 @@ by_quantile2
     
     <item>
       <title>Mapping the article 50 petition in R and ggplot</title>
-      <link>https://www.glynmottershead.com/tutorial/mapping-the-article-50-petition-in-r-and-ggplot/</link>
+      <link>/tutorial/mapping-the-article-50-petition-in-r-and-ggplot/</link>
       <pubDate>Fri, 29 Mar 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://www.glynmottershead.com/tutorial/mapping-the-article-50-petition-in-r-and-ggplot/</guid>
+      <guid>/tutorial/mapping-the-article-50-petition-in-r-and-ggplot/</guid>
       <description>
 
 &lt;h1 id=&#34;mapping-in-r-using-ggplot2&#34;&gt;Mapping in R - using ggplot2&lt;/h1&gt;
@@ -346,7 +543,7 @@ total_sig &amp;lt;- sum(sign_data$signature_count)
 total_sig
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;pre&gt;&lt;code&gt;## [1] 5693104
+&lt;pre&gt;&lt;code&gt;## [1] 5711799
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;h2 id=&#34;joing-the-data-sets&#34;&gt;Joing the data sets&lt;/h2&gt;
@@ -392,7 +589,7 @@ ggplot() +
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;div class=&#34;figure&#34;&gt;
-&lt;img src=&#34;https://www.glynmottershead.com/tutorial/2019-03-29-mapping-the-article-50-petition-in-r-and-ggplot_files/figure-html/map-1.png&#34; alt=&#34;A simple choropleth map.&#34; width=&#34;672&#34; /&gt;
+&lt;img src=&#34;/tutorial/2019-03-29-mapping-the-article-50-petition-in-r-and-ggplot_files/figure-html/map-1.png&#34; alt=&#34;A simple choropleth map.&#34; width=&#34;672&#34; /&gt;
 &lt;p class=&#34;caption&#34;&gt;Figure 1 A simple choropleth map.&lt;/p&gt;
 &lt;/div&gt;
 
@@ -400,7 +597,7 @@ ggplot() +
 
 &lt;p&gt;I&amp;rsquo;ve also been playing with a great post from Timo Grossenbaher on how to &lt;a href=&#34;https://timogrossenbacher.ch/2016/12/beautiful-thematic-maps-with-ggplot2-only/&#34; target=&#34;_blank&#34;&gt;make beatiful thematic maps with ggplot2&lt;/a&gt; to create something a bit more effective.&lt;/p&gt;
 
-&lt;p&gt;Now pop along to &lt;a href=&#34;https://www.glynmottershead.com/tutorial/mapping-the-article-50-petition-in-r-and-ggplot-part-2/&#34; target=&#34;_blank&#34;&gt;stage two of this tutorial&lt;/a&gt; which goes further and looks at making things more interesting.&lt;/p&gt;
+&lt;p&gt;Now pop along to &lt;a href=&#34;/tutorial/mapping-the-article-50-petition-in-r-and-ggplot-part-2/&#34; target=&#34;_blank&#34;&gt;stage two of this tutorial&lt;/a&gt; which goes further and looks at making things more interesting.&lt;/p&gt;
 
 &lt;h2 id=&#34;more-analysis&#34;&gt;More analysis&lt;/h2&gt;
 
@@ -410,91 +607,101 @@ ggplot() +
     
     <item>
       <title>When a tech company pulls the plug on your story</title>
-      <link>https://www.glynmottershead.com/publication/nieman-predictions-2019/</link>
+      <link>/publication/nieman-predictions-2019/</link>
       <pubDate>Sat, 01 Dec 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://www.glynmottershead.com/publication/nieman-predictions-2019/</guid>
+      <guid>/publication/nieman-predictions-2019/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Are You Talking To Me?: An Analysis of Journalism Conversation on Social Media</title>
-      <link>https://www.glynmottershead.com/publication/are-you-talking-book-chapter/</link>
+      <link>/publication/are-you-talking-book-chapter/</link>
       <pubDate>Sat, 01 Sep 2018 00:00:00 +0100</pubDate>
       
-      <guid>https://www.glynmottershead.com/publication/are-you-talking-book-chapter/</guid>
+      <guid>/publication/are-you-talking-book-chapter/</guid>
       <description></description>
     </item>
     
     <item>
+      <title>Privacy Policy</title>
+      <link>/privacy/</link>
+      <pubDate>Thu, 28 Jun 2018 00:00:00 +0100</pubDate>
+      
+      <guid>/privacy/</guid>
+      <description>&lt;p&gt;&amp;hellip;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
       <title>&#39;Can I click it? Yes you can&#39;: Football journalism, Twitter and clickbait</title>
-      <link>https://www.glynmottershead.com/publication/can-i-click-it/</link>
+      <link>/publication/can-i-click-it/</link>
       <pubDate>Fri, 09 Mar 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://www.glynmottershead.com/publication/can-i-click-it/</guid>
+      <guid>/publication/can-i-click-it/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Recoding journalism  education: mind the  skills gap, please!</title>
-      <link>https://www.glynmottershead.com/talk/gap_foj/</link>
+      <link>/talk/gap_foj/</link>
       <pubDate>Sat, 02 Sep 2017 00:00:00 +0100</pubDate>
       
-      <guid>https://www.glynmottershead.com/talk/gap_foj/</guid>
+      <guid>/talk/gap_foj/</guid>
       <description></description>
     </item>
     
     <item>
       <title>The First Commit of History: Visualising News on a Deadline</title>
-      <link>https://www.glynmottershead.com/talk/visualising-on-a-deadline/</link>
+      <link>/talk/visualising-on-a-deadline/</link>
       <pubDate>Wed, 12 Jul 2017 00:00:00 +0100</pubDate>
       
-      <guid>https://www.glynmottershead.com/talk/visualising-on-a-deadline/</guid>
+      <guid>/talk/visualising-on-a-deadline/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Now we are three: A perspective on Computational and Data Journalism Education</title>
-      <link>https://www.glynmottershead.com/talk/now-we-are-three/</link>
+      <link>/talk/now-we-are-three/</link>
       <pubDate>Thu, 06 Jul 2017 00:00:00 +0100</pubDate>
       
-      <guid>https://www.glynmottershead.com/talk/now-we-are-three/</guid>
+      <guid>/talk/now-we-are-three/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Are You Talking To Me?: An Analysis of Journalism Conversation on Social Media</title>
-      <link>https://www.glynmottershead.com/publication/are-you-talking-to-me/</link>
+      <link>/publication/are-you-talking-to-me/</link>
       <pubDate>Sun, 02 Oct 2016 00:00:00 +0100</pubDate>
       
-      <guid>https://www.glynmottershead.com/publication/are-you-talking-to-me/</guid>
+      <guid>/publication/are-you-talking-to-me/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Subediting and production for journalists</title>
-      <link>https://www.glynmottershead.com/publication/subbing-book/</link>
+      <link>/publication/subbing-book/</link>
       <pubDate>Fri, 28 Aug 2015 00:00:00 +0100</pubDate>
       
-      <guid>https://www.glynmottershead.com/publication/subbing-book/</guid>
+      <guid>/publication/subbing-book/</guid>
       <description></description>
     </item>
     
     <item>
       <title>21st Century Journalism Handbook</title>
-      <link>https://www.glynmottershead.com/publication/21st-century-journalism-handbook/</link>
+      <link>/publication/21st-century-journalism-handbook/</link>
       <pubDate>Sun, 01 Jul 2012 00:00:00 +0100</pubDate>
       
-      <guid>https://www.glynmottershead.com/publication/21st-century-journalism-handbook/</guid>
+      <guid>/publication/21st-century-journalism-handbook/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Learning and Knowledge Building with Web 2.0 Technologies: Implications for Teacher Education</title>
-      <link>https://www.glynmottershead.com/publication/learning-and-knowledge-building/</link>
+      <link>/publication/learning-and-knowledge-building/</link>
       <pubDate>Sat, 01 Aug 2009 00:00:00 +0100</pubDate>
       
-      <guid>https://www.glynmottershead.com/publication/learning-and-knowledge-building/</guid>
+      <guid>/publication/learning-and-knowledge-building/</guid>
       <description></description>
     </item>
     

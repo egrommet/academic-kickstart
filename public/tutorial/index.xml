@@ -2,21 +2,32 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Overview on Glyn Mottershead</title>
-    <link>https://www.glynmottershead.com/tutorial/</link>
+    <link>/tutorial/</link>
     <description>Recent content in Overview on Glyn Mottershead</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-gb</language>
-    <lastBuildDate>Wed, 20 Mar 2019 13:53:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 09 Apr 2019 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://www.glynmottershead.com/tutorial/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/tutorial/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
+      <title>Pivot tables in R - looking at police data</title>
+      <link>/tutorial/pivot-tables-in-r-looking-at-police-data/</link>
+      <pubDate>Tue, 09 Apr 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/tutorial/pivot-tables-in-r-looking-at-police-data/</guid>
+      <description>Looking at police data using Tidyverse tools The Tidyverse tools are one of my favourite things and made my R coding experience much simpler. Most of the things I&amp;rsquo;ll be posting will use them in one way or another.
+We&amp;rsquo;re going to find out what happens when someone reports a stolen bicycle - a friend seems to believe they do nothing, so let&amp;rsquo;s investigate.
+Downloading the data I&amp;rsquo;ve downloaded a month&amp;rsquo;s worth of data for South Wales Police from data.</description>
+    </item>
+    
+    <item>
       <title>Mapping the article 50 petition in R and ggplot - part 2</title>
-      <link>https://www.glynmottershead.com/tutorial/mapping-the-article-50-petition-in-r-and-ggplot-part-2/</link>
+      <link>/tutorial/mapping-the-article-50-petition-in-r-and-ggplot-part-2/</link>
       <pubDate>Mon, 01 Apr 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://www.glynmottershead.com/tutorial/mapping-the-article-50-petition-in-r-and-ggplot-part-2/</guid>
+      <guid>/tutorial/mapping-the-article-50-petition-in-r-and-ggplot-part-2/</guid>
       <description>Mapping in R - using ggplot2, part two In the previous tutorial we looked at getting data from web APIs in JSON and GeoJSON formats to create a simple map.
 This time we&amp;rsquo;ll be adapting code from Timo Grossenbacher to make our map more attractive.
 Getting started We need to reload the data again, so we&amp;rsquo;re going to get a different number of signatures than last time.
@@ -25,10 +36,10 @@ I&amp;rsquo;m going to run this in one block and assume you can follow along, if
     
     <item>
       <title>Mapping the article 50 petition in R and ggplot</title>
-      <link>https://www.glynmottershead.com/tutorial/mapping-the-article-50-petition-in-r-and-ggplot/</link>
+      <link>/tutorial/mapping-the-article-50-petition-in-r-and-ggplot/</link>
       <pubDate>Fri, 29 Mar 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://www.glynmottershead.com/tutorial/mapping-the-article-50-petition-in-r-and-ggplot/</guid>
+      <guid>/tutorial/mapping-the-article-50-petition-in-r-and-ggplot/</guid>
       <description>Mapping in R - using ggplot2 The Revoke Article 50 petition got my colleague and all-round codemeister Dr Martin Chorley and I talking.
 We started thinking about ways that we could see what the patterns for people signing were like.
 It was well into the millions when I started playing with ways of visualising where people who voted were located. The site can map all of the signatures (5,962,824 at the time of writing), but it also has an option to get the data in a machine-friendly json format.</description>

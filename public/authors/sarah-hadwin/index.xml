@@ -2,22 +2,22 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Sarah Hadwin on Glyn Mottershead</title>
-    <link>https://www.glynmottershead.com/authors/sarah-hadwin/</link>
+    <link>/authors/sarah-hadwin/</link>
     <description>Recent content in Sarah Hadwin on Glyn Mottershead</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-gb</language>
     <lastBuildDate>Sun, 01 Jul 2012 00:00:00 +0100</lastBuildDate>
     
-	<atom:link href="https://www.glynmottershead.com/authors/sarah-hadwin/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/authors/sarah-hadwin/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>21st Century Journalism Handbook</title>
-      <link>https://www.glynmottershead.com/publication/21st-century-journalism-handbook/</link>
+      <link>/publication/21st-century-journalism-handbook/</link>
       <pubDate>Sun, 01 Jul 2012 00:00:00 +0100</pubDate>
       
-      <guid>https://www.glynmottershead.com/publication/21st-century-journalism-handbook/</guid>
-      <description></description>
+      <guid>/publication/21st-century-journalism-handbook/</guid>
+      <description>The 21st Century Journalism Handbook is a comprehensive guide to the core principles and practices essential to the modern journalist.</description>
     </item>
     
   </channel>
