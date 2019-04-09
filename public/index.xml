@@ -24,7 +24,7 @@
 
 &lt;h2 id=&#34;downloading-the-data&#34;&gt;Downloading the data&lt;/h2&gt;
 
-&lt;p&gt;I&amp;rsquo;ve downloaded a month&amp;rsquo;s worth of data for South Wales Police from &lt;a href=&#34;https://data.police.uk/data/&#34; target=&#34;_blank&#34;&gt;data.police.uk&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;I&amp;rsquo;ve downloaded a month&amp;rsquo;s worth of data for South Wales Police from &lt;a href=&#34;https://data.police.uk/data/&#34;&gt;data.police.uk&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;I&amp;rsquo;m going to do the R equivalent of a pivot table, grouping information together and then analysing it.&lt;/p&gt;
 
@@ -229,13 +229,13 @@ bikes
 
 &lt;p&gt;In the previous tutorial we looked at getting data from web APIs in JSON and GeoJSON formats to create a simple map.&lt;/p&gt;
 
-&lt;p&gt;This time we&amp;rsquo;ll be adapting code from &lt;a href=&#34;https://timogrossenbacher.ch/2016/12/beautiful-thematic-maps-with-ggplot2-only/&#34; title=&#34;Timo Grossenbacher&#39;s post on how to make beautiful plots in ggplot2&#34; target=&#34;_blank&#34;&gt;Timo Grossenbacher&lt;/a&gt; to make our map more attractive.&lt;/p&gt;
+&lt;p&gt;This time we&amp;rsquo;ll be adapting code from &lt;a href=&#34;https://timogrossenbacher.ch/2016/12/beautiful-thematic-maps-with-ggplot2-only/&#34; title=&#34;Timo Grossenbacher&#39;s post on how to make beautiful plots in ggplot2&#34;&gt;Timo Grossenbacher&lt;/a&gt; to make our map more attractive.&lt;/p&gt;
 
 &lt;h2 id=&#34;getting-started&#34;&gt;Getting started&lt;/h2&gt;
 
 &lt;p&gt;We need to reload the data again, so we&amp;rsquo;re going to get a different number of signatures than last time.&lt;/p&gt;
 
-&lt;p&gt;I&amp;rsquo;m going to run this in one block and assume you can follow along, if not &lt;a href=&#34;/tutorial/mapping-the-article-50-petition-in-r-and-ggplot/&#34; target=&#34;_blank&#34;&gt;go back to the previous post&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;I&amp;rsquo;m going to run this in one block and assume you can follow along, if not &lt;a href=&#34;/tutorial/mapping-the-article-50-petition-in-r-and-ggplot/&#34;&gt;go back to the previous post&lt;/a&gt;.&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;# Load the mapping file
 library(geojsonio)
@@ -300,16 +300,16 @@ library(dplyr)
 &lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;full_uk_map &amp;lt;- left_join(fort_uk_map, sign_data, by = c(&amp;quot;id&amp;quot; = &amp;quot;ons_code&amp;quot;))
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;One of the things I really liked about Timo&amp;rsquo;s post is that he divided the vote count into bands (buckets) to help make it easier to see what is going on. I like the previous map but it isn&amp;rsquo;t massively easy to read. I&amp;rsquo;m not going to go into a lot on data viz theory here, but I strongly recommend you have a look at the work of &lt;a href=&#34;http://albertocairo.com/&#34; title=&#34;Dataviz guru Alberto Cairo&#39;s site&#34; target=&#34;_blank&#34;&gt;Alberto Cairo&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;One of the things I really liked about Timo&amp;rsquo;s post is that he divided the vote count into bands (buckets) to help make it easier to see what is going on. I like the previous map but it isn&amp;rsquo;t massively easy to read. I&amp;rsquo;m not going to go into a lot on data viz theory here, but I strongly recommend you have a look at the work of &lt;a href=&#34;http://albertocairo.com/&#34; title=&#34;Dataviz guru Alberto Cairo&#39;s site&#34;&gt;Alberto Cairo&lt;/a&gt;.&lt;/p&gt;
 
 &lt;h2 id=&#34;blue-is-the-colour&#34;&gt;Blue is the colour&lt;/h2&gt;
 
 &lt;p&gt;What I didn&amp;rsquo;t explain last time is that the default colour of our last map was blue. This time I want it to be intentional and echo the blue background of the European flag, so the deeper blues signify more Europhile constituencies.&lt;/p&gt;
 
 &lt;p&gt;There is a problem with maps - they often just show where the population is biggest, we could go int detail about constituencies to scale it more effectively but it gives us an interesting starting point.
-&lt;em&gt;&amp;ldquo;The Office for National Statistics gives the median total parliamentary electorate across constituencies of about 72,400 in England, 69,000 in Scotland, 66,800 in Northern Ireland and 56,800 in Wales.&amp;rdquo;&lt;/em&gt; &lt;a href=&#34;https://www.parliament.uk/about/how/elections-and-voting/constituencies/&#34; target=&#34;_blank&#34;&gt;Source&lt;/a&gt;&lt;/p&gt;
+&lt;em&gt;&amp;ldquo;The Office for National Statistics gives the median total parliamentary electorate across constituencies of about 72,400 in England, 69,000 in Scotland, 66,800 in Northern Ireland and 56,800 in Wales.&amp;rdquo;&lt;/em&gt; &lt;a href=&#34;https://www.parliament.uk/about/how/elections-and-voting/constituencies/&#34;&gt;Source&lt;/a&gt;&lt;/p&gt;
 
-&lt;p&gt;I like to use &lt;a href=&#34;http://colorbrewer2.org/#type=sequential&amp;amp;scheme=BuGn&amp;amp;n=3&#34; title=&#34;Colorbrewer for mapping&#34; target=&#34;_blank&#34;&gt;colorbrewer&lt;/a&gt; when I&amp;rsquo;m working with maps, you can have a much more nuanced colour range than using R&amp;rsquo;s default (yes it can be done in R default, but I&amp;rsquo;ve personally found it to be more fiddly). And, it is also a function that is built into ggplot2 &lt;code&gt;scale_fill_brewer()&lt;/code&gt; - which will make our life easier.&lt;/p&gt;
+&lt;p&gt;I like to use &lt;a href=&#34;http://colorbrewer2.org/#type=sequential&amp;amp;scheme=BuGn&amp;amp;n=3&#34; title=&#34;Colorbrewer for mapping&#34;&gt;colorbrewer&lt;/a&gt; when I&amp;rsquo;m working with maps, you can have a much more nuanced colour range than using R&amp;rsquo;s default (yes it can be done in R default, but I&amp;rsquo;ve personally found it to be more fiddly). And, it is also a function that is built into ggplot2 &lt;code&gt;scale_fill_brewer()&lt;/code&gt; - which will make our life easier.&lt;/p&gt;
 
 &lt;p&gt;But this gives us a bit of a problem as our colorbrewer function call only allows us nine shades of blue. If we tried using it as it stands we&amp;rsquo;d throw an error message similar to this
 &lt;code&gt;1: In brewer.pal(n, pal): n too large, allowed maximum for palette....&lt;/code&gt;&lt;/p&gt;
@@ -323,7 +323,7 @@ library(dplyr)
 &lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;no_classes &amp;lt;- 9
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;The next thing to do is then chop our voter range into sections (we want 9), we&amp;rsquo;ll be using &lt;code&gt;quantiles()&lt;/code&gt; to do that. We&amp;rsquo;ll give our function the numbers in the signature count column of our full_uk_map. The &lt;a href=&#34;https://www.rdocumentation.org/packages/stats/versions/3.5.3/topics/quantile&#34; target=&#34;_blank&#34;&gt;probs argument&lt;/a&gt; takes the number of classes and then calculates the bands for us.&lt;/p&gt;
+&lt;p&gt;The next thing to do is then chop our voter range into sections (we want 9), we&amp;rsquo;ll be using &lt;code&gt;quantiles()&lt;/code&gt; to do that. We&amp;rsquo;ll give our function the numbers in the signature count column of our full_uk_map. The &lt;a href=&#34;https://www.rdocumentation.org/packages/stats/versions/3.5.3/topics/quantile&#34;&gt;probs argument&lt;/a&gt; takes the number of classes and then calculates the bands for us.&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;quantiles &amp;lt;- quantile(full_uk_map$signature_count, probs = seq(0, 1, length.out = no_classes + 1))
 &lt;/code&gt;&lt;/pre&gt;
@@ -360,7 +360,7 @@ labels
 ## [9] &amp;quot;11172 – 37066&amp;quot;
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;Next, we need to add our new number range to the map. We&amp;rsquo;ll do this with the &lt;a href=&#34;https://www.rdocumentation.org/packages/base/versions/3.5.3/topics/cut&#34; target=&#34;_blank&#34;&gt;&lt;code&gt;cut()&lt;/code&gt; function&lt;/a&gt;, to turn our &lt;a href=&#34;https://www.stat.berkeley.edu/~s133/factors.html&#34; target=&#34;_blank&#34;&gt;number range into a factor&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Next, we need to add our new number range to the map. We&amp;rsquo;ll do this with the &lt;a href=&#34;https://www.rdocumentation.org/packages/base/versions/3.5.3/topics/cut&#34;&gt;&lt;code&gt;cut()&lt;/code&gt; function&lt;/a&gt;, to turn our &lt;a href=&#34;https://www.stat.berkeley.edu/~s133/factors.html&#34;&gt;number range into a factor&lt;/a&gt;.&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;full_uk_map$quantiles &amp;lt;- cut(full_uk_map$signature_count,
                              breaks = quantiles,
@@ -439,7 +439,7 @@ by_quantile2
 
 &lt;p&gt;At some stage I&amp;rsquo;m going to play around with the background to declare the plot size (I&amp;rsquo;m guessing that is why it is breaking the bounds here - but the version at the top is exported from the code run in RStudio), I&amp;rsquo;ll post when I do but for now I&amp;rsquo;m going to stop here.&lt;/p&gt;
 
-&lt;p&gt;Remember, Timo goes on much further to make &lt;a href=&#34;https://timogrossenbacher.ch/2016/12/beautiful-thematic-maps-with-ggplot2-only/#clear-workspace-and-install-necessary-packages&#34; target=&#34;_blank&#34;&gt;a really beautiful map&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Remember, Timo goes on much further to make &lt;a href=&#34;https://timogrossenbacher.ch/2016/12/beautiful-thematic-maps-with-ggplot2-only/#clear-workspace-and-install-necessary-packages&#34;&gt;a really beautiful map&lt;/a&gt;.&lt;/p&gt;
 </description>
     </item>
     
@@ -453,11 +453,11 @@ by_quantile2
 
 &lt;h1 id=&#34;mapping-in-r-using-ggplot2&#34;&gt;Mapping in R - using ggplot2&lt;/h1&gt;
 
-&lt;p&gt;The &lt;a href=&#34;https://petition.parliament.uk/petitions/241584/&#34; target=&#34;_blank&#34;&gt;Revoke Article 50 petition&lt;/a&gt; got my colleague and all-round codemeister &lt;a href=&#34;https://twitter.com/martinjc&#34; target=&#34;_blank&#34;&gt;Dr Martin Chorley&lt;/a&gt; and I talking.&lt;/p&gt;
+&lt;p&gt;The &lt;a href=&#34;https://petition.parliament.uk/petitions/241584/&#34;&gt;Revoke Article 50 petition&lt;/a&gt; got my colleague and all-round codemeister &lt;a href=&#34;https://twitter.com/martinjc&#34;&gt;Dr Martin Chorley&lt;/a&gt; and I talking.&lt;/p&gt;
 
 &lt;p&gt;We started thinking about ways that we could see what the patterns for people signing were like.&lt;/p&gt;
 
-&lt;p&gt;It was well into the millions when I started playing with ways of visualising where people who voted were located. The site can map all of the signatures (5,962,824 at the time of writing), but it also has an option to get the data in a &lt;a href=&#34;https://petition.parliament.uk/petitions/241584.json&#34; target=&#34;_blank&#34;&gt;machine-friendly json format&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;It was well into the millions when I started playing with ways of visualising where people who voted were located. The site can map all of the signatures (5,962,824 at the time of writing), but it also has an option to get the data in a &lt;a href=&#34;https://petition.parliament.uk/petitions/241584.json&#34;&gt;machine-friendly json format&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;According to the site:&lt;br /&gt;
 &lt;em&gt;The data shows the number of people who have signed the petition by country as well as in the constituency of each Member of Parliament. This data is available for all petitions on the site. It is not a list of people who have signed the petition. The only name that is shared on the site is that of the petition creator.&lt;/em&gt;&lt;/p&gt;
@@ -469,7 +469,7 @@ by_quantile2
 
 &lt;h2 id=&#34;getting-the-map-shapes&#34;&gt;Getting the map shapes&lt;/h2&gt;
 
-&lt;p&gt;We&amp;rsquo;re going to use &lt;em&gt;geojsonio&lt;/em&gt; first to get a mapping file from the &lt;a href=&#34;http://geoportal.statistics.gov.uk/&#34; target=&#34;_blank&#34;&gt;ONS Open Geography Portal&lt;/a&gt;. It has a great respository of mapping files. We&amp;rsquo;ll be using the parliamentary wards file. Go to the site and use the menu bar to:
+&lt;p&gt;We&amp;rsquo;re going to use &lt;em&gt;geojsonio&lt;/em&gt; first to get a mapping file from the &lt;a href=&#34;http://geoportal.statistics.gov.uk/&#34;&gt;ONS Open Geography Portal&lt;/a&gt;. It has a great respository of mapping files. We&amp;rsquo;ll be using the parliamentary wards file. Go to the site and use the menu bar to:
 &lt;em&gt;Boundaries &amp;gt; Electoral Boundaries &amp;gt; Westminster Parliamentary Constituencies &amp;gt; 2017 Boundaries&lt;/em&gt;&lt;br /&gt;
 You can download the file in a variety of formats, but we&amp;rsquo;re going to use the API to import it directly in GeoJSON format.&lt;/p&gt;
 
@@ -548,7 +548,7 @@ total_sig
 
 &lt;h2 id=&#34;joing-the-data-sets&#34;&gt;Joing the data sets&lt;/h2&gt;
 
-&lt;p&gt;This is where &lt;strong&gt;dplyr&lt;/strong&gt; comes into its own as a data-wrangling toolkit. We&amp;rsquo;ll call the library and then use a &lt;code&gt;left_join()&lt;/code&gt; to merge them together into a new dataframe called &lt;strong&gt;full_uk_map&lt;/strong&gt;. There&amp;rsquo;s an explanation of join types on the &lt;a href=&#34;https://dplyr.tidyverse.org/reference/join.html&#34; target=&#34;_blank&#34;&gt;tidyverse site&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;This is where &lt;strong&gt;dplyr&lt;/strong&gt; comes into its own as a data-wrangling toolkit. We&amp;rsquo;ll call the library and then use a &lt;code&gt;left_join()&lt;/code&gt; to merge them together into a new dataframe called &lt;strong&gt;full_uk_map&lt;/strong&gt;. There&amp;rsquo;s an explanation of join types on the &lt;a href=&#34;https://dplyr.tidyverse.org/reference/join.html&#34;&gt;tidyverse site&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;To do the join we have to tell the function where our common columns are in the &amp;lsquo;by&amp;rsquo; element &amp;ndash; &lt;code&gt;left_join(dataset1, dataset2, by = c(&amp;quot;a_column&amp;quot; = &amp;quot;the_equivalent_column&amp;quot;))&lt;/code&gt;&lt;/p&gt;
 
@@ -595,13 +595,13 @@ ggplot() +
 
 &lt;h2 id=&#34;next-steps&#34;&gt;Next steps&lt;/h2&gt;
 
-&lt;p&gt;I&amp;rsquo;ve also been playing with a great post from Timo Grossenbaher on how to &lt;a href=&#34;https://timogrossenbacher.ch/2016/12/beautiful-thematic-maps-with-ggplot2-only/&#34; target=&#34;_blank&#34;&gt;make beatiful thematic maps with ggplot2&lt;/a&gt; to create something a bit more effective.&lt;/p&gt;
+&lt;p&gt;I&amp;rsquo;ve also been playing with a great post from Timo Grossenbaher on how to &lt;a href=&#34;https://timogrossenbacher.ch/2016/12/beautiful-thematic-maps-with-ggplot2-only/&#34;&gt;make beatiful thematic maps with ggplot2&lt;/a&gt; to create something a bit more effective.&lt;/p&gt;
 
-&lt;p&gt;Now pop along to &lt;a href=&#34;/tutorial/mapping-the-article-50-petition-in-r-and-ggplot-part-2/&#34; target=&#34;_blank&#34;&gt;stage two of this tutorial&lt;/a&gt; which goes further and looks at making things more interesting.&lt;/p&gt;
+&lt;p&gt;Now pop along to &lt;a href=&#34;/tutorial/mapping-the-article-50-petition-in-r-and-ggplot-part-2/&#34;&gt;stage two of this tutorial&lt;/a&gt; which goes further and looks at making things more interesting.&lt;/p&gt;
 
 &lt;h2 id=&#34;more-analysis&#34;&gt;More analysis&lt;/h2&gt;
 
-&lt;p&gt;Andy Dickinson from Manchester Met has done a &lt;a href=&#34;https://andydickinson.net/2019/03/27/quick-analalysis-of-petitions-data&#34; target=&#34;_blank&#34;&gt;Pandas (Python) look at the article 50 and knife crime petitions&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Andy Dickinson from Manchester Met has done a &lt;a href=&#34;https://andydickinson.net/2019/03/27/quick-analalysis-of-petitions-data&#34;&gt;Pandas (Python) look at the article 50 and knife crime petitions&lt;/a&gt;.&lt;/p&gt;
 </description>
     </item>
     

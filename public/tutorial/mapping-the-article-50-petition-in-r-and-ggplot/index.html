@@ -504,11 +504,11 @@ It was well into the millions when I started playing with ways of visualising wh
 
 <h1 id="mapping-in-r-using-ggplot2">Mapping in R - using ggplot2</h1>
 
-<p>The <a href="https://petition.parliament.uk/petitions/241584/" target="_blank">Revoke Article 50 petition</a> got my colleague and all-round codemeister <a href="https://twitter.com/martinjc" target="_blank">Dr Martin Chorley</a> and I talking.</p>
+<p>The <a href="https://petition.parliament.uk/petitions/241584/">Revoke Article 50 petition</a> got my colleague and all-round codemeister <a href="https://twitter.com/martinjc">Dr Martin Chorley</a> and I talking.</p>
 
 <p>We started thinking about ways that we could see what the patterns for people signing were like.</p>
 
-<p>It was well into the millions when I started playing with ways of visualising where people who voted were located. The site can map all of the signatures (5,962,824 at the time of writing), but it also has an option to get the data in a <a href="https://petition.parliament.uk/petitions/241584.json" target="_blank">machine-friendly json format</a>.</p>
+<p>It was well into the millions when I started playing with ways of visualising where people who voted were located. The site can map all of the signatures (5,962,824 at the time of writing), but it also has an option to get the data in a <a href="https://petition.parliament.uk/petitions/241584.json">machine-friendly json format</a>.</p>
 
 <p>According to the site:<br />
 <em>The data shows the number of people who have signed the petition by country as well as in the constituency of each Member of Parliament. This data is available for all petitions on the site. It is not a list of people who have signed the petition. The only name that is shared on the site is that of the petition creator.</em></p>
@@ -520,7 +520,7 @@ It was well into the millions when I started playing with ways of visualising wh
 
 <h2 id="getting-the-map-shapes">Getting the map shapes</h2>
 
-<p>We&rsquo;re going to use <em>geojsonio</em> first to get a mapping file from the <a href="http://geoportal.statistics.gov.uk/" target="_blank">ONS Open Geography Portal</a>. It has a great respository of mapping files. We&rsquo;ll be using the parliamentary wards file. Go to the site and use the menu bar to:
+<p>We&rsquo;re going to use <em>geojsonio</em> first to get a mapping file from the <a href="http://geoportal.statistics.gov.uk/">ONS Open Geography Portal</a>. It has a great respository of mapping files. We&rsquo;ll be using the parliamentary wards file. Go to the site and use the menu bar to:
 <em>Boundaries &gt; Electoral Boundaries &gt; Westminster Parliamentary Constituencies &gt; 2017 Boundaries</em><br />
 You can download the file in a variety of formats, but we&rsquo;re going to use the API to import it directly in GeoJSON format.</p>
 
@@ -599,7 +599,7 @@ total_sig
 
 <h2 id="joing-the-data-sets">Joing the data sets</h2>
 
-<p>This is where <strong>dplyr</strong> comes into its own as a data-wrangling toolkit. We&rsquo;ll call the library and then use a <code>left_join()</code> to merge them together into a new dataframe called <strong>full_uk_map</strong>. There&rsquo;s an explanation of join types on the <a href="https://dplyr.tidyverse.org/reference/join.html" target="_blank">tidyverse site</a>.</p>
+<p>This is where <strong>dplyr</strong> comes into its own as a data-wrangling toolkit. We&rsquo;ll call the library and then use a <code>left_join()</code> to merge them together into a new dataframe called <strong>full_uk_map</strong>. There&rsquo;s an explanation of join types on the <a href="https://dplyr.tidyverse.org/reference/join.html">tidyverse site</a>.</p>
 
 <p>To do the join we have to tell the function where our common columns are in the &lsquo;by&rsquo; element &ndash; <code>left_join(dataset1, dataset2, by = c(&quot;a_column&quot; = &quot;the_equivalent_column&quot;))</code></p>
 
@@ -646,13 +646,13 @@ ggplot() +
 
 <h2 id="next-steps">Next steps</h2>
 
-<p>I&rsquo;ve also been playing with a great post from Timo Grossenbaher on how to <a href="https://timogrossenbacher.ch/2016/12/beautiful-thematic-maps-with-ggplot2-only/" target="_blank">make beatiful thematic maps with ggplot2</a> to create something a bit more effective.</p>
+<p>I&rsquo;ve also been playing with a great post from Timo Grossenbaher on how to <a href="https://timogrossenbacher.ch/2016/12/beautiful-thematic-maps-with-ggplot2-only/">make beatiful thematic maps with ggplot2</a> to create something a bit more effective.</p>
 
-<p>Now pop along to <a href="/tutorial/mapping-the-article-50-petition-in-r-and-ggplot-part-2/" target="_blank">stage two of this tutorial</a> which goes further and looks at making things more interesting.</p>
+<p>Now pop along to <a href="/tutorial/mapping-the-article-50-petition-in-r-and-ggplot-part-2/">stage two of this tutorial</a> which goes further and looks at making things more interesting.</p>
 
 <h2 id="more-analysis">More analysis</h2>
 
-<p>Andy Dickinson from Manchester Met has done a <a href="https://andydickinson.net/2019/03/27/quick-analalysis-of-petitions-data" target="_blank">Pandas (Python) look at the article 50 and knife crime petitions</a>.</p>
+<p>Andy Dickinson from Manchester Met has done a <a href="https://andydickinson.net/2019/03/27/quick-analalysis-of-petitions-data">Pandas (Python) look at the article 50 and knife crime petitions</a>.</p>
 
     </div>
 

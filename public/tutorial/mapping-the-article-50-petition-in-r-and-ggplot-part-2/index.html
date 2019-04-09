@@ -510,13 +510,13 @@ I&rsquo;m going to run this in one block and assume you can follow along, if not
 
 <p>In the previous tutorial we looked at getting data from web APIs in JSON and GeoJSON formats to create a simple map.</p>
 
-<p>This time we&rsquo;ll be adapting code from <a href="https://timogrossenbacher.ch/2016/12/beautiful-thematic-maps-with-ggplot2-only/" title="Timo Grossenbacher's post on how to make beautiful plots in ggplot2" target="_blank">Timo Grossenbacher</a> to make our map more attractive.</p>
+<p>This time we&rsquo;ll be adapting code from <a href="https://timogrossenbacher.ch/2016/12/beautiful-thematic-maps-with-ggplot2-only/" title="Timo Grossenbacher's post on how to make beautiful plots in ggplot2">Timo Grossenbacher</a> to make our map more attractive.</p>
 
 <h2 id="getting-started">Getting started</h2>
 
 <p>We need to reload the data again, so we&rsquo;re going to get a different number of signatures than last time.</p>
 
-<p>I&rsquo;m going to run this in one block and assume you can follow along, if not <a href="/tutorial/mapping-the-article-50-petition-in-r-and-ggplot/" target="_blank">go back to the previous post</a>.</p>
+<p>I&rsquo;m going to run this in one block and assume you can follow along, if not <a href="/tutorial/mapping-the-article-50-petition-in-r-and-ggplot/">go back to the previous post</a>.</p>
 
 <pre><code class="language-r"># Load the mapping file
 library(geojsonio)
@@ -581,16 +581,16 @@ library(dplyr)
 <pre><code class="language-r">full_uk_map &lt;- left_join(fort_uk_map, sign_data, by = c(&quot;id&quot; = &quot;ons_code&quot;))
 </code></pre>
 
-<p>One of the things I really liked about Timo&rsquo;s post is that he divided the vote count into bands (buckets) to help make it easier to see what is going on. I like the previous map but it isn&rsquo;t massively easy to read. I&rsquo;m not going to go into a lot on data viz theory here, but I strongly recommend you have a look at the work of <a href="http://albertocairo.com/" title="Dataviz guru Alberto Cairo's site" target="_blank">Alberto Cairo</a>.</p>
+<p>One of the things I really liked about Timo&rsquo;s post is that he divided the vote count into bands (buckets) to help make it easier to see what is going on. I like the previous map but it isn&rsquo;t massively easy to read. I&rsquo;m not going to go into a lot on data viz theory here, but I strongly recommend you have a look at the work of <a href="http://albertocairo.com/" title="Dataviz guru Alberto Cairo's site">Alberto Cairo</a>.</p>
 
 <h2 id="blue-is-the-colour">Blue is the colour</h2>
 
 <p>What I didn&rsquo;t explain last time is that the default colour of our last map was blue. This time I want it to be intentional and echo the blue background of the European flag, so the deeper blues signify more Europhile constituencies.</p>
 
 <p>There is a problem with maps - they often just show where the population is biggest, we could go int detail about constituencies to scale it more effectively but it gives us an interesting starting point.
-<em>&ldquo;The Office for National Statistics gives the median total parliamentary electorate across constituencies of about 72,400 in England, 69,000 in Scotland, 66,800 in Northern Ireland and 56,800 in Wales.&rdquo;</em> <a href="https://www.parliament.uk/about/how/elections-and-voting/constituencies/" target="_blank">Source</a></p>
+<em>&ldquo;The Office for National Statistics gives the median total parliamentary electorate across constituencies of about 72,400 in England, 69,000 in Scotland, 66,800 in Northern Ireland and 56,800 in Wales.&rdquo;</em> <a href="https://www.parliament.uk/about/how/elections-and-voting/constituencies/">Source</a></p>
 
-<p>I like to use <a href="http://colorbrewer2.org/#type=sequential&amp;scheme=BuGn&amp;n=3" title="Colorbrewer for mapping" target="_blank">colorbrewer</a> when I&rsquo;m working with maps, you can have a much more nuanced colour range than using R&rsquo;s default (yes it can be done in R default, but I&rsquo;ve personally found it to be more fiddly). And, it is also a function that is built into ggplot2 <code>scale_fill_brewer()</code> - which will make our life easier.</p>
+<p>I like to use <a href="http://colorbrewer2.org/#type=sequential&amp;scheme=BuGn&amp;n=3" title="Colorbrewer for mapping">colorbrewer</a> when I&rsquo;m working with maps, you can have a much more nuanced colour range than using R&rsquo;s default (yes it can be done in R default, but I&rsquo;ve personally found it to be more fiddly). And, it is also a function that is built into ggplot2 <code>scale_fill_brewer()</code> - which will make our life easier.</p>
 
 <p>But this gives us a bit of a problem as our colorbrewer function call only allows us nine shades of blue. If we tried using it as it stands we&rsquo;d throw an error message similar to this
 <code>1: In brewer.pal(n, pal): n too large, allowed maximum for palette....</code></p>
@@ -604,7 +604,7 @@ library(dplyr)
 <pre><code class="language-r">no_classes &lt;- 9
 </code></pre>
 
-<p>The next thing to do is then chop our voter range into sections (we want 9), we&rsquo;ll be using <code>quantiles()</code> to do that. We&rsquo;ll give our function the numbers in the signature count column of our full_uk_map. The <a href="https://www.rdocumentation.org/packages/stats/versions/3.5.3/topics/quantile" target="_blank">probs argument</a> takes the number of classes and then calculates the bands for us.</p>
+<p>The next thing to do is then chop our voter range into sections (we want 9), we&rsquo;ll be using <code>quantiles()</code> to do that. We&rsquo;ll give our function the numbers in the signature count column of our full_uk_map. The <a href="https://www.rdocumentation.org/packages/stats/versions/3.5.3/topics/quantile">probs argument</a> takes the number of classes and then calculates the bands for us.</p>
 
 <pre><code class="language-r">quantiles &lt;- quantile(full_uk_map$signature_count, probs = seq(0, 1, length.out = no_classes + 1))
 </code></pre>
@@ -641,7 +641,7 @@ labels
 ## [9] &quot;11172 – 37066&quot;
 </code></pre>
 
-<p>Next, we need to add our new number range to the map. We&rsquo;ll do this with the <a href="https://www.rdocumentation.org/packages/base/versions/3.5.3/topics/cut" target="_blank"><code>cut()</code> function</a>, to turn our <a href="https://www.stat.berkeley.edu/~s133/factors.html" target="_blank">number range into a factor</a>.</p>
+<p>Next, we need to add our new number range to the map. We&rsquo;ll do this with the <a href="https://www.rdocumentation.org/packages/base/versions/3.5.3/topics/cut"><code>cut()</code> function</a>, to turn our <a href="https://www.stat.berkeley.edu/~s133/factors.html">number range into a factor</a>.</p>
 
 <pre><code class="language-r">full_uk_map$quantiles &lt;- cut(full_uk_map$signature_count,
                              breaks = quantiles,
@@ -720,7 +720,7 @@ by_quantile2
 
 <p>At some stage I&rsquo;m going to play around with the background to declare the plot size (I&rsquo;m guessing that is why it is breaking the bounds here - but the version at the top is exported from the code run in RStudio), I&rsquo;ll post when I do but for now I&rsquo;m going to stop here.</p>
 
-<p>Remember, Timo goes on much further to make <a href="https://timogrossenbacher.ch/2016/12/beautiful-thematic-maps-with-ggplot2-only/#clear-workspace-and-install-necessary-packages" target="_blank">a really beautiful map</a>.</p>
+<p>Remember, Timo goes on much further to make <a href="https://timogrossenbacher.ch/2016/12/beautiful-thematic-maps-with-ggplot2-only/#clear-workspace-and-install-necessary-packages">a really beautiful map</a>.</p>
 
     </div>
 
