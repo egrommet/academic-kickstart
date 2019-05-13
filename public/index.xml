@@ -20,7 +20,7 @@
 
 &lt;p&gt;The Tidyverse tools are one of my favourite things and made my R coding experience much simpler. Most of the things I&amp;rsquo;ll be posting will use them in one way or another.&lt;/p&gt;
 
-&lt;p&gt;We&amp;rsquo;re going to find out what happens when someone reports a stolen bicycle - a friend seems to believe the police do nothing, so let&amp;rsquo;s investigate what actuall happens.&lt;/p&gt;
+&lt;p&gt;We&amp;rsquo;re going to find out what happens when someone reports a stolen bicycle - a friend seems to believe the police do nothing, so let&amp;rsquo;s investigate what actually happens.&lt;/p&gt;
 
 &lt;h2 id=&#34;downloading-the-data&#34;&gt;Downloading the data&lt;/h2&gt;
 
@@ -255,7 +255,21 @@ uk_map &amp;lt;- geojson_read(url, what = &amp;quot;sp&amp;quot;)
 
 # Convert to a ggplot-friendly format
 library(ggplot2)
-fort_uk_map &amp;lt;- fortify(uk_map, region = &amp;quot;pcon17cd&amp;quot;)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code&gt;## Registered S3 methods overwritten by &#39;ggplot2&#39;:
+##   method         from 
+##   [.quosures     rlang
+##   c.quosures     rlang
+##   print.quosures rlang
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code&gt;## Registered S3 method overwritten by &#39;dplyr&#39;:
+##   method         from     
+##   print.location geojsonio
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;fort_uk_map &amp;lt;- fortify(uk_map, region = &amp;quot;pcon17cd&amp;quot;)
 
 # Get the data from the petition site
 library(jsonlite)
@@ -343,9 +357,9 @@ for(band in 1:length(quantiles)){
 labels
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;pre&gt;&lt;code&gt;##  [1] &amp;quot;1981 – 3909&amp;quot;   &amp;quot;3909 – 4602&amp;quot;   &amp;quot;4602 – 5333&amp;quot;   &amp;quot;5333 – 6531&amp;quot;  
-##  [5] &amp;quot;6531 – 7630&amp;quot;   &amp;quot;7630 – 9088&amp;quot;   &amp;quot;9088 – 9702&amp;quot;   &amp;quot;9702 – 11172&amp;quot; 
-##  [9] &amp;quot;11172 – 37066&amp;quot; &amp;quot;37066 – NA&amp;quot;
+&lt;pre&gt;&lt;code&gt;##  [1] &amp;quot;1986 – 3917&amp;quot;   &amp;quot;3917 – 4607&amp;quot;   &amp;quot;4607 – 5345&amp;quot;   &amp;quot;5345 – 6543&amp;quot;  
+##  [5] &amp;quot;6543 – 7646&amp;quot;   &amp;quot;7646 – 9103&amp;quot;   &amp;quot;9103 – 9714&amp;quot;   &amp;quot;9714 – 11188&amp;quot; 
+##  [9] &amp;quot;11188 – 37122&amp;quot; &amp;quot;37122 – NA&amp;quot;
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;And we&amp;rsquo;ve got a problem - the code gives us a final band that looks like &amp;ldquo;36901 - NA&amp;rdquo;, anything over our maximum. We can easily get rid of that as obviously we are limited at the maximum.&lt;/p&gt;
@@ -355,9 +369,9 @@ labels
 labels
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;pre&gt;&lt;code&gt;## [1] &amp;quot;1981 – 3909&amp;quot;   &amp;quot;3909 – 4602&amp;quot;   &amp;quot;4602 – 5333&amp;quot;   &amp;quot;5333 – 6531&amp;quot;  
-## [5] &amp;quot;6531 – 7630&amp;quot;   &amp;quot;7630 – 9088&amp;quot;   &amp;quot;9088 – 9702&amp;quot;   &amp;quot;9702 – 11172&amp;quot; 
-## [9] &amp;quot;11172 – 37066&amp;quot;
+&lt;pre&gt;&lt;code&gt;## [1] &amp;quot;1986 – 3917&amp;quot;   &amp;quot;3917 – 4607&amp;quot;   &amp;quot;4607 – 5345&amp;quot;   &amp;quot;5345 – 6543&amp;quot;  
+## [5] &amp;quot;6543 – 7646&amp;quot;   &amp;quot;7646 – 9103&amp;quot;   &amp;quot;9103 – 9714&amp;quot;   &amp;quot;9714 – 11188&amp;quot; 
+## [9] &amp;quot;11188 – 37122&amp;quot;
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;Next, we need to add our new number range to the map. We&amp;rsquo;ll do this with the &lt;a href=&#34;https://www.rdocumentation.org/packages/base/versions/3.5.3/topics/cut&#34;&gt;&lt;code&gt;cut()&lt;/code&gt; function&lt;/a&gt;, to turn our &lt;a href=&#34;https://www.stat.berkeley.edu/~s133/factors.html&#34;&gt;number range into a factor&lt;/a&gt;.&lt;/p&gt;
@@ -469,7 +483,7 @@ by_quantile2
 
 &lt;h2 id=&#34;getting-the-map-shapes&#34;&gt;Getting the map shapes&lt;/h2&gt;
 
-&lt;p&gt;We&amp;rsquo;re going to use &lt;em&gt;geojsonio&lt;/em&gt; first to get a mapping file from the &lt;a href=&#34;http://geoportal.statistics.gov.uk/&#34;&gt;ONS Open Geography Portal&lt;/a&gt;. It has a great respository of mapping files. We&amp;rsquo;ll be using the parliamentary wards file. Go to the site and use the menu bar to:
+&lt;p&gt;We&amp;rsquo;re going to use &lt;em&gt;geojsonio&lt;/em&gt; first to get a mapping file from the &lt;a href=&#34;http://geoportal.statistics.gov.uk/&#34;&gt;ONS Open Geography Portal&lt;/a&gt;. It has a great repository of mapping files. We&amp;rsquo;ll be using the parliamentary wards file. Go to the site and use the menu bar to:
 &lt;em&gt;Boundaries &amp;gt; Electoral Boundaries &amp;gt; Westminster Parliamentary Constituencies &amp;gt; 2017 Boundaries&lt;/em&gt;&lt;br /&gt;
 You can download the file in a variety of formats, but we&amp;rsquo;re going to use the API to import it directly in GeoJSON format.&lt;/p&gt;
 
@@ -535,7 +549,7 @@ uk_map &amp;lt;- geojson_read(url, what = &amp;quot;sp&amp;quot;)
 &lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;json_data &amp;lt;- fromJSON(&amp;quot;https://petition.parliament.uk/petitions/241584.json&amp;quot;, flatten = FALSE)
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;The next thing we need to do is get the data out of the json file we just imported. If you click on the json_data object in the Environment pane, you&amp;rsquo;ll see it is a list of two - double click to open it up and we cab view the file.  Inside the json-data structure we can see data has a list of three objects inside it, opening that shows us attributes is where the intersting things are happening.&lt;/p&gt;
+&lt;p&gt;The next thing we need to do is get the data out of the json file we just imported. If you click on the json_data object in the Environment pane, you&amp;rsquo;ll see it is a list of two - double click to open it up and we cab view the file.  Inside the json-data structure we can see data has a list of three objects inside it, opening that shows us attributes is where the interesting things are happening.&lt;/p&gt;
 
 &lt;p&gt;There&amp;rsquo;s a lot going on but there are two things that interest me for mapping - signatures_by_constituency and signatures_by_country (this second one is for a later date).&lt;/p&gt;
 
@@ -556,10 +570,10 @@ total_sig &amp;lt;- sum(sign_data$signature_count)
 total_sig
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;pre&gt;&lt;code&gt;## [1] 5721370
+&lt;pre&gt;&lt;code&gt;## [1] 5721697
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h2 id=&#34;joing-the-data-sets&#34;&gt;Joing the data sets&lt;/h2&gt;
+&lt;h2 id=&#34;joining-the-data-sets&#34;&gt;Joining the data sets&lt;/h2&gt;
 
 &lt;p&gt;This is where &lt;strong&gt;dplyr&lt;/strong&gt; comes into its own as a data-wrangling toolkit. We&amp;rsquo;ll call the library and then use a &lt;code&gt;left_join()&lt;/code&gt; to merge them together into a new dataframe called &lt;strong&gt;full_uk_map&lt;/strong&gt;. There&amp;rsquo;s an explanation of join types on the &lt;a href=&#34;https://dplyr.tidyverse.org/reference/join.html&#34;&gt;tidyverse site&lt;/a&gt;.&lt;/p&gt;
 
@@ -603,7 +617,7 @@ ggplot() +
 
 &lt;div class=&#34;figure&#34;&gt;
 &lt;img src=&#34;/tutorial/2019-03-29-mapping-the-article-50-petition-in-r-and-ggplot_files/figure-html/map-1.png&#34; alt=&#34;A simple choropleth map.&#34; width=&#34;672&#34; /&gt;
-&lt;p class=&#34;caption&#34;&gt;Figure 1 A simple choropleth map.&lt;/p&gt;
+&lt;p class=&#34;caption&#34;&gt;Figure 1: A simple choropleth map.&lt;/p&gt;
 &lt;/div&gt;
 
 &lt;h2 id=&#34;next-steps&#34;&gt;Next steps&lt;/h2&gt;

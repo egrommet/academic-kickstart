@@ -24,7 +24,7 @@ You'll need to install the following packages:
 `install.packages(c("geojsonio", "ggplot2", "dplyr", "jsonlite"))`
 
 ## Getting the map shapes
-We're going to use *geojsonio* first to get a mapping file from the [ONS Open Geography Portal](http://geoportal.statistics.gov.uk/). It has a great respository of mapping files. We'll be using the parliamentary wards file. Go to the site and use the menu bar to:
+We're going to use *geojsonio* first to get a mapping file from the [ONS Open Geography Portal](http://geoportal.statistics.gov.uk/). It has a great repository of mapping files. We'll be using the parliamentary wards file. Go to the site and use the menu bar to:
 *Boundaries > Electoral Boundaries > Westminster Parliamentary Constituencies > 2017 Boundaries*  
 You can download the file in a variety of formats, but we're going to use the API to import it directly in GeoJSON format.  
   
@@ -106,7 +106,7 @@ library(jsonlite)
 json_data <- fromJSON("https://petition.parliament.uk/petitions/241584.json", flatten = FALSE)
 ```
 
-The next thing we need to do is get the data out of the json file we just imported. If you click on the json_data object in the Environment pane, you'll see it is a list of two - double click to open it up and we cab view the file.  Inside the json-data structure we can see data has a list of three objects inside it, opening that shows us attributes is where the intersting things are happening.  
+The next thing we need to do is get the data out of the json file we just imported. If you click on the json_data object in the Environment pane, you'll see it is a list of two - double click to open it up and we cab view the file.  Inside the json-data structure we can see data has a list of three objects inside it, opening that shows us attributes is where the interesting things are happening.  
 
 There's a lot going on but there are two things that interest me for mapping - signatures_by_constituency and signatures_by_country (this second one is for a later date).  
 
@@ -130,10 +130,10 @@ total_sig
 ```
 
 ```
-## [1] 5721370
+## [1] 5721697
 ```
 
-## Joing the data sets
+## Joining the data sets
 This is where **dplyr** comes into its own as a data-wrangling toolkit. We'll call the library and then use a `left_join()` to merge them together into a new dataframe called **full_uk_map**. There's an explanation of join types on the [tidyverse site](https://dplyr.tidyverse.org/reference/join.html).  
 
 To do the join we have to tell the function where our common columns are in the 'by' element -- `left_join(dataset1, dataset2, by = c("a_column" = "the_equivalent_column"))`
@@ -184,7 +184,7 @@ ggplot() +
 
 <div class="figure">
 <img src="/tutorial/2019-03-29-mapping-the-article-50-petition-in-r-and-ggplot_files/figure-html/map-1.png" alt="A simple choropleth map." width="672" />
-<p class="caption">Figure 1 A simple choropleth map.</p>
+<p class="caption">Figure 1: A simple choropleth map.</p>
 </div>
 
 

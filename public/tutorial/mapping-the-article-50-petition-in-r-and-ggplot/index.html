@@ -520,7 +520,7 @@ It was well into the millions when I started playing with ways of visualising wh
 
 <h2 id="getting-the-map-shapes">Getting the map shapes</h2>
 
-<p>We&rsquo;re going to use <em>geojsonio</em> first to get a mapping file from the <a href="http://geoportal.statistics.gov.uk/">ONS Open Geography Portal</a>. It has a great respository of mapping files. We&rsquo;ll be using the parliamentary wards file. Go to the site and use the menu bar to:
+<p>We&rsquo;re going to use <em>geojsonio</em> first to get a mapping file from the <a href="http://geoportal.statistics.gov.uk/">ONS Open Geography Portal</a>. It has a great repository of mapping files. We&rsquo;ll be using the parliamentary wards file. Go to the site and use the menu bar to:
 <em>Boundaries &gt; Electoral Boundaries &gt; Westminster Parliamentary Constituencies &gt; 2017 Boundaries</em><br />
 You can download the file in a variety of formats, but we&rsquo;re going to use the API to import it directly in GeoJSON format.</p>
 
@@ -586,7 +586,7 @@ uk_map &lt;- geojson_read(url, what = &quot;sp&quot;)
 <pre><code class="language-r">json_data &lt;- fromJSON(&quot;https://petition.parliament.uk/petitions/241584.json&quot;, flatten = FALSE)
 </code></pre>
 
-<p>The next thing we need to do is get the data out of the json file we just imported. If you click on the json_data object in the Environment pane, you&rsquo;ll see it is a list of two - double click to open it up and we cab view the file.  Inside the json-data structure we can see data has a list of three objects inside it, opening that shows us attributes is where the intersting things are happening.</p>
+<p>The next thing we need to do is get the data out of the json file we just imported. If you click on the json_data object in the Environment pane, you&rsquo;ll see it is a list of two - double click to open it up and we cab view the file.  Inside the json-data structure we can see data has a list of three objects inside it, opening that shows us attributes is where the interesting things are happening.</p>
 
 <p>There&rsquo;s a lot going on but there are two things that interest me for mapping - signatures_by_constituency and signatures_by_country (this second one is for a later date).</p>
 
@@ -607,10 +607,10 @@ total_sig &lt;- sum(sign_data$signature_count)
 total_sig
 </code></pre>
 
-<pre><code>## [1] 5721370
+<pre><code>## [1] 5721697
 </code></pre>
 
-<h2 id="joing-the-data-sets">Joing the data sets</h2>
+<h2 id="joining-the-data-sets">Joining the data sets</h2>
 
 <p>This is where <strong>dplyr</strong> comes into its own as a data-wrangling toolkit. We&rsquo;ll call the library and then use a <code>left_join()</code> to merge them together into a new dataframe called <strong>full_uk_map</strong>. There&rsquo;s an explanation of join types on the <a href="https://dplyr.tidyverse.org/reference/join.html">tidyverse site</a>.</p>
 
@@ -654,7 +654,7 @@ ggplot() +
 
 <div class="figure">
 <img src="/tutorial/2019-03-29-mapping-the-article-50-petition-in-r-and-ggplot_files/figure-html/map-1.png" alt="A simple choropleth map." width="672" />
-<p class="caption">Figure 1 A simple choropleth map.</p>
+<p class="caption">Figure 1: A simple choropleth map.</p>
 </div>
 
 <h2 id="next-steps">Next steps</h2>
@@ -708,7 +708,7 @@ ggplot() +
 
   <div class="media-body">
     <h5 class="card-title" itemprop="name"><a href="/authors/admin">Glyn Mottershead</a></h5>
-    <h6 class="card-subtitle">Senior Lecturer in Data Journalism</h6>
+    <h6 class="card-subtitle">Senior Lecturer</h6>
     <p class="card-text" itemprop="description">I have a keen interest in data journalism and developer/journalism. Human computer interaction and journalistic innovation are also areas of research and teaching practise.</p>
     <ul class="network-icon" aria-hidden="true">
       

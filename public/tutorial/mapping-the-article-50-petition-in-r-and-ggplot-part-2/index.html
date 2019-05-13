@@ -536,7 +536,21 @@ uk_map &lt;- geojson_read(url, what = &quot;sp&quot;)
 
 # Convert to a ggplot-friendly format
 library(ggplot2)
-fort_uk_map &lt;- fortify(uk_map, region = &quot;pcon17cd&quot;)
+</code></pre>
+
+<pre><code>## Registered S3 methods overwritten by 'ggplot2':
+##   method         from 
+##   [.quosures     rlang
+##   c.quosures     rlang
+##   print.quosures rlang
+</code></pre>
+
+<pre><code>## Registered S3 method overwritten by 'dplyr':
+##   method         from     
+##   print.location geojsonio
+</code></pre>
+
+<pre><code class="language-r">fort_uk_map &lt;- fortify(uk_map, region = &quot;pcon17cd&quot;)
 
 # Get the data from the petition site
 library(jsonlite)
@@ -624,9 +638,9 @@ for(band in 1:length(quantiles)){
 labels
 </code></pre>
 
-<pre><code>##  [1] &quot;1981 – 3909&quot;   &quot;3909 – 4602&quot;   &quot;4602 – 5333&quot;   &quot;5333 – 6531&quot;  
-##  [5] &quot;6531 – 7630&quot;   &quot;7630 – 9088&quot;   &quot;9088 – 9702&quot;   &quot;9702 – 11172&quot; 
-##  [9] &quot;11172 – 37066&quot; &quot;37066 – NA&quot;
+<pre><code>##  [1] &quot;1986 – 3917&quot;   &quot;3917 – 4607&quot;   &quot;4607 – 5345&quot;   &quot;5345 – 6543&quot;  
+##  [5] &quot;6543 – 7646&quot;   &quot;7646 – 9103&quot;   &quot;9103 – 9714&quot;   &quot;9714 – 11188&quot; 
+##  [9] &quot;11188 – 37122&quot; &quot;37122 – NA&quot;
 </code></pre>
 
 <p>And we&rsquo;ve got a problem - the code gives us a final band that looks like &ldquo;36901 - NA&rdquo;, anything over our maximum. We can easily get rid of that as obviously we are limited at the maximum.</p>
@@ -636,9 +650,9 @@ labels
 labels
 </code></pre>
 
-<pre><code>## [1] &quot;1981 – 3909&quot;   &quot;3909 – 4602&quot;   &quot;4602 – 5333&quot;   &quot;5333 – 6531&quot;  
-## [5] &quot;6531 – 7630&quot;   &quot;7630 – 9088&quot;   &quot;9088 – 9702&quot;   &quot;9702 – 11172&quot; 
-## [9] &quot;11172 – 37066&quot;
+<pre><code>## [1] &quot;1986 – 3917&quot;   &quot;3917 – 4607&quot;   &quot;4607 – 5345&quot;   &quot;5345 – 6543&quot;  
+## [5] &quot;6543 – 7646&quot;   &quot;7646 – 9103&quot;   &quot;9103 – 9714&quot;   &quot;9714 – 11188&quot; 
+## [9] &quot;11188 – 37122&quot;
 </code></pre>
 
 <p>Next, we need to add our new number range to the map. We&rsquo;ll do this with the <a href="https://www.rdocumentation.org/packages/base/versions/3.5.3/topics/cut"><code>cut()</code> function</a>, to turn our <a href="https://www.stat.berkeley.edu/~s133/factors.html">number range into a factor</a>.</p>
@@ -763,7 +777,7 @@ by_quantile2
 
   <div class="media-body">
     <h5 class="card-title" itemprop="name"><a href="/authors/admin">Glyn Mottershead</a></h5>
-    <h6 class="card-subtitle">Senior Lecturer in Data Journalism</h6>
+    <h6 class="card-subtitle">Senior Lecturer</h6>
     <p class="card-text" itemprop="description">I have a keen interest in data journalism and developer/journalism. Human computer interaction and journalistic innovation are also areas of research and teaching practise.</p>
     <ul class="network-icon" aria-hidden="true">
       

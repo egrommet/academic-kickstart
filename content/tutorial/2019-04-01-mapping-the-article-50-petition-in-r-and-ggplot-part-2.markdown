@@ -51,6 +51,23 @@ uk_map <- geojson_read(url, what = "sp")
 
 # Convert to a ggplot-friendly format
 library(ggplot2)
+```
+
+```
+## Registered S3 methods overwritten by 'ggplot2':
+##   method         from 
+##   [.quosures     rlang
+##   c.quosures     rlang
+##   print.quosures rlang
+```
+
+```
+## Registered S3 method overwritten by 'dplyr':
+##   method         from     
+##   print.location geojsonio
+```
+
+```r
 fort_uk_map <- fortify(uk_map, region = "pcon17cd")
 
 # Get the data from the petition site
@@ -151,9 +168,9 @@ labels
 ```
 
 ```
-##  [1] "1981 – 3909"   "3909 – 4602"   "4602 – 5333"   "5333 – 6531"  
-##  [5] "6531 – 7630"   "7630 – 9088"   "9088 – 9702"   "9702 – 11172" 
-##  [9] "11172 – 37066" "37066 – NA"
+##  [1] "1986 – 3917"   "3917 – 4607"   "4607 – 5345"   "5345 – 6543"  
+##  [5] "6543 – 7646"   "7646 – 9103"   "9103 – 9714"   "9714 – 11188" 
+##  [9] "11188 – 37122" "37122 – NA"
 ```
 
 
@@ -167,9 +184,9 @@ labels
 ```
 
 ```
-## [1] "1981 – 3909"   "3909 – 4602"   "4602 – 5333"   "5333 – 6531"  
-## [5] "6531 – 7630"   "7630 – 9088"   "9088 – 9702"   "9702 – 11172" 
-## [9] "11172 – 37066"
+## [1] "1986 – 3917"   "3917 – 4607"   "4607 – 5345"   "5345 – 6543"  
+## [5] "6543 – 7646"   "7646 – 9103"   "9103 – 9714"   "9714 – 11188" 
+## [9] "11188 – 37122"
 ```
 
 Next, we need to add our new number range to the map. We'll do this with the [`cut()` function](https://www.rdocumentation.org/packages/base/versions/3.5.3/topics/cut), to turn our [number range into a factor](https://www.stat.berkeley.edu/~s133/factors.html).
