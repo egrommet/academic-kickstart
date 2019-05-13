@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="generator" content="Source Themes Academic 4.1.0">
-  <meta name="generator" content="Hugo 0.55.0" />
+  <meta name="generator" content="Hugo 0.55.5" />
 
   
 
@@ -550,8 +550,21 @@ uk_map &lt;- geojson_read(url, what = &quot;sp&quot;)
 <p>By having a look in side the uk_map dataframe we can see our code names for the constituencies are stored in <strong>pcon17cd</strong>, so we&rsquo;ll add that as our region.</p>
 
 <pre><code class="language-r">library(ggplot2)
+</code></pre>
 
-fort_uk_map &lt;- fortify(uk_map, region = &quot;pcon17cd&quot;)
+<pre><code>## Registered S3 methods overwritten by 'ggplot2':
+##   method         from 
+##   [.quosures     rlang
+##   c.quosures     rlang
+##   print.quosures rlang
+</code></pre>
+
+<pre><code>## Registered S3 method overwritten by 'dplyr':
+##   method         from     
+##   print.location geojsonio
+</code></pre>
+
+<pre><code class="language-r">fort_uk_map &lt;- fortify(uk_map, region = &quot;pcon17cd&quot;)
 </code></pre>
 
 <h2 id="getting-the-data-for-our-map">Getting the data for our map</h2>
@@ -582,7 +595,7 @@ fort_uk_map &lt;- fortify(uk_map, region = &quot;pcon17cd&quot;)
 <p>We can move through the levels of our json_data object  in this fashion <code>name$parent_element$child_element</code>.</p>
 
 <p>So in our case:
-<code>ign_data &lt;- json_data$data$attributes$signatures_by_constituency</code></p>
+<code>sign_data &lt;- json_data$data$attributes$signatures_by_constituency</code></p>
 
 <p>We&rsquo;ll store that in a dataframe and while we&rsquo;re at it we&rsquo;ll calculate how many signatures there were at the time of running the code, I&rsquo;ll do this as a dataframe as it will be useful in the second tutorial.</p>
 
@@ -594,7 +607,7 @@ total_sig &lt;- sum(sign_data$signature_count)
 total_sig
 </code></pre>
 
-<pre><code>## [1] 5711799
+<pre><code>## [1] 5721370
 </code></pre>
 
 <h2 id="joing-the-data-sets">Joing the data sets</h2>

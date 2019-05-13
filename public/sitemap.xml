@@ -21,14 +21,6 @@
     
     <url>
     
-      <loc>/tutorial/</loc>
-      <lastmod>2019-04-09T00:00:00+00:00</lastmod>
-    </url>
-    
-  
-    
-    <url>
-    
       <loc>/tutorial/pivot-tables-in-r-looking-at-police-data/</loc>
       <lastmod>2019-04-09T00:00:00+00:00</lastmod>
     </url>
@@ -153,6 +145,14 @@
     
       <loc>/tutorial/mapping-the-article-50-petition-in-r-and-ggplot/</loc>
       <lastmod>2019-03-29T00:00:00+00:00</lastmod>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>/tutorial/</loc>
+      <lastmod>2019-03-20T13:53:00+00:00</lastmod>
     </url>
     
   

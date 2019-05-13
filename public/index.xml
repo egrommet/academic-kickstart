@@ -499,8 +499,21 @@ uk_map &amp;lt;- geojson_read(url, what = &amp;quot;sp&amp;quot;)
 &lt;p&gt;By having a look in side the uk_map dataframe we can see our code names for the constituencies are stored in &lt;strong&gt;pcon17cd&lt;/strong&gt;, so we&amp;rsquo;ll add that as our region.&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;library(ggplot2)
+&lt;/code&gt;&lt;/pre&gt;
 
-fort_uk_map &amp;lt;- fortify(uk_map, region = &amp;quot;pcon17cd&amp;quot;)
+&lt;pre&gt;&lt;code&gt;## Registered S3 methods overwritten by &#39;ggplot2&#39;:
+##   method         from 
+##   [.quosures     rlang
+##   c.quosures     rlang
+##   print.quosures rlang
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code&gt;## Registered S3 method overwritten by &#39;dplyr&#39;:
+##   method         from     
+##   print.location geojsonio
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;fort_uk_map &amp;lt;- fortify(uk_map, region = &amp;quot;pcon17cd&amp;quot;)
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;h2 id=&#34;getting-the-data-for-our-map&#34;&gt;Getting the data for our map&lt;/h2&gt;
@@ -531,7 +544,7 @@ fort_uk_map &amp;lt;- fortify(uk_map, region = &amp;quot;pcon17cd&amp;quot;)
 &lt;p&gt;We can move through the levels of our json_data object  in this fashion &lt;code&gt;name$parent_element$child_element&lt;/code&gt;.&lt;/p&gt;
 
 &lt;p&gt;So in our case:
-&lt;code&gt;ign_data &amp;lt;- json_data$data$attributes$signatures_by_constituency&lt;/code&gt;&lt;/p&gt;
+&lt;code&gt;sign_data &amp;lt;- json_data$data$attributes$signatures_by_constituency&lt;/code&gt;&lt;/p&gt;
 
 &lt;p&gt;We&amp;rsquo;ll store that in a dataframe and while we&amp;rsquo;re at it we&amp;rsquo;ll calculate how many signatures there were at the time of running the code, I&amp;rsquo;ll do this as a dataframe as it will be useful in the second tutorial.&lt;/p&gt;
 
@@ -543,7 +556,7 @@ total_sig &amp;lt;- sum(sign_data$signature_count)
 total_sig
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;pre&gt;&lt;code&gt;## [1] 5711799
+&lt;pre&gt;&lt;code&gt;## [1] 5721370
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;h2 id=&#34;joing-the-data-sets&#34;&gt;Joing the data sets&lt;/h2&gt;

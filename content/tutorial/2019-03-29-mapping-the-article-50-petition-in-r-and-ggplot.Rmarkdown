@@ -71,7 +71,7 @@ Opening the signatures_by_country list shows it has the following elements **nam
 We can move through the levels of our json_data object  in this fashion `name$parent_element$child_element`. 
 
 So in our case:
-`ign_data <- json_data$data$attributes$signatures_by_constituency`
+`sign_data <- json_data$data$attributes$signatures_by_constituency`
 
 We'll store that in a dataframe and while we're at it we'll calculate how many signatures there were at the time of running the code, I'll do this as a dataframe as it will be useful in the second tutorial.
 

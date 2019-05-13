@@ -18,11 +18,24 @@ date_format = "Jan 2006"
 #   Begin/end multi-line descriptions with 3 quotes `"""`.
 [[experience]]
   title = "Senior Lecturer"
+  company = "City, University of London"
+  company_url = "https://www.city.ac.uk/about/schools/arts-social-sciences/journalism"
+  location = "London, England"
+  date_start = "2019-06-03"
+  date_end = ""
+  description = """
+  Responsibilities include:
+
+  * Data journalism
+  """
+
+[[experience]]
+  title = "Senior Lecturer"
   company = "Cardiff University"
   company_url = "http://www.cardiff.ac.uk"
   location = "Cardiff, Wales"
   date_start = "2006-11-26"
-  date_end = ""
+  date_end = "2019-05-31"
   description = """
   Responsibilities include:
 

@@ -62,7 +62,23 @@ By having a look in side the uk_map dataframe we can see our code names for the 
 
 ```r
 library(ggplot2)
+```
 
+```
+## Registered S3 methods overwritten by 'ggplot2':
+##   method         from 
+##   [.quosures     rlang
+##   c.quosures     rlang
+##   print.quosures rlang
+```
+
+```
+## Registered S3 method overwritten by 'dplyr':
+##   method         from     
+##   print.location geojsonio
+```
+
+```r
 fort_uk_map <- fortify(uk_map, region = "pcon17cd")
 ```
 
@@ -99,7 +115,7 @@ Opening the signatures_by_country list shows it has the following elements **nam
 We can move through the levels of our json_data object  in this fashion `name$parent_element$child_element`. 
 
 So in our case:
-`ign_data <- json_data$data$attributes$signatures_by_constituency`
+`sign_data <- json_data$data$attributes$signatures_by_constituency`
 
 We'll store that in a dataframe and while we're at it we'll calculate how many signatures there were at the time of running the code, I'll do this as a dataframe as it will be useful in the second tutorial.
 
@@ -114,7 +130,7 @@ total_sig
 ```
 
 ```
-## [1] 5711799
+## [1] 5721370
 ```
 
 ## Joing the data sets
