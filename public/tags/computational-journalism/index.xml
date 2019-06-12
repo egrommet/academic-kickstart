@@ -2,30 +2,30 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Computational Journalism on Glyn Mottershead</title>
-    <link>/tags/computational-journalism/</link>
+    <link>https://www.glynmottershead.com/tags/computational-journalism/</link>
     <description>Recent content in Computational Journalism on Glyn Mottershead</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-gb</language>
     <lastBuildDate>Wed, 12 Jul 2017 00:00:00 +0100</lastBuildDate>
     
-	<atom:link href="/tags/computational-journalism/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://www.glynmottershead.com/tags/computational-journalism/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>The First Commit of History: Visualising News on a Deadline</title>
-      <link>/talk/visualising-on-a-deadline/</link>
+      <link>https://www.glynmottershead.com/talk/visualising-on-a-deadline/</link>
       <pubDate>Wed, 12 Jul 2017 00:00:00 +0100</pubDate>
       
-      <guid>/talk/visualising-on-a-deadline/</guid>
+      <guid>https://www.glynmottershead.com/talk/visualising-on-a-deadline/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Now we are three: A perspective on Computational and Data Journalism Education</title>
-      <link>/talk/now-we-are-three/</link>
+      <link>https://www.glynmottershead.com/talk/now-we-are-three/</link>
       <pubDate>Thu, 06 Jul 2017 00:00:00 +0100</pubDate>
       
-      <guid>/talk/now-we-are-three/</guid>
+      <guid>https://www.glynmottershead.com/talk/now-we-are-three/</guid>
       <description>Key findings from the process of designing a new joint-honours Master’s degree combining Computer Science and Journalism.</description>
     </item>
     

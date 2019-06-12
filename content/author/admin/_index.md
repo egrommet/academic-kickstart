@@ -13,7 +13,7 @@ role = "Senior Lecturer"
 
 # Organizations/Affiliations
 #   Separate multiple entries with a comma, using the form: `[ {name="Org1", url=""}, {name="Org2", url=""} ]`.
-organizations = [ { name = "Cardiff University", url = "https://www.cardiff.ac.uk/people/view/182955-mottershead-glyn" } ]
+organizations = [ { name = "City, University of London", url = "https://www.city.ac.uk/about/schools/arts-social-sciences/journalism" } ]
 
 # Short bio (displayed in user profile at end of posts)
 bio = "I have a keen interest in data journalism and developer/journalism. Human computer interaction and journalistic innovation are also areas of research and teaching practise."
@@ -82,6 +82,8 @@ interests = [
 
 +++
 
-I'm a Senior Lecturer in Data Journalism. For the last 12 years I've been working at Cardiff University's School of Journalism, Media and Culture but from June I'll be joining [City, University of London](https://www.city.ac.uk/about/schools/arts-social-sciences/journalism).
+I'm a Senior Lecturer in Data Journalism at [City, University of London](https://www.city.ac.uk/about/schools/arts-social-sciences/journalism).
 
-I'm currently co-director of the [MSc in Computational and Data Journalism](https://www.cardiff.ac.uk/study/postgraduate/taught/courses/course/computational-and-data-journalism-msc) and a co-founder of the [European Data and Computational Journalism Conference](http://datajconf.com/). My interests include data journalism, journalism and software development, social media and production journalism.
+Prior to that I was founding co-director of the [MSc in Computational and Data Journalism](https://www.cardiff.ac.uk/study/postgraduate/taught/courses/course/computational-and-data-journalism-msc), a joint honours course in journalism and computer science.
+
+I'm also a co-founder of the [European Data and Computational Journalism Conference](http://datajconf.com/). My interests include data journalism, journalism and software development, social media and production journalism.

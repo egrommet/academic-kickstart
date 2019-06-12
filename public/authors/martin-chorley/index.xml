@@ -2,57 +2,66 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Martin Chorley on Glyn Mottershead</title>
-    <link>/authors/martin-chorley/</link>
+    <link>https://www.glynmottershead.com/authors/martin-chorley/</link>
     <description>Recent content in Martin Chorley on Glyn Mottershead</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-gb</language>
-    <lastBuildDate>Sat, 01 Dec 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 09 Jul 2019 14:00:00 +0100</lastBuildDate>
     
-	<atom:link href="/authors/martin-chorley/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://www.glynmottershead.com/authors/martin-chorley/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
+      <title>Bridging the Skills Gap: Innovation in Journalism Education</title>
+      <link>https://www.glynmottershead.com/talk/wjec-paris/</link>
+      <pubDate>Tue, 09 Jul 2019 14:00:00 +0100</pubDate>
+      
+      <guid>https://www.glynmottershead.com/talk/wjec-paris/</guid>
+      <description>There&amp;rsquo;s a skills gap between traditional journalism education and training and the emerging requirements of the industry.</description>
+    </item>
+    
+    <item>
       <title>When a tech company pulls the plug on your story</title>
-      <link>/publication/nieman-predictions-2019/</link>
+      <link>https://www.glynmottershead.com/publication/nieman-predictions-2019/</link>
       <pubDate>Sat, 01 Dec 2018 00:00:00 +0000</pubDate>
       
-      <guid>/publication/nieman-predictions-2019/</guid>
+      <guid>https://www.glynmottershead.com/publication/nieman-predictions-2019/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Are You Talking To Me?: An Analysis of Journalism Conversation on Social Media</title>
-      <link>/publication/are-you-talking-book-chapter/</link>
+      <link>https://www.glynmottershead.com/publication/are-you-talking-book-chapter/</link>
       <pubDate>Sat, 01 Sep 2018 00:00:00 +0100</pubDate>
       
-      <guid>/publication/are-you-talking-book-chapter/</guid>
+      <guid>https://www.glynmottershead.com/publication/are-you-talking-book-chapter/</guid>
       <description>This preliminary research aims to show how computational analysis allows us to investigate the means by which news stories are spread.</description>
     </item>
     
     <item>
       <title>Recoding journalism  education: mind the  skills gap, please!</title>
-      <link>/talk/gap_foj/</link>
+      <link>https://www.glynmottershead.com/talk/gap_foj/</link>
       <pubDate>Sat, 02 Sep 2017 00:00:00 +0100</pubDate>
       
-      <guid>/talk/gap_foj/</guid>
+      <guid>https://www.glynmottershead.com/talk/gap_foj/</guid>
       <description>Fake news, open data, algorithms and news room experimentation mean there&amp;rsquo;s a need to train journalists beyond the basics.</description>
     </item>
     
     <item>
       <title>Now we are three: A perspective on Computational and Data Journalism Education</title>
-      <link>/talk/now-we-are-three/</link>
+      <link>https://www.glynmottershead.com/talk/now-we-are-three/</link>
       <pubDate>Thu, 06 Jul 2017 00:00:00 +0100</pubDate>
       
-      <guid>/talk/now-we-are-three/</guid>
+      <guid>https://www.glynmottershead.com/talk/now-we-are-three/</guid>
       <description>Key findings from the process of designing a new joint-honours Master’s degree combining Computer Science and Journalism.</description>
     </item>
     
     <item>
       <title>Are You Talking To Me?: An Analysis of Journalism Conversation on Social Media</title>
-      <link>/publication/are-you-talking-to-me/</link>
+      <link>https://www.glynmottershead.com/publication/are-you-talking-to-me/</link>
       <pubDate>Sun, 02 Oct 2016 00:00:00 +0100</pubDate>
       
-      <guid>/publication/are-you-talking-to-me/</guid>
+      <guid>https://www.glynmottershead.com/publication/are-you-talking-to-me/</guid>
       <description>This preliminary research aims to show how computational analysis allows us to investigate the means by which news stories are spread.</description>
     </item>
     

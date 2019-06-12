@@ -2,39 +2,39 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Categories on Glyn Mottershead</title>
-    <link>/categories/</link>
+    <link>https://www.glynmottershead.com/categories/</link>
     <description>Recent content in Categories on Glyn Mottershead</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-gb</language>
-    <lastBuildDate>Tue, 09 Apr 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 07 Jun 2019 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="/categories/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://www.glynmottershead.com/categories/index.xml" rel="self" type="application/rss+xml" />
     
-    
-    <item>
-      <title>R</title>
-      <link>/categories/r/</link>
-      <pubDate>Tue, 09 Apr 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/categories/r/</guid>
-      <description></description>
-    </item>
     
     <item>
       <title>Data Visualisation</title>
-      <link>/categories/data-visualisation/</link>
-      <pubDate>Mon, 01 Apr 2019 00:00:00 +0000</pubDate>
+      <link>https://www.glynmottershead.com/categories/data-visualisation/</link>
+      <pubDate>Fri, 07 Jun 2019 00:00:00 +0000</pubDate>
       
-      <guid>/categories/data-visualisation/</guid>
+      <guid>https://www.glynmottershead.com/categories/data-visualisation/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Mapping</title>
-      <link>/categories/mapping/</link>
-      <pubDate>Mon, 01 Apr 2019 00:00:00 +0000</pubDate>
+      <link>https://www.glynmottershead.com/categories/mapping/</link>
+      <pubDate>Fri, 07 Jun 2019 00:00:00 +0000</pubDate>
       
-      <guid>/categories/mapping/</guid>
+      <guid>https://www.glynmottershead.com/categories/mapping/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>R</title>
+      <link>https://www.glynmottershead.com/categories/r/</link>
+      <pubDate>Fri, 07 Jun 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.glynmottershead.com/categories/r/</guid>
       <description></description>
     </item>
     

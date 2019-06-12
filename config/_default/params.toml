@@ -50,9 +50,9 @@ time_format = "3:04 PM"
 ############################
 
 # Enter contact details (optional). To hide a field, clear it to "".
-email = "MottersheadGG@cardiff.ac.uk"
-phone = "+44 2920876183"
-address = "Room 1.31, JOMEC, 2 Central Square, Cardiff, CF10 1FS"
+email = "Glyn.Mottershead@city.ac.uk"
+phone = "+44 (0)20 7040 3551"
+address = "Department of Journalism, City, University of London, Northampton Square, London, EC1V 0HB"
 
 # Office hours: use `<br>` to insert a line break, or set to "" to remove office hours
 office_hours = """By appointment"""

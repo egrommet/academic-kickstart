@@ -2,30 +2,30 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>6 on Glyn Mottershead</title>
-    <link>/publication_types/6/</link>
+    <link>https://www.glynmottershead.com/publication_types/6/</link>
     <description>Recent content in 6 on Glyn Mottershead</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-gb</language>
     <lastBuildDate>Sat, 01 Sep 2018 00:00:00 +0100</lastBuildDate>
     
-	<atom:link href="/publication_types/6/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://www.glynmottershead.com/publication_types/6/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Are You Talking To Me?: An Analysis of Journalism Conversation on Social Media</title>
-      <link>/publication/are-you-talking-book-chapter/</link>
+      <link>https://www.glynmottershead.com/publication/are-you-talking-book-chapter/</link>
       <pubDate>Sat, 01 Sep 2018 00:00:00 +0100</pubDate>
       
-      <guid>/publication/are-you-talking-book-chapter/</guid>
+      <guid>https://www.glynmottershead.com/publication/are-you-talking-book-chapter/</guid>
       <description>This preliminary research aims to show how computational analysis allows us to investigate the means by which news stories are spread.</description>
     </item>
     
     <item>
       <title>Subediting and production for journalists</title>
-      <link>/publication/subbing-book/</link>
+      <link>https://www.glynmottershead.com/publication/subbing-book/</link>
       <pubDate>Fri, 28 Aug 2015 00:00:00 +0100</pubDate>
       
-      <guid>/publication/subbing-book/</guid>
+      <guid>https://www.glynmottershead.com/publication/subbing-book/</guid>
       <description>Subediting and Production for Journalists is an introduction to the skills of subediting for newspapers, magazines and websites.</description>
     </item>
     

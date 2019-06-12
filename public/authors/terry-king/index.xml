@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Terry King on Glyn Mottershead</title>
-    <link>/authors/terry-king/</link>
+    <link>https://www.glynmottershead.com/authors/terry-king/</link>
     <description>Recent content in Terry King on Glyn Mottershead</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-gb</language>
     <lastBuildDate>Sat, 01 Aug 2009 00:00:00 +0100</lastBuildDate>
     
-	<atom:link href="/authors/terry-king/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://www.glynmottershead.com/authors/terry-king/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Learning and Knowledge Building with Web 2.0 Technologies: Implications for Teacher Education</title>
-      <link>/publication/learning-and-knowledge-building/</link>
+      <link>https://www.glynmottershead.com/publication/learning-and-knowledge-building/</link>
       <pubDate>Sat, 01 Aug 2009 00:00:00 +0100</pubDate>
       
-      <guid>/publication/learning-and-knowledge-building/</guid>
+      <guid>https://www.glynmottershead.com/publication/learning-and-knowledge-building/</guid>
       <description>This paper seeks to draw together findings from a number of research studies to discuss the implications for the development of educational practices in Higher Education towards a student experience which is rich in authenticity.</description>
     </item>
     
