@@ -122,7 +122,7 @@ total_sig
 ```
 
 ```
-## [1] 5728344
+## [1] 5728351
 ```
 
 ## Joining the data sets
