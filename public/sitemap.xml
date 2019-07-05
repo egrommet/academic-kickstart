@@ -74,7 +74,59 @@
     <url>
     
       <loc>https://www.glynmottershead.com/categories/</loc>
-      <lastmod>2019-06-07T00:00:00+00:00</lastmod>
+      <lastmod>2019-07-05T00:00:00+00:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>https://www.glynmottershead.com/categories/data-journalism/</loc>
+      <lastmod>2019-07-05T00:00:00+00:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>https://www.glynmottershead.com/post/2019-07-05-data-journalism-in-malaga/data-journalism-in-malaga/</loc>
+      <lastmod>2019-07-05T00:00:00+00:00</lastmod>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>https://www.glynmottershead.com/categories/datajconf/</loc>
+      <lastmod>2019-07-05T00:00:00+00:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>https://www.glynmottershead.com/tags/datajconf/</loc>
+      <lastmod>2019-07-05T00:00:00+00:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>https://www.glynmottershead.com/post/</loc>
+      <lastmod>2019-07-05T00:00:00+00:00</lastmod>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>https://www.glynmottershead.com/tags/data-journalism/</loc>
+      <lastmod>2019-07-05T00:00:00+00:00</lastmod>
       <priority>0</priority>
     </url>
     
@@ -187,15 +239,6 @@
     
       <loc>https://www.glynmottershead.com/tutorial/</loc>
       <lastmod>2019-03-20T13:53:00+00:00</lastmod>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>https://www.glynmottershead.com/tags/data-journalism/</loc>
-      <lastmod>2018-12-01T00:00:00+00:00</lastmod>
-      <priority>0</priority>
     </url>
     
   
@@ -524,13 +567,6 @@
     
       <loc>https://www.glynmottershead.com/author/</loc>
       <priority>0</priority>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>https://www.glynmottershead.com/post/</loc>
     </url>
     
   

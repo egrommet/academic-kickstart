@@ -265,6 +265,25 @@ I&rsquo;m going to run this in one block and assume you can follow along, if not
         
 
         <li class="nav-item">
+          <a class="nav-link" href="/#posts">
+            
+            <span>Posts</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
           <a class="nav-link" href="/#featured">
             
             <span>Publications</span>
@@ -538,13 +557,6 @@ uk_map &lt;- geojson_read(url, what = &quot;sp&quot;)
 library(ggplot2)
 </code></pre>
 
-<pre><code>## Registered S3 methods overwritten by 'ggplot2':
-##   method         from 
-##   [.quosures     rlang
-##   c.quosures     rlang
-##   print.quosures rlang
-</code></pre>
-
 <pre><code>## Registered S3 method overwritten by 'dplyr':
 ##   method         from     
 ##   print.location geojsonio
@@ -638,9 +650,9 @@ for(band in 1:length(quantiles)){
 labels
 </code></pre>
 
-<pre><code>##  [1] &quot;1987 – 3920&quot;   &quot;3920 – 4610&quot;   &quot;4610 – 5352&quot;   &quot;5352 – 6552&quot;  
-##  [5] &quot;6552 – 7649&quot;   &quot;7649 – 9113&quot;   &quot;9113 – 9723&quot;   &quot;9723 – 11199&quot; 
-##  [9] &quot;11199 – 37149&quot; &quot;37149 – NA&quot;
+<pre><code>##  [1] &quot;1988 – 3920&quot;   &quot;3920 – 4611&quot;   &quot;4611 – 5354&quot;   &quot;5354 – 6558&quot;  
+##  [5] &quot;6558 – 7651&quot;   &quot;7651 – 9114&quot;   &quot;9114 – 9724&quot;   &quot;9724 – 11199&quot; 
+##  [9] &quot;11199 – 37154&quot; &quot;37154 – NA&quot;
 </code></pre>
 
 <p>And we&rsquo;ve got a problem - the code gives us a final band that looks like &ldquo;36901 - NA&rdquo;, anything over our maximum. We can easily get rid of that as obviously we are limited at the maximum.</p>
@@ -650,9 +662,9 @@ labels
 labels
 </code></pre>
 
-<pre><code>## [1] &quot;1987 – 3920&quot;   &quot;3920 – 4610&quot;   &quot;4610 – 5352&quot;   &quot;5352 – 6552&quot;  
-## [5] &quot;6552 – 7649&quot;   &quot;7649 – 9113&quot;   &quot;9113 – 9723&quot;   &quot;9723 – 11199&quot; 
-## [9] &quot;11199 – 37149&quot;
+<pre><code>## [1] &quot;1988 – 3920&quot;   &quot;3920 – 4611&quot;   &quot;4611 – 5354&quot;   &quot;5354 – 6558&quot;  
+## [5] &quot;6558 – 7651&quot;   &quot;7651 – 9114&quot;   &quot;9114 – 9724&quot;   &quot;9724 – 11199&quot; 
+## [9] &quot;11199 – 37154&quot;
 </code></pre>
 
 <p>Next, we need to add our new number range to the map. We&rsquo;ll do this with the <a href="https://www.rdocumentation.org/packages/base/versions/3.5.3/topics/cut"><code>cut()</code> function</a>, to turn our <a href="https://www.stat.berkeley.edu/~s133/factors.html">number range into a factor</a>.</p>

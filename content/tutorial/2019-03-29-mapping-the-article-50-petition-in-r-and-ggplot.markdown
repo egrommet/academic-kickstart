@@ -65,14 +65,6 @@ library(ggplot2)
 ```
 
 ```
-## Registered S3 methods overwritten by 'ggplot2':
-##   method         from 
-##   [.quosures     rlang
-##   c.quosures     rlang
-##   print.quosures rlang
-```
-
-```
 ## Registered S3 method overwritten by 'dplyr':
 ##   method         from     
 ##   print.location geojsonio
@@ -130,7 +122,7 @@ total_sig
 ```
 
 ```
-## [1] 5726908
+## [1] 5728344
 ```
 
 ## Joining the data sets

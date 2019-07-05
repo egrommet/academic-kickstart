@@ -54,14 +54,6 @@ library(ggplot2)
 ```
 
 ```
-## Registered S3 methods overwritten by 'ggplot2':
-##   method         from 
-##   [.quosures     rlang
-##   c.quosures     rlang
-##   print.quosures rlang
-```
-
-```
 ## Registered S3 method overwritten by 'dplyr':
 ##   method         from     
 ##   print.location geojsonio
@@ -168,9 +160,9 @@ labels
 ```
 
 ```
-##  [1] "1987 – 3920"   "3920 – 4610"   "4610 – 5352"   "5352 – 6552"  
-##  [5] "6552 – 7649"   "7649 – 9113"   "9113 – 9723"   "9723 – 11199" 
-##  [9] "11199 – 37149" "37149 – NA"
+##  [1] "1988 – 3920"   "3920 – 4611"   "4611 – 5354"   "5354 – 6558"  
+##  [5] "6558 – 7651"   "7651 – 9114"   "9114 – 9724"   "9724 – 11199" 
+##  [9] "11199 – 37154" "37154 – NA"
 ```
 
 
@@ -184,9 +176,9 @@ labels
 ```
 
 ```
-## [1] "1987 – 3920"   "3920 – 4610"   "4610 – 5352"   "5352 – 6552"  
-## [5] "6552 – 7649"   "7649 – 9113"   "9113 – 9723"   "9723 – 11199" 
-## [9] "11199 – 37149"
+## [1] "1988 – 3920"   "3920 – 4611"   "4611 – 5354"   "5354 – 6558"  
+## [5] "6558 – 7651"   "7651 – 9114"   "9114 – 9724"   "9724 – 11199" 
+## [9] "11199 – 37154"
 ```
 
 Next, we need to add our new number range to the map. We'll do this with the [`cut()` function](https://www.rdocumentation.org/packages/base/versions/3.5.3/topics/cut), to turn our [number range into a factor](https://www.stat.berkeley.edu/~s133/factors.html).
