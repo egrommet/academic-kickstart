@@ -26,7 +26,8 @@ date_format = "Jan 2006"
   description = """
   Responsibilities include:
 
-  * Data journalism
+  * Data journalism, including R Programming
+  * Digital Journalism
   """
 
 [[experience]]

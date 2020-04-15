@@ -1,4 +1,4 @@
-theme = "hugo-academic"
+theme = "academic-kickstart"
 baseURL = "https://www.glynmottershead.com"
 languageCode = "en-us"
 title = "Glyn Mottershead"
