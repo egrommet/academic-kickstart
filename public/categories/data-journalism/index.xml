@@ -1,25 +1,156 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Data Journalism on Glyn Mottershead</title>
-    <link>https://www.glynmottershead.com/categories/data-journalism/</link>
-    <description>Recent content in Data Journalism on Glyn Mottershead</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en-gb</language>
-    <lastBuildDate>Fri, 05 Jul 2019 00:00:00 +0000</lastBuildDate>
+    <title>Data Journalism | Glyn Mottershead</title>
+    <link>/categories/data-journalism/</link>
+      <atom:link href="/categories/data-journalism/index.xml" rel="self" type="application/rss+xml" />
+    <description>Data Journalism</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Thu, 30 Apr 2020 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>img/map[gravatar:%!s(bool=true) shape:circle]</url>
+      <title>Data Journalism</title>
+      <link>/categories/data-journalism/</link>
+    </image>
     
-	<atom:link href="https://www.glynmottershead.com/categories/data-journalism/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Coding for journalists - an evolving reading list</title>
+      <link>/post/coding-for-journalists/</link>
+      <pubDate>Thu, 30 Apr 2020 00:00:00 +0000</pubDate>
+      <guid>/post/coding-for-journalists/</guid>
+      <description>&lt;p&gt;Investigative data journalist 
+&lt;a href=&#34;https://twitter.com/leilahaddou?lang=en&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Leila Haddou&lt;/a&gt; joined us in #datalockdown to deliver a lecture to data and investigative journalism students from City, University of London, Birmingham City University, and De Montfort University on April 30.&lt;/p&gt;
+&lt;p&gt;One point that came up during the session is that a lot of coding resources are not aimed at journalists. So, I thought I&amp;rsquo;d start pulling together a list of sources and some thoughts about them.&lt;/p&gt;
+&lt;p&gt;The initial version of this post will be biased towards R, as that is what I tend to work in. I&amp;rsquo;ll add Python and other resources as I go along.&lt;/p&gt;
+&lt;p&gt;Also, it doesn&amp;rsquo;t matter if you call it coding, programming or any of the other terms - I&amp;rsquo;m going to assume that we are talking about the data journalism workflow (acquiring, cleaning, analysing and displaying and equivalents) rather than building apps or websites.&lt;/p&gt;
+&lt;p&gt;Want to add anything? Tweet @glynmottershead with the hashtag #codereadinglist.&lt;/p&gt;
+&lt;h2 id=&#34;cross-language&#34;&gt;Cross language&lt;/h2&gt;
+&lt;p&gt;Datacamp has a lot of materials to support training, you can pay for an account or if you are an educator it is possible for you to 
+&lt;a href=&#34;https://www.datacamp.com/groups/education&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;register your class for educational access&lt;/a&gt;. It&amp;rsquo;s really useful but one thing to point out is it is aimed at data scientists rather than journalists. This can mean that some of the exercises may not seem obvious at first, but stick with it.&lt;/p&gt;
+&lt;h2 id=&#34;websites-covering-a-range-of-related-topics&#34;&gt;Websites covering a range of related topics&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;a href=&#34;https://onlinejournalismblog.com/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Paul Bradshaw&amp;rsquo;s Online Journalism Blog&lt;/a&gt; has lost of great pointers, and a list of his books. I&amp;rsquo;ll break those down over time.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;courses&#34;&gt;Courses&lt;/h2&gt;
+&lt;p&gt;Any course listed is not necessarily a recommendation.&lt;/p&gt;
+&lt;p&gt;
+&lt;a href=&#34;https://journalismcourses.org/intro-r.html?mc_cid=13f366b409&amp;amp;mc_eid=f9664ad50f&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Intro to R for Journalists&lt;/a&gt; at journalismcourses.org by 
+&lt;a href=&#34;https://twitter.com/abtran&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Andrew Ba Tran&lt;/a&gt; of the Wall Street Journal. An excellent suggestion by Paul Bradshaw.&lt;/p&gt;
+&lt;h2 id=&#34;groups&#34;&gt;Groups&lt;/h2&gt;
+&lt;p&gt;
+&lt;a href=&#34;https://journocoders.com/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Journocoders&lt;/a&gt; is a London group I would recommend attending when lockdown is finished. Leila Haddou is one member of the team behind it. Think friendly group of people, coding, beers/soft drinks and a good supportive atmosphere. I go when I can and really enjoy it.&lt;/p&gt;
+&lt;h2 id=&#34;r-programming&#34;&gt;R Programming&lt;/h2&gt;
+&lt;h3 id=&#34;books&#34;&gt;Books&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;a href=&#34;https://twitter.com/sharon000&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Sharon Machlis&lt;/a&gt; has put six chapters of her book 
+&lt;a href=&#34;http://www.machlis.com/R4Journalists/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;R for Mass Communication and Jouranlism online for free&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;This is a brilliant book on 
+&lt;a href=&#34;https://r4ds.had.co.nz/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;R for Data Science by Hadley Wickham and Garrett Grolemund&lt;/a&gt;. It covers a lot of the key principles required by data journalists, but again the examples might not always resonate. I always recommend getting to grips with the tidyverse suite of tools (covered in the book), as it makes your code a lot easier to read.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;websites&#34;&gt;Websites&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;I&amp;rsquo;m going to add my site here as the 
+&lt;a href=&#34;/tutorial&#34;&gt;tutorial section&lt;/a&gt; is growing over time, and is focused on coding in R for journalists&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;python-programming&#34;&gt;Python programming&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;a href=&#34;http://automatetheboringstuff.com/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Automate the boring stuff&lt;/a&gt; is a Python book aimed at &amp;ldquo;practical programming for absolute beginners&amp;rdquo; - a recommendation from Mindy McAdams. There&amp;rsquo;s also a course on 
+&lt;a href=&#34;https://www.udemy.com/course/automate/?couponCode=APR2020&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Udemy&lt;/a&gt;, the price seems to fluctuate quite a bit so keep an eye out.&lt;/li&gt;
+&lt;li&gt;
+&lt;a href=&#34;https://WWW.firstpythonnotebook.org/index.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;First Python Notebook&lt;/a&gt; - a step-by-step guide to analyzing data with Python and the Jupyter notebook. Suggested by Paul Bradshaw.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;data-visualisation&#34;&gt;Data visualisation&lt;/h2&gt;
+&lt;p&gt;
+&lt;a href=&#34;https://twitter.com/flowingdata?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Eauthor&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Nathan Yau&amp;rsquo;s&lt;/a&gt; site [Flowingdata] (&lt;a href=&#34;https://flowingdata.com/&#34;&gt;https://flowingdata.com/&lt;/a&gt;) has tutorials and a subscription/membership option. I&amp;rsquo;ve done this in the past and found it really helpful.&lt;/p&gt;
+&lt;h2 id=&#34;other-tools-and-languages&#34;&gt;Other tools and languages&lt;/h2&gt;
+&lt;p&gt;Although I point out this list isn&amp;rsquo;t about web dev - if you want to understand web scraping then an understanding of web page structure is important, so I recommend 
+&lt;a href=&#34;https://www.w3schools.com/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;w3 schools&lt;/a&gt; as one starting point.&lt;/p&gt;
+</description>
+    </item>
     
+    <item>
+      <title>Covid-19 and the European Data and Computational Journalism Conference</title>
+      <link>/post/covid-19-and-the-european-data-journalism-conference/</link>
+      <pubDate>Tue, 28 Apr 2020 00:00:00 +0000</pubDate>
+      <guid>/post/covid-19-and-the-european-data-journalism-conference/</guid>
+      <description>&lt;p&gt;You&amp;rsquo;ve probably seen the news by now that we&amp;rsquo;ve had to postpone the 
+&lt;a href=&#34;https://www.datajconf.com/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;European Data and Computational Journalism Conference&lt;/a&gt; due to Covid-19.&lt;/p&gt;
+&lt;p&gt;I would have posted earlier, but an upgrade and site rebuild means I haven&amp;rsquo;t done much posting here for a while.&lt;/p&gt;
+&lt;p&gt;Plans to host the conference at City, University of London (my current place of employment) were in full swing when the organising committee had to take the decision to cancel due to everyone&amp;rsquo;s safety.&lt;/p&gt;
+&lt;p&gt;Our plan is a break rather than a farewell, but if you want to have a chat with us between now and DataJConf 2021, then please get in touch!&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Data Police location issues</title>
+      <link>/post/data-police-location-issues/</link>
+      <pubDate>Mon, 27 Apr 2020 00:00:00 +0000</pubDate>
+      <guid>/post/data-police-location-issues/</guid>
+      <description>&lt;p&gt;I&amp;rsquo;ve just working on a couple of tutorials using data from 
+&lt;a href=&#34;https://data.police.uk&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;data.police.uk&lt;/a&gt; - the first using the csv download method and the second using an API call using the httr package.&lt;/p&gt;
+&lt;p&gt;However, you call the data you get back a whole host of information - including the latitude and longitude of the incidents themselves.&lt;/p&gt;
+&lt;p&gt;Or do you?&lt;/p&gt;
+&lt;p&gt;Last year, one of my former students Conor Gogarty wrote this story on the GloucestershireLive site following up from a crime map that showed  - 
+&lt;a href=&#34;https://www.gloucestershirelive.co.uk/news/gloucester-news/search-crime-gloucester-crime-hotspot-2553224&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&amp;ldquo;My search for crime in the Gloucester crime hotspot with no crime&amp;rdquo;&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Conor, with his pair of binoculars, goes to investigate what is going on in Tredworth&amp;rsquo;s Bishop&amp;rsquo;s Castle Way.&lt;/p&gt;
+&lt;p&gt;He found really interesting information including these gems:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&amp;ldquo;A total of 41 shoplifting reports were linked to the spot last year. But there are no shops there&amp;hellip; How could 41 shoplifting incidents have been reported last year if the nearest stores were a five-minute walk away in Barton Street?&amp;rdquo;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;As any journalist should, Conor gets in touch with the police - a press officer confirms there were no crimes in that area.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&amp;ldquo;She said the markers on the map are not the exact locations of offences. They are ‘snap points’ which pull in the reports from nearby spots.&amp;rdquo;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;A further check led to this information:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&amp;ldquo;Gloucestershire police said this was a question for the Home Office, which oversees the police.uk website. A Home Office spokesman told me inaccuracies can result from “inconsistent geocoding policies”. He said the website makes it clear the data is not always “fully accurate”.&amp;rdquo;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;rtfm&#34;&gt;RTFM&lt;/h2&gt;
+&lt;p&gt;When you read the docs, this is an issue that is highlighted:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&amp;ldquo;The latitude and longitude locations of Crime and ASB incidents published on this site always represent the approximate location of a crime — not the exact place that it happened.&amp;rdquo;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;That&amp;rsquo;s pretty straightforward, when you think about some offences the location could actually help identify the victim of the incident. So, obfuscation is a really good idea.&lt;/p&gt;
+&lt;p&gt;The documentation is really interesting when they explain 
+&lt;a href=&#34;https://data.police.uk/about/#location-anonymisation&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;how the location is anonymised&lt;/a&gt;.&lt;/p&gt;
+&lt;h3 id=&#34;this-is-not-the-location-you-are-looking-for&#34;&gt;This is not the location you are looking for&lt;/h3&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;How are crime locations anonymised?&lt;/em&gt;
+We maintain a master list of anonymous map points. Each map point is specifically chosen so that it:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Appears over the centre point of a street, above a public place such as a Park or Airport, or above a commercial premise like a Shopping Centre or Nightclub.&lt;/li&gt;
+&lt;li&gt;Has a catchment area which contains at least eight postal addresses or no postal addresses at all.&lt;/li&gt;
+&lt;li&gt;When crime data is uploaded by police forces, the exact location of each crime is compared against this master list to find the nearest map point. The co-ordinates of the actual crime are then replaced with the co-ordinates of the map point. &lt;em&gt;If the nearest map point is more than 20km away&lt;/em&gt;, the co-ordinates are zeroed out. No other filtering or rules are applied.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;How was the master list of snap points created?
+The snap points list was created in 2012 and based on Ordnance Survey population and housing developments relevant to that year.
+In summary, to create the master list of anonymous points, we:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Took the centre point of every road in England and Wales from the Ordnance Survey Locator dataset.&lt;/li&gt;
+&lt;li&gt;Augmented these with locally relevant points of interest from the Point X dataset.&lt;/li&gt;
+&lt;li&gt;Subsequently analysed each map point to see how many postal addresses were contained in its catchment area according to the Ordnance Survey Address-Point dataset. Any with between 1 and 7 postal addresses were discarded to protect privacy.&lt;/li&gt;
+&lt;li&gt;The remaining points were provided to police forces for a human assessment. A small number of additions and deletions were made based on their feedback to make the map points more locally relevant.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Ok, so as data journalists it does mean we have to subject the data to scrutiny before publishing crime near x stories. It also calls into question apps that draw on the data for things like home sales.&lt;/p&gt;
+&lt;p&gt;So, a simple point. Always read the manual for the data - and if you are interested in the data.police.uk site then 
+&lt;a href=&#34;https://www.tandfonline.com/doi/full/10.1080/15230406.2014.972456&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;this academic paper&lt;/a&gt; is worth a read if you are able to get access.&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Data Journalism in Malaga</title>
-      <link>https://www.glynmottershead.com/post/2019-07-05-data-journalism-in-malaga/data-journalism-in-malaga/</link>
+      <link>/post/2019-07-05-data-journalism-in-malaga/data-journalism-in-malaga/</link>
       <pubDate>Fri, 05 Jul 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://www.glynmottershead.com/post/2019-07-05-data-journalism-in-malaga/data-journalism-in-malaga/</guid>
-      <description>I’ve just got back from the third European Data and Computational Journalism Conference in Malaga, Spain, and thought I’d share a few thoughts about the event.
-This is the third time the I’ve helped organise this conference, along with my co-chairs Martin Chorley (Cardiff University) and Bahareh Heravi (University College Dublin), and the first one I’ve done since moving to City, University of London.
-More than 100 people took part in the two days, with participants coming from 14 countries.</description>
+      <guid>/post/2019-07-05-data-journalism-in-malaga/data-journalism-in-malaga/</guid>
+      <description>&lt;img src=&#34;/2019-07-05-data-journalism-in-malaga/2019-07-05-data-journalism-in-malaga_files/featured.jpg&#34; alt=&#34;Malaga&#34; width=&#34;80%&#34;/&gt;
+&lt;h2 id=&#34;a-video-of-the-conference&#34;&gt;A video of the conference&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&#34;http://www.youtube.com/watch?v=WAls1xTwFS0&#34; title=&#34;European Data and Computational Journalism Conference, Malaga&#34;&gt;&lt;img src=&#34;http://img.youtube.com/vi/WAls1xTwFS0/0.jpg&#34; alt=&#34;European Data and Computational Journalism Conference, Malaga&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+</description>
     </item>
     
   </channel>

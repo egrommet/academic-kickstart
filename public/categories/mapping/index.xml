@@ -1,47 +1,27 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Mapping on Glyn Mottershead</title>
-    <link>https://www.glynmottershead.com/categories/mapping/</link>
-    <description>Recent content in Mapping on Glyn Mottershead</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en-gb</language>
-    <lastBuildDate>Fri, 07 Jun 2019 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="https://www.glynmottershead.com/categories/mapping/index.xml" rel="self" type="application/rss+xml" />
-    
-    
-    <item>
-      <title>Hex Mapping</title>
-      <link>https://www.glynmottershead.com/tutorial/hex-mapping/</link>
-      <pubDate>Fri, 07 Jun 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://www.glynmottershead.com/tutorial/hex-mapping/</guid>
-      <description>Mapping and convenient lies Size isn&amp;rsquo;t everything When thinking about maps, it is important to understand what we are trying to show. In the last tutorial
-&amp;ldquo;The largest constituency is Ross, Skye and Lochaber. It measures approximately 12,000 square kilometres. The smallest constituency is Islington North at 7.35 square kilometres.&amp;rdquo; [From the UK Parliament site](&amp;ldquo;https://www.parliament.uk/about/how/elections-and-voting/constituencies/#jump-link-2&amp;quot;)</description>
-    </item>
+    <title>Mapping | Academic</title>
+    <link>/categories/mapping/</link>
+      <atom:link href="/categories/mapping/index.xml" rel="self" type="application/rss+xml" />
+    <description>Mapping</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Fri, 29 Mar 2019 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>img/map[gravatar:%!s(bool=true) shape:circle]</url>
+      <title>Mapping</title>
+      <link>/categories/mapping/</link>
+    </image>
     
     <item>
-      <title>Mapping the article 50 petition in R and ggplot - part 2</title>
-      <link>https://www.glynmottershead.com/tutorial/mapping-the-article-50-petition-in-r-and-ggplot-part-2/</link>
-      <pubDate>Mon, 01 Apr 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://www.glynmottershead.com/tutorial/mapping-the-article-50-petition-in-r-and-ggplot-part-2/</guid>
-      <description>Mapping in R - using ggplot2, part two In the previous tutorial we looked at getting data from web APIs in JSON and GeoJSON formats to create a simple map.
-This time we&amp;rsquo;ll be adapting code from Timo Grossenbacher to make our map more attractive.
-Getting started We need to reload the data again, so we&amp;rsquo;re going to get a different number of signatures than last time.
-I&amp;rsquo;m going to run this in one block and assume you can follow along, if not go back to the previous post.</description>
-    </item>
-    
-    <item>
-      <title>Mapping the article 50 petition in R and ggplot</title>
-      <link>https://www.glynmottershead.com/tutorial/mapping-the-article-50-petition-in-r-and-ggplot/</link>
+      <title>Mapping the Article 50 petition in R and ggplot</title>
+      <link>/tutorial/mapping-the-article-50-petition-in-r-and-ggplot/</link>
       <pubDate>Fri, 29 Mar 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://www.glynmottershead.com/tutorial/mapping-the-article-50-petition-in-r-and-ggplot/</guid>
-      <description>Mapping in R - using ggplot2 The Revoke Article 50 petition got my colleague and all-round codemeister Dr Martin Chorley and I talking.
-We started thinking about ways that we could see what the patterns for people signing were like.
-It was well into the millions when I started playing with ways of visualising where people who voted were located. The site can map all of the signatures (5,962,824 at the time of writing), but it also has an option to get the data in a machine-friendly json format.</description>
+      <guid>/tutorial/mapping-the-article-50-petition-in-r-and-ggplot/</guid>
+      <description>
+
+
+
+</description>
     </item>
     
   </channel>

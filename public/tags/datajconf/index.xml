@@ -1,25 +1,39 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Datajconf on Glyn Mottershead</title>
-    <link>https://www.glynmottershead.com/tags/datajconf/</link>
-    <description>Recent content in Datajconf on Glyn Mottershead</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en-gb</language>
-    <lastBuildDate>Fri, 05 Jul 2019 00:00:00 +0000</lastBuildDate>
+    <title>Datajconf | Glyn Mottershead</title>
+    <link>/tags/datajconf/</link>
+      <atom:link href="/tags/datajconf/index.xml" rel="self" type="application/rss+xml" />
+    <description>Datajconf</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Tue, 28 Apr 2020 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>img/map[gravatar:%!s(bool=true) shape:circle]</url>
+      <title>Datajconf</title>
+      <link>/tags/datajconf/</link>
+    </image>
     
-	<atom:link href="https://www.glynmottershead.com/tags/datajconf/index.xml" rel="self" type="application/rss+xml" />
-    
+    <item>
+      <title>Covid-19 and the European Data and Computational Journalism Conference</title>
+      <link>/post/covid-19-and-the-european-data-journalism-conference/</link>
+      <pubDate>Tue, 28 Apr 2020 00:00:00 +0000</pubDate>
+      <guid>/post/covid-19-and-the-european-data-journalism-conference/</guid>
+      <description>&lt;p&gt;You&amp;rsquo;ve probably seen the news by now that we&amp;rsquo;ve had to postpone the 
+&lt;a href=&#34;https://www.datajconf.com/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;European Data and Computational Journalism Conference&lt;/a&gt; due to Covid-19.&lt;/p&gt;
+&lt;p&gt;I would have posted earlier, but an upgrade and site rebuild means I haven&amp;rsquo;t done much posting here for a while.&lt;/p&gt;
+&lt;p&gt;Plans to host the conference at City, University of London (my current place of employment) were in full swing when the organising committee had to take the decision to cancel due to everyone&amp;rsquo;s safety.&lt;/p&gt;
+&lt;p&gt;Our plan is a break rather than a farewell, but if you want to have a chat with us between now and DataJConf 2021, then please get in touch!&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Data Journalism in Malaga</title>
-      <link>https://www.glynmottershead.com/post/2019-07-05-data-journalism-in-malaga/data-journalism-in-malaga/</link>
+      <link>/post/2019-07-05-data-journalism-in-malaga/data-journalism-in-malaga/</link>
       <pubDate>Fri, 05 Jul 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://www.glynmottershead.com/post/2019-07-05-data-journalism-in-malaga/data-journalism-in-malaga/</guid>
-      <description>I’ve just got back from the third European Data and Computational Journalism Conference in Malaga, Spain, and thought I’d share a few thoughts about the event.
-This is the third time the I’ve helped organise this conference, along with my co-chairs Martin Chorley (Cardiff University) and Bahareh Heravi (University College Dublin), and the first one I’ve done since moving to City, University of London.
-More than 100 people took part in the two days, with participants coming from 14 countries.</description>
+      <guid>/post/2019-07-05-data-journalism-in-malaga/data-journalism-in-malaga/</guid>
+      <description>&lt;img src=&#34;/2019-07-05-data-journalism-in-malaga/2019-07-05-data-journalism-in-malaga_files/featured.jpg&#34; alt=&#34;Malaga&#34; width=&#34;80%&#34;/&gt;
+&lt;h2 id=&#34;a-video-of-the-conference&#34;&gt;A video of the conference&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&#34;http://www.youtube.com/watch?v=WAls1xTwFS0&#34; title=&#34;European Data and Computational Journalism Conference, Malaga&#34;&gt;&lt;img src=&#34;http://img.youtube.com/vi/WAls1xTwFS0/0.jpg&#34; alt=&#34;European Data and Computational Journalism Conference, Malaga&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+</description>
     </item>
     
   </channel>

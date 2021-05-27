@@ -1,77 +1,71 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Publications on Glyn Mottershead</title>
-    <link>https://www.glynmottershead.com/publication/</link>
-    <description>Recent content in Publications on Glyn Mottershead</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en-gb</language>
-    <lastBuildDate>Sat, 01 Dec 2018 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="https://www.glynmottershead.com/publication/index.xml" rel="self" type="application/rss+xml" />
-    
+    <title>Publications | Glyn Mottershead</title>
+    <link>/publication/</link>
+      <atom:link href="/publication/index.xml" rel="self" type="application/rss+xml" />
+    <description>Publications</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Sat, 01 Dec 2018 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>img/map[gravatar:%!s(bool=true) shape:circle]</url>
+      <title>Publications</title>
+      <link>/publication/</link>
+    </image>
     
     <item>
       <title>When a tech company pulls the plug on your story</title>
-      <link>https://www.glynmottershead.com/publication/nieman-predictions-2019/</link>
+      <link>/publication/nieman-predictions-2019/</link>
       <pubDate>Sat, 01 Dec 2018 00:00:00 +0000</pubDate>
-      
-      <guid>https://www.glynmottershead.com/publication/nieman-predictions-2019/</guid>
+      <guid>/publication/nieman-predictions-2019/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Are You Talking To Me?: An Analysis of Journalism Conversation on Social Media</title>
-      <link>https://www.glynmottershead.com/publication/are-you-talking-book-chapter/</link>
+      <link>/publication/are-you-talking-book-chapter/</link>
       <pubDate>Sat, 01 Sep 2018 00:00:00 +0100</pubDate>
-      
-      <guid>https://www.glynmottershead.com/publication/are-you-talking-book-chapter/</guid>
-      <description>This preliminary research aims to show how computational analysis allows us to investigate the means by which news stories are spread.</description>
+      <guid>/publication/are-you-talking-book-chapter/</guid>
+      <description></description>
     </item>
     
     <item>
       <title>&#39;Can I click it? Yes you can&#39;: Football journalism, Twitter and clickbait</title>
-      <link>https://www.glynmottershead.com/publication/can-i-click-it/</link>
+      <link>/publication/can-i-click-it/</link>
       <pubDate>Fri, 09 Mar 2018 00:00:00 +0000</pubDate>
-      
-      <guid>https://www.glynmottershead.com/publication/can-i-click-it/</guid>
-      <description>Does the sports media just use clickbait to generate traffic, and is this is reducing the quality of football journalism?</description>
+      <guid>/publication/can-i-click-it/</guid>
+      <description></description>
     </item>
     
     <item>
       <title>Are You Talking To Me?: An Analysis of Journalism Conversation on Social Media</title>
-      <link>https://www.glynmottershead.com/publication/are-you-talking-to-me/</link>
+      <link>/publication/are-you-talking-to-me/</link>
       <pubDate>Sun, 02 Oct 2016 00:00:00 +0100</pubDate>
-      
-      <guid>https://www.glynmottershead.com/publication/are-you-talking-to-me/</guid>
-      <description>This preliminary research aims to show how computational analysis allows us to investigate the means by which news stories are spread.</description>
+      <guid>/publication/are-you-talking-to-me/</guid>
+      <description></description>
     </item>
     
     <item>
       <title>Subediting and production for journalists</title>
-      <link>https://www.glynmottershead.com/publication/subbing-book/</link>
+      <link>/publication/subbing-book/</link>
       <pubDate>Fri, 28 Aug 2015 00:00:00 +0100</pubDate>
-      
-      <guid>https://www.glynmottershead.com/publication/subbing-book/</guid>
-      <description>Subediting and Production for Journalists is an introduction to the skills of subediting for newspapers, magazines and websites.</description>
+      <guid>/publication/subbing-book/</guid>
+      <description></description>
     </item>
     
     <item>
       <title>21st Century Journalism Handbook</title>
-      <link>https://www.glynmottershead.com/publication/21st-century-journalism-handbook/</link>
+      <link>/publication/21st-century-journalism-handbook/</link>
       <pubDate>Sun, 01 Jul 2012 00:00:00 +0100</pubDate>
-      
-      <guid>https://www.glynmottershead.com/publication/21st-century-journalism-handbook/</guid>
-      <description>The 21st Century Journalism Handbook is a comprehensive guide to the core principles and practices essential to the modern journalist.</description>
+      <guid>/publication/21st-century-journalism-handbook/</guid>
+      <description></description>
     </item>
     
     <item>
       <title>Learning and Knowledge Building with Web 2.0 Technologies: Implications for Teacher Education</title>
-      <link>https://www.glynmottershead.com/publication/learning-and-knowledge-building/</link>
+      <link>/publication/learning-and-knowledge-building/</link>
       <pubDate>Sat, 01 Aug 2009 00:00:00 +0100</pubDate>
-      
-      <guid>https://www.glynmottershead.com/publication/learning-and-knowledge-building/</guid>
-      <description>This paper seeks to draw together findings from a number of research studies to discuss the implications for the development of educational practices in Higher Education towards a student experience which is rich in authenticity.</description>
+      <guid>/publication/learning-and-knowledge-building/</guid>
+      <description></description>
     </item>
     
   </channel>

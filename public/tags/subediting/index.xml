@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Subediting on Glyn Mottershead</title>
-    <link>https://www.glynmottershead.com/tags/subediting/</link>
-    <description>Recent content in Subediting on Glyn Mottershead</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en-gb</language>
-    <lastBuildDate>Fri, 28 Aug 2015 00:00:00 +0100</lastBuildDate>
-    
-	<atom:link href="https://www.glynmottershead.com/tags/subediting/index.xml" rel="self" type="application/rss+xml" />
-    
+    <title>Subediting | Glyn Mottershead</title>
+    <link>/tags/subediting/</link>
+      <atom:link href="/tags/subediting/index.xml" rel="self" type="application/rss+xml" />
+    <description>Subediting</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Fri, 28 Aug 2015 00:00:00 +0100</lastBuildDate>
+    <image>
+      <url>img/map[gravatar:%!s(bool=true) shape:circle]</url>
+      <title>Subediting</title>
+      <link>/tags/subediting/</link>
+    </image>
     
     <item>
       <title>Subediting and production for journalists</title>
-      <link>https://www.glynmottershead.com/publication/subbing-book/</link>
+      <link>/publication/subbing-book/</link>
       <pubDate>Fri, 28 Aug 2015 00:00:00 +0100</pubDate>
-      
-      <guid>https://www.glynmottershead.com/publication/subbing-book/</guid>
-      <description>Subediting and Production for Journalists is an introduction to the skills of subediting for newspapers, magazines and websites.</description>
+      <guid>/publication/subbing-book/</guid>
+      <description></description>
     </item>
     
   </channel>

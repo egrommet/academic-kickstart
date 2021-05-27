@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>ddj | Glyn Mottershead</title>
+    <link>/tags/ddj/</link>
+      <atom:link href="/tags/ddj/index.xml" rel="self" type="application/rss+xml" />
+    <description>ddj</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Fri, 05 Jul 2019 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>img/map[gravatar:%!s(bool=true) shape:circle]</url>
+      <title>ddj</title>
+      <link>/tags/ddj/</link>
+    </image>
+    
+    <item>
+      <title>Data Journalism in Malaga</title>
+      <link>/post/2019-07-05-data-journalism-in-malaga/data-journalism-in-malaga/</link>
+      <pubDate>Fri, 05 Jul 2019 00:00:00 +0000</pubDate>
+      <guid>/post/2019-07-05-data-journalism-in-malaga/data-journalism-in-malaga/</guid>
+      <description>&lt;img src=&#34;/2019-07-05-data-journalism-in-malaga/2019-07-05-data-journalism-in-malaga_files/featured.jpg&#34; alt=&#34;Malaga&#34; width=&#34;80%&#34;/&gt;
+&lt;h2 id=&#34;a-video-of-the-conference&#34;&gt;A video of the conference&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&#34;http://www.youtube.com/watch?v=WAls1xTwFS0&#34; title=&#34;European Data and Computational Journalism Conference, Malaga&#34;&gt;&lt;img src=&#34;http://img.youtube.com/vi/WAls1xTwFS0/0.jpg&#34; alt=&#34;European Data and Computational Journalism Conference, Malaga&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

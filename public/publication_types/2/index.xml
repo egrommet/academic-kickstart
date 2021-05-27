@@ -1,32 +1,31 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>2 on Glyn Mottershead</title>
-    <link>https://www.glynmottershead.com/publication_types/2/</link>
-    <description>Recent content in 2 on Glyn Mottershead</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en-gb</language>
-    <lastBuildDate>Fri, 09 Mar 2018 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="https://www.glynmottershead.com/publication_types/2/index.xml" rel="self" type="application/rss+xml" />
-    
+    <title>2 | Glyn Mottershead</title>
+    <link>/publication_types/2/</link>
+      <atom:link href="/publication_types/2/index.xml" rel="self" type="application/rss+xml" />
+    <description>2</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Fri, 09 Mar 2018 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>img/map[gravatar:%!s(bool=true) shape:circle]</url>
+      <title>2</title>
+      <link>/publication_types/2/</link>
+    </image>
     
     <item>
       <title>&#39;Can I click it? Yes you can&#39;: Football journalism, Twitter and clickbait</title>
-      <link>https://www.glynmottershead.com/publication/can-i-click-it/</link>
+      <link>/publication/can-i-click-it/</link>
       <pubDate>Fri, 09 Mar 2018 00:00:00 +0000</pubDate>
-      
-      <guid>https://www.glynmottershead.com/publication/can-i-click-it/</guid>
-      <description>Does the sports media just use clickbait to generate traffic, and is this is reducing the quality of football journalism?</description>
+      <guid>/publication/can-i-click-it/</guid>
+      <description></description>
     </item>
     
     <item>
       <title>Are You Talking To Me?: An Analysis of Journalism Conversation on Social Media</title>
-      <link>https://www.glynmottershead.com/publication/are-you-talking-to-me/</link>
+      <link>/publication/are-you-talking-to-me/</link>
       <pubDate>Sun, 02 Oct 2016 00:00:00 +0100</pubDate>
-      
-      <guid>https://www.glynmottershead.com/publication/are-you-talking-to-me/</guid>
-      <description>This preliminary research aims to show how computational analysis allows us to investigate the means by which news stories are spread.</description>
+      <guid>/publication/are-you-talking-to-me/</guid>
+      <description></description>
     </item>
     
   </channel>

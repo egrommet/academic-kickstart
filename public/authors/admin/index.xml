@@ -1,25 +1,16 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>admin on Glyn Mottershead</title>
-    <link>https://www.glynmottershead.com/authors/admin/</link>
-    <description>Recent content in admin on Glyn Mottershead</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en-gb</language>
-    
-	<atom:link href="https://www.glynmottershead.com/authors/admin/index.xml" rel="self" type="application/rss+xml" />
-    
-    
-    <item>
-      <title></title>
-      <link>https://www.glynmottershead.com/author/admin/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://www.glynmottershead.com/author/admin/</guid>
-      <description>I&amp;rsquo;m a Senior Lecturer in Data Journalism at City, University of London.
-Prior to that I was founding co-director of the MSc in Computational and Data Journalism, a joint honours course in journalism and computer science.
-I&amp;rsquo;m also a co-founder of the European Data and Computational Journalism Conference. My interests include data journalism, journalism and software development, social media and production journalism.</description>
-    </item>
+    <title>Glyn Mottershead</title>
+    <link>/authors/admin/</link>
+      <atom:link href="/authors/admin/index.xml" rel="self" type="application/rss+xml" />
+    <description>Glyn Mottershead</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language>
+    <image>
+      <url>img/map[gravatar:%!s(bool=true) shape:circle]</url>
+      <title>Glyn Mottershead</title>
+      <link>/authors/admin/</link>
+    </image>
     
   </channel>
 </rss>

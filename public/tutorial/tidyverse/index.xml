@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Overview | Glyn Mottershead</title>
+    <link>/tutorial/tidyverse/</link>
+      <atom:link href="/tutorial/tidyverse/index.xml" rel="self" type="application/rss+xml" />
+    <description>Overview</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Wed, 15 Apr 2020 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>img/map[gravatar:%!s(bool=true) shape:circle]</url>
+      <title>Overview</title>
+      <link>/tutorial/tidyverse/</link>
+    </image>
+    
+    <item>
+      <title>Pivot tables</title>
+      <link>/tutorial/tidyverse/pivot-tables-in-r/</link>
+      <pubDate>Wed, 15 Apr 2020 00:00:00 +0000</pubDate>
+      <guid>/tutorial/tidyverse/pivot-tables-in-r/</guid>
+      <description>&lt;h2 id=&#34;looking-at-police-data-using-tidyverse-tools&#34;&gt;Looking at police data using Tidyverse tools&lt;/h2&gt;
+&lt;p&gt;The Tidyverse tools are one of my favourite things and made my R coding experience much simpler. Most of the things I&amp;rsquo;ll be posting will use them in one way or another.&lt;/p&gt;
+&lt;p&gt;We&amp;rsquo;re going to find out what happens when someone reports a stolen bicycle - a friend seems to believe the police do nothing, so let&amp;rsquo;s investigate what actually happens when a crime is reported.&lt;/p&gt;
+&lt;h3 id=&#34;downloading-the-data&#34;&gt;Downloading the data&lt;/h3&gt;
+&lt;p&gt;I&amp;rsquo;ve downloaded a month&amp;rsquo;s worth of data for South Wales Police from 
+&lt;a href=&#34;https://data.police.uk/data/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;data.police.uk&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;I&amp;rsquo;m going to do the R equivalent of a pivot table, grouping information together and then analysing it.&lt;/p&gt;
+&lt;h3 id=&#34;getting-started&#34;&gt;Getting started&lt;/h3&gt;
+&lt;p&gt;Open RStudio and go to &lt;strong&gt;FILE &amp;gt; NEW PROJECT&lt;/strong&gt; then create it in a new folder. This will give you a chance to choose where you want it to go. I tend to have a project folder and then each individual project is stored inside that.&lt;/p&gt;
+&lt;p&gt;We&amp;rsquo;ll leave RStudio for a second and head into the computer&amp;rsquo;s file manager to find the folder we just created in RStudio. Inside that I always create a folder called data, I&amp;rsquo;ll then put my downloaded data inside it.&lt;/p&gt;
+&lt;h3 id=&#34;create-a-script&#34;&gt;Create a script&lt;/h3&gt;
+&lt;p&gt;Back inside RStudio, I&amp;rsquo;m going to go to &lt;strong&gt;File menu &amp;gt; New File &amp;gt; R Script&lt;/strong&gt;. I&amp;rsquo;m doing this as it allows me to repeat this analysis when I want to. You&amp;rsquo;ll want to give it a name that makes sense and then save it. R files have a &lt;strong&gt;.R&lt;/strong&gt; file extension at the end.&lt;/p&gt;
+&lt;h3 id=&#34;installing-your-first-r-package&#34;&gt;Installing your first R Package&lt;/h3&gt;
+&lt;p&gt;A package is a tool, or group of tools, that someone has created to cut out some of the repetition in R. We&amp;rsquo;ll be using the tidyverse by Hadley Wickham. These are a set of really helpful data tools that also make R programming easier to read.&lt;/p&gt;
+&lt;p&gt;We can install packages by going to the &lt;strong&gt;Tools menu &amp;gt; Install Packages&lt;/strong&gt; and type the name into the pop-up box.&lt;/p&gt;
+&lt;p&gt;Or I can write the command (known as a function) into my script, highlight my line of code and hit the &lt;strong&gt;RUN&lt;/strong&gt; button at the top of the script. The other way to do it is a line of code - &lt;code&gt;install.packages(&amp;quot;tidyverse&amp;quot;)&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;I then need to load it in my script. This is done by the &lt;code&gt;library()&lt;/code&gt; function. Again, run the line of code.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;library(tidyverse)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;loading-data&#34;&gt;Loading data&lt;/h2&gt;
+&lt;p&gt;Even though we have the data set in our R project folder we need to load it up.&lt;/p&gt;
+&lt;p&gt;I&amp;rsquo;m going to use &lt;code&gt;read_csv()&lt;/code&gt; from readr to read a CSV file into our RStudio environment.&lt;/p&gt;
+&lt;p&gt;If you ever want to know how what a package or function does then type &lt;code&gt;?function_name&lt;/code&gt; in the console eg &lt;code&gt;?read_csv&lt;/code&gt;, and you&amp;rsquo;ll get a help message.&lt;/p&gt;
+&lt;p&gt;Our function wrapping works like this &lt;code&gt;read_csv()&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;We need to put the address (** aka file path**) for our CSV inside quote marks inside the inner pair of brackets.
+It will look like this - &lt;code&gt;read_csv(&amp;quot;file_path&amp;quot;)&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;The full syntax (not the working code I want to use) looks like this:
+&lt;code&gt;data_frame_name &amp;lt;- read_csv(&amp;quot;file_path&amp;quot;)&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;The &lt;strong&gt;&amp;lt;-&lt;/strong&gt; is an assignment symbol, I tend to think of it as a hosepipe which allows the function to pour into the name we give our data frame (and yes, the analogy continues as I think of the frame name as a bucket for storing things in - so the &lt;code&gt;&amp;lt;-&lt;/code&gt; allows us to pour data into where it is being stored).&lt;/p&gt;
+&lt;p&gt;My file path in the example below says &lt;strong&gt;./&lt;/strong&gt; inside the folder we are currently in is a folder called &lt;strong&gt;data&lt;/strong&gt; and &lt;strong&gt;/&lt;/strong&gt; inside that is a named csv file.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;crimes &amp;lt;- read_csv(&amp;quot;./data/2019-01-south-wales-street.csv&amp;quot;)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## Parsed with column specification:
+## cols(
+##   `Crime ID` = col_character(),
+##   Month = col_character(),
+##   `Reported by` = col_character(),
+##   `Falls within` = col_character(),
+##   Longitude = col_double(),
+##   Latitude = col_double(),
+##   Location = col_character(),
+##   `LSOA code` = col_character(),
+##   `LSOA name` = col_character(),
+##   `Crime type` = col_character(),
+##   `Last outcome category` = col_character(),
+##   Context = col_logical()
+## )
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The output for this will show us what types of columns we have - in this case &lt;code&gt;col_character()&lt;/code&gt; means text and &lt;code&gt;col_double()&lt;/code&gt; means a number format. All good so far.&lt;/p&gt;
+&lt;h3 id=&#34;filtering-with-dplyr&#34;&gt;Filtering with dplyr&lt;/h3&gt;
+&lt;p&gt;I want to filter the information so it just includes bicycle thefts. I&amp;rsquo;m going to use some dplyr package tricks to do this.&lt;/p&gt;
+&lt;p&gt;I&amp;rsquo;m going to store it in a new data frame called &lt;strong&gt;bikes&lt;/strong&gt;. We&amp;rsquo;ll be using the crimes data frame we made earlier and then filtering it, before assigning the new information to bikes. So &lt;code&gt;bikes &amp;lt;- crimes&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;The next bit of the code is &lt;code&gt;%&amp;gt;%&lt;/code&gt; a pipe - essentially you can say &lt;strong&gt;and then&lt;/strong&gt; to yourself when you write it. Our next function is a filter(), it does a similar job to the Excel function of the same name.&lt;/p&gt;
+&lt;p&gt;Most functions will need you to say which data frame you are working on and then what you want to do. So we could say &lt;code&gt;filter(data_frame, column_name == &amp;quot;text we want back&amp;quot;)&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;But dplyr knows we are working on the data frame before the first &lt;code&gt;%&amp;gt;%&lt;/code&gt;, so our code becomes simpler and we just need the column name and the text to grab.&lt;sup id=&#34;fnref:1&#34;&gt;&lt;a href=&#34;#fn:1&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;bikes &amp;lt;- crimes %&amp;gt;%
+  filter(`Crime type` == &amp;quot;Bicycle theft&amp;quot;) 
+
+# If I use the dataframe name on its own and run that line I can see what is in it
+bikes
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## # A tibble: 126 x 12
+##    `Crime ID` Month `Reported by` `Falls within` Longitude Latitude Location
+##    &amp;lt;chr&amp;gt;      &amp;lt;chr&amp;gt; &amp;lt;chr&amp;gt;         &amp;lt;chr&amp;gt;              &amp;lt;dbl&amp;gt;    &amp;lt;dbl&amp;gt; &amp;lt;chr&amp;gt;   
+##  1 0fad86217… 2019… South Wales … South Wales P…     -3.54     51.5 On or n…
+##  2 5ea5f1bb3… 2019… South Wales … South Wales P…     -3.19     51.5 On or n…
+##  3 ab5c7a5c7… 2019… South Wales … South Wales P…     -3.12     51.5 On or n…
+##  4 44e702929… 2019… South Wales … South Wales P…     -3.23     51.5 On or n…
+##  5 979ee8076… 2019… South Wales … South Wales P…     -3.09     51.5 On or n…
+##  6 34490753e… 2019… South Wales … South Wales P…     -3.12     51.5 On or n…
+##  7 59c9863ef… 2019… South Wales … South Wales P…     -3.12     51.5 On or n…
+##  8 7029c550b… 2019… South Wales … South Wales P…     -3.22     51.5 On or n…
+##  9 f8f063bad… 2019… South Wales … South Wales P…     -3.22     51.5 On or n…
+## 10 cdd878455… 2019… South Wales … South Wales P…     -3.20     51.5 On or n…
+## # … with 116 more rows, and 5 more variables: `LSOA code` &amp;lt;chr&amp;gt;, `LSOA
+## #   name` &amp;lt;chr&amp;gt;, `Crime type` &amp;lt;chr&amp;gt;, `Last outcome category` &amp;lt;chr&amp;gt;,
+## #   Context &amp;lt;lgl&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The output will show us how many rows (observations) and columns (variables) there are - in this case a 126 x 12. We can start adding some more analysis now.&lt;/p&gt;
+&lt;h3 id=&#34;filtering-and-renaming-for-speed&#34;&gt;Filtering and renaming for speed&lt;/h3&gt;
+&lt;p&gt;You may notice when we printed the data frame that some of the column names have backticks around them. That&amp;rsquo;s because they&amp;rsquo;ve got a space between the words and R is trying to help out. So, if we wanted to work with our Crime ID column we&amp;rsquo;d actually have to type &lt;code&gt;Crime ID&lt;/code&gt; with the back ticks.&lt;/p&gt;
+&lt;p&gt;I&amp;rsquo;m too lazy for things like that. I&amp;rsquo;d rather change the name so I can write something easier. We&amp;rsquo;re going to use &lt;code&gt;rename()&lt;/code&gt; to do it. We will tell &lt;code&gt;rename()&lt;/code&gt; that our &lt;code&gt;&amp;quot;new column name&amp;quot; = &amp;quot;old column name&amp;quot;&lt;/code&gt;  - but make sure you put the quote marks around the names when you do this.&lt;/p&gt;
+&lt;p&gt;So, I&amp;rsquo;m going to tweak my code from before. I&amp;rsquo;m going to change the name of the &lt;code&gt;Last outcome category&lt;/code&gt; and the &lt;code&gt;Crime type&lt;/code&gt; columns. I&amp;rsquo;m going to change them to Outcome and Crimes - much shorter to type.&lt;/p&gt;
+&lt;p&gt;So, we&amp;rsquo;re telling dplyr to take the &lt;strong&gt;crimes&lt;/strong&gt; data frame &lt;strong&gt;and then&lt;/strong&gt; rename by assigning the new name to the old name. (The comma means we can do more than one rename at once, to do more just add a comma and then say &amp;ldquo;new&amp;rdquo; = &amp;ldquo;old&amp;rdquo; again.) &lt;strong&gt;And then&lt;/strong&gt; filter our newly-named &lt;strong&gt;Crimes&lt;/strong&gt; column and look for the text inside the quote marks.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;bikes &amp;lt;- crimes %&amp;gt;%
+  rename(&amp;quot;Outcome&amp;quot; = &amp;quot;Last outcome category&amp;quot;, &amp;quot;Crimes&amp;quot; = &amp;quot;Crime type&amp;quot;) %&amp;gt;%
+  filter(Crimes == &amp;quot;Bicycle theft&amp;quot;) 
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;doing-a-pivot-table-in-dplyr-syntax&#34;&gt;Doing a pivot table in dplyr syntax&lt;/h3&gt;
+&lt;p&gt;Now we can do some digging. I want to know what the police have done about the reported bike thefts.&lt;/p&gt;
+&lt;p&gt;We can group things together by our Outcome category and count how often each of the outcomes happen. So, we tell &lt;code&gt;group_by()&lt;/code&gt; which column we want to work on. &lt;strong&gt;And then&lt;/strong&gt; we tell it what to count - in this case it creates a column called outcome_count and uses the &lt;code&gt;n()&lt;/code&gt; function to count the Outcome.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;bikes &amp;lt;- crimes %&amp;gt;%
+  rename(&amp;quot;Outcome&amp;quot; = &amp;quot;Last outcome category&amp;quot;, &amp;quot;Crimes&amp;quot; = &amp;quot;Crime type&amp;quot;) %&amp;gt;%
+  filter(Crimes == &amp;quot;Bicycle theft&amp;quot;) %&amp;gt;%
+  group_by(Outcome) %&amp;gt;%
+  summarise(outcome_count = n())
+
+# Again I&#39;ll type the dataframe name here and run this line to see what we have got.
+bikes
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## # A tibble: 4 x 2
+##   Outcome                                       outcome_count
+##   &amp;lt;chr&amp;gt;                                                 &amp;lt;int&amp;gt;
+## 1 Awaiting court outcome                                    1
+## 2 Investigation complete; no suspect identified            88
+## 3 Unable to prosecute suspect                               1
+## 4 Under investigation                                      36
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;We&amp;rsquo;ve got a pivot table - it has grouped the &lt;strong&gt;Outcome column&lt;/strong&gt; and counted how often each one occurs.&lt;/p&gt;
+&lt;h2 id=&#34;tldr-horrible-description-names-are-horrible&#34;&gt;TLDR: horrible description names are horrible&lt;/h2&gt;
+&lt;p&gt;We&amp;rsquo;re going to change an element by using the &lt;code&gt;mutate()&lt;/code&gt; function - we&amp;rsquo;re going to &lt;code&gt;recode()&lt;/code&gt; one of our Outcome categories to shorten it. The code would look like this - &lt;code&gt;mutate(Outcome = recode(Outcome, &amp;quot;Investigation complete; no suspect identified&amp;quot; = &amp;quot;No suspect identified&amp;quot;))&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;But I&amp;rsquo;d like to order it in descending order - so we can do one more &lt;strong&gt;and then&lt;/strong&gt; &lt;code&gt;%&amp;gt;%&lt;/code&gt; at the end of our code. We will &lt;code&gt;arrange()&lt;/code&gt; our &lt;strong&gt;outcome_count&lt;/strong&gt; in &lt;code&gt;desc()&lt;/code&gt; - descending order. You must put &lt;code&gt;desc()&lt;/code&gt; inside the &lt;code&gt;arrange()&lt;/code&gt; function. And check your brackets.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;bikes &amp;lt;- crimes %&amp;gt;%
+  rename(&amp;quot;Outcome&amp;quot; = &amp;quot;Last outcome category&amp;quot;, &amp;quot;Crimes&amp;quot; = &amp;quot;Crime type&amp;quot;) %&amp;gt;%
+  filter(Crimes == &amp;quot;Bicycle theft&amp;quot;) %&amp;gt;%
+  mutate(Outcome = recode(Outcome, 
+                          &amp;quot;Investigation complete; no suspect identified&amp;quot; = &amp;quot;No suspect identified&amp;quot;)) %&amp;gt;%
+  group_by(Outcome) %&amp;gt;%
+  summarise(outcome_count = n()) %&amp;gt;%
+  arrange(desc(outcome_count))
+
+# Again I&#39;ll type the dataframe name here and run this line to see what we have got.
+bikes
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## # A tibble: 4 x 2
+##   Outcome                     outcome_count
+##   &amp;lt;chr&amp;gt;                               &amp;lt;int&amp;gt;
+## 1 No suspect identified                  88
+## 2 Under investigation                    36
+## 3 Awaiting court outcome                  1
+## 4 Unable to prosecute suspect             1
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;And we&amp;rsquo;ve got it. A pivot table that tells us what has happened to the bike crimes in the original data set and has put them in descending order.&lt;/p&gt;
+&lt;section class=&#34;footnotes&#34; role=&#34;doc-endnotes&#34;&gt;
+&lt;hr&gt;
+&lt;ol&gt;
+&lt;li id=&#34;fn:1&#34; role=&#34;doc-endnote&#34;&gt;
+&lt;p&gt;The text we want back has to be surrounded in quote marks &lt;code&gt;&amp;quot;&amp;quot;&lt;/code&gt; as we are looking at text, or a string as it is more properly known. Find out about 
+&lt;a href=&#34;https://r4ds.had.co.nz/strings.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;string manipulation from the R for Data Science book&lt;/a&gt;. &lt;a href=&#34;#fnref:1&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/section&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>First graph in ggplot</title>
+      <link>/tutorial/tidyverse/first-graph/</link>
+      <pubDate>Wed, 15 Apr 2020 00:00:00 +0000</pubDate>
+      <guid>/tutorial/tidyverse/first-graph/</guid>
+      <description>&lt;h2 id=&#34;getting-the-data&#34;&gt;Getting the data&lt;/h2&gt;
+&lt;p&gt;We can, of course, download the data set we want and then use tools such as readr (if it is a csv file) to import the data. But that misses out on quite a powerful way of grabbing information. Many organisations have set up a way of asking questions directly to their database - think about it like a machine-to-machine conversation.&lt;/p&gt;
+&lt;p&gt;This is called an 
+&lt;a href=&#34;https://www.freecodecamp.org/news/what-is-an-api-in-english-please-b880a3214a82/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;API (Application Programming Interface)&lt;/a&gt;, and there are lots of them about. So, a basic understanding of how to get that information into an R dataframe for analysis is really important.&lt;/p&gt;
+&lt;p&gt;And just for an added bonus, we&amp;rsquo;re going to build on the concepts from the 
+&lt;a href=&#34;/tutorial/tidyverse/pivot-tables-in-r/&#34;&gt;pivot table session&lt;/a&gt; to add in a graph using ggplot2 (again a tidyverse tool).&lt;/p&gt;
+&lt;h3 id=&#34;tools-for-the-job&#34;&gt;Tools for the job&lt;/h3&gt;
+&lt;p&gt;We&amp;rsquo;ll be using httr to work with our APIs - it makes it much easier to construct a question. I&amp;rsquo;ve tried using the paste() function to do this in the past and didn&amp;rsquo;t find it easy, httr is much nicer in comparison.&lt;/p&gt;
+&lt;p&gt;The response from our questions is often in the form of either 
+&lt;a href=&#34;https://www.w3schools.com/js/js_json_xml.asp&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;JSON or XML&lt;/a&gt;. The documentation for the API will tell you about what form it is in and that will tell us what tools we need to deal with the particular formats.&lt;/p&gt;
+&lt;p&gt;We&amp;rsquo;ll be using an API from the 
+&lt;a href=&#34;https://data.police.uk&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;data.police site&lt;/a&gt;, which returns data from queries as JSON - we&amp;rsquo;ll need the jsonlite package to help us with that.&lt;/p&gt;
+&lt;p&gt;The final package is the tidyverse to allow us to do some data changes, in a similar way to what we&amp;rsquo;ve done before and to generate the chart we are going to make at the end.&lt;/p&gt;
+&lt;p&gt;So, usual rules create an R script file in RStudio and we can get working.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;library(httr)
+library(jsonlite)
+library(tidyverse)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;what-are-we-looking-for&#34;&gt;What are we looking for?&lt;/h3&gt;
+&lt;p&gt;The first step is to look at what kind of crimes we can investigate.
+The 
+&lt;a href=&#34;https://data.police.uk/docs/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;documentation for the data.police site&amp;rsquo;s API&lt;/a&gt; gives this examples of the different API queries that are available. You can just copy and paste one of the examples into a web browser to see what is going on. I&amp;rsquo;ve picked the 
+&lt;a href=&#34;https://data.police.uk/docs/method/crime-categories/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;crime categories API page&lt;/a&gt; - which shows an example that looks like this -  &lt;a href=&#34;https://data.police.uk/api/crime-categories?date=2020-03&#34;&gt;https://data.police.uk/api/crime-categories?date=2020-03&lt;/a&gt;. Copy and paste that into a web browser to get a JSON view of the data.&lt;/p&gt;
+&lt;p&gt;I&amp;rsquo;ve had a look at the webpage and inspired by what I&amp;rsquo;ve seen in the news recently, I&amp;rsquo;m going to look at car crime around the main hospital in Cardiff. You could swap any category in this.&lt;/p&gt;
+&lt;h3 id=&#34;building-our-query-web-address&#34;&gt;Building our query web address&lt;/h3&gt;
+&lt;p&gt;We&amp;rsquo;ll be looking at 
+&lt;a href=&#34;https://data.police.uk/docs/method/crime-street/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;street level crimes&lt;/a&gt;, this call is built is in three parts:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;The basic structure &lt;code&gt;https://data.police.uk/api/crimes-street/&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;The crime type &lt;code&gt;vehicle-crime&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;The query &lt;code&gt;lat= long= date=&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;I&amp;rsquo;ll go onto Google Maps in Chrome and search for University Hospital of Wales - the hospital mentioned in the story I read. If you right click on the point you searched for in the browser window, you can pick &lt;code&gt;What&#39;s here?&lt;/code&gt; and you&amp;rsquo;ll get a little pop-up with the latitude and longitude on the bottom. Copy that over to your script.&lt;/p&gt;
+&lt;p&gt;We&amp;rsquo;re going to store the first part of the address in an object called &lt;code&gt;url&lt;/code&gt;. I&amp;rsquo;ve copied an example from the documentation but changed it from the usual &lt;code&gt;all-crimes?&lt;/code&gt; to &lt;code&gt;vehicle-crime?&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;We&amp;rsquo;ll wrap the web address in double quotes and use the &lt;code&gt;&amp;lt;-&lt;/code&gt; assign symbol.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;url &amp;lt;- &amp;quot;https://data.police.uk/api/crimes-street/vehicle-crime?&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;We&amp;rsquo;ll now start structuring our request to the data.police server. We&amp;rsquo;ll be using &lt;code&gt;GET()&lt;/code&gt; from httr - it does what it says. We&amp;rsquo;ll tell it what the url is that we are using and then give it a &lt;code&gt;list()&lt;/code&gt; with our query elements inside it. Have a play with the dates and see what is going on - you may get error messages. If so, Google them and find out what they mean.&lt;/p&gt;
+&lt;p&gt;An important point in checking your code is watching out for how many brackets you have. This is a real source of broken code for beginners, so watch out for it. This section below has two opening brackets - one for &lt;code&gt;GET&lt;/code&gt; and one for &lt;code&gt;list&lt;/code&gt;, so we must have matching closing brackets. If it isn&amp;rsquo;t matched the code will not run.&lt;/p&gt;
+&lt;p&gt;In mock structure it looks like this - &lt;code&gt;our_stored_call &amp;lt;- GET(base_address, query = list(some queries, separated by commas))&lt;/code&gt;. I&amp;rsquo;ve hit return at points below to make it easier to read, it will be treated as one line of code like this.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;api_call &amp;lt;- GET(url = url,
+               query = list(
+                 lat = 51.50724,
+                 lng = -3.190278,
+                 date = &amp;quot;2020-02&amp;quot;)
+)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The key thing to do when you make a call to an API is to check what has happened - they all have a status code built into the return. We can access this by running one line of code - &lt;code&gt;api_call$status_code&lt;/code&gt;.
+It will return a number - 200 means all is well, numbers in the 400s usually mean you haven&amp;rsquo;t structured your call properly and 500s means their API isn&amp;rsquo;t working.&lt;/p&gt;
+&lt;p&gt;We&amp;rsquo;ve got a 200 - all is well.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;api_call$status_code
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] 200
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The way JSON is structured means there is a header with lots of background information (metadata) and content - which is what we want. We&amp;rsquo;ll use jsonlite&amp;rsquo;s &lt;code&gt;content()&lt;/code&gt; function and specify how we want it back.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;response &amp;lt;- content(api_call, as = &amp;quot;text&amp;quot;, encoding = &amp;quot;UTF-8&amp;quot;)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;I wouldn&amp;rsquo;t normally use &lt;code&gt;head()&lt;/code&gt; to look at the top of this kind of object but, let&amp;rsquo;s do it here to see what we get back. You can call &lt;code&gt;head()&lt;/code&gt; on many types of data object in R to see what you&amp;rsquo;ve got at the head (top) of it. You can even tell it how many to look at by adding an n = * argument eg &lt;code&gt;head(object, n = 6)&lt;/code&gt;.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;head(response)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] &amp;quot;[{\&amp;quot;category\&amp;quot;:\&amp;quot;vehicle-crime\&amp;quot;,\&amp;quot;location_type\&amp;quot;:\&amp;quot;Force\&amp;quot;,\&amp;quot;location\&amp;quot;:{\&amp;quot;latitude\&amp;quot;:\&amp;quot;51.510986\&amp;quot;,\&amp;quot;street\&amp;quot;:{\&amp;quot;id\&amp;quot;:1082838,\&amp;quot;name\&amp;quot;:\&amp;quot;On or near Heol Wernlas\&amp;quot;},\&amp;quot;longitude\&amp;quot;:\&amp;quot;-3.207382\&amp;quot;},\&amp;quot;context\&amp;quot;:\&amp;quot;\&amp;quot;,\&amp;quot;outcome_status\&amp;quot;:{\&amp;quot;category\&amp;quot;:\&amp;quot;Under investigation\&amp;quot;,\&amp;quot;date\&amp;quot;:\&amp;quot;2020-02\&amp;quot;},\&amp;quot;persistent_id\&amp;quot;:\&amp;quot;cb7458646b734199c1728e7ba2b0cc375cb792a1d181092c30e3a8a217838c32\&amp;quot;,\&amp;quot;id\&amp;quot;:81238108,\&amp;quot;location_subtype\&amp;quot;:\&amp;quot;\&amp;quot;,\&amp;quot;month\&amp;quot;:\&amp;quot;2020-02\&amp;quot;},{\&amp;quot;category\&amp;quot;:\&amp;quot;vehicle-crime\&amp;quot;,\&amp;quot;location_type\&amp;quot;:\&amp;quot;Force\&amp;quot;,\&amp;quot;location\&amp;quot;:{\&amp;quot;latitude\&amp;quot;:\&amp;quot;51.504594\&amp;quot;,\&amp;quot;street\&amp;quot;:{\&amp;quot;id\&amp;quot;:1083004,\&amp;quot;name\&amp;quot;:\&amp;quot;On or near Dovedale Close\&amp;quot;},\&amp;quot;longitude\&amp;quot;:\&amp;quot;-3.169997\&amp;quot;},\&amp;quot;context\&amp;quot;:\&amp;quot;\&amp;quot;,\&amp;quot;outcome_status\&amp;quot;:{\&amp;quot;category\&amp;quot;:\&amp;quot;Investigation complete; no suspect identified\&amp;quot;,\&amp;quot;date\&amp;quot;:\&amp;quot;2020-03\&amp;quot;},\&amp;quot;persistent_id\&amp;quot;:\&amp;quot;1b5a72e887633314e5f0f570e97a8112bc99781745db1b3c54f3a0815117628f\&amp;quot;,\&amp;quot;id\&amp;quot;:81238172,\&amp;quot;location_subtype\&amp;quot;:\&amp;quot;\&amp;quot;,\&amp;quot;month\&amp;quot;:\&amp;quot;2020-02\&amp;quot;},{\&amp;quot;category\&amp;quot;:\&amp;quot;vehicle-crime\&amp;quot;,\&amp;quot;location_type\&amp;quot;:\&amp;quot;Force\&amp;quot;,\&amp;quot;location\&amp;quot;:{\&amp;quot;latitude\&amp;quot;:\&amp;quot;51.497118\&amp;quot;,\&amp;quot;street\&amp;quot;:{\&amp;quot;id\&amp;quot;:1081632,\&amp;quot;name\&amp;quot;:\&amp;quot;On or near Petrol Station\&amp;quot;},\&amp;quot;longitude\&amp;quot;:\&amp;quot;-3.192711\&amp;quot;},\&amp;quot;context\&amp;quot;:\&amp;quot;\&amp;quot;,\&amp;quot;outcome_status\&amp;quot;:{\&amp;quot;category\&amp;quot;:\&amp;quot;Investigation complete; no suspect identified\&amp;quot;,\&amp;quot;date\&amp;quot;:\&amp;quot;2020-03\&amp;quot;},\&amp;quot;persistent_id\&amp;quot;:\&amp;quot;b66c1dcefad0ced8cffde6924ae86bf36df004c84c48389c15db6e44a99baff6\&amp;quot;,\&amp;quot;id\&amp;quot;:81238305,\&amp;quot;location_subtype\&amp;quot;:\&amp;quot;\&amp;quot;,\&amp;quot;month\&amp;quot;:\&amp;quot;2020-02\&amp;quot;},{\&amp;quot;category\&amp;quot;:\&amp;quot;vehicle-crime\&amp;quot;,\&amp;quot;location_type\&amp;quot;:\&amp;quot;Force\&amp;quot;,\&amp;quot;location\&amp;quot;:{\&amp;quot;latitude\&amp;quot;:\&amp;quot;51.515486\&amp;quot;,\&amp;quot;street\&amp;quot;:{\&amp;quot;id\&amp;quot;:1083744,\&amp;quot;name\&amp;quot;:\&amp;quot;On or near Heath Park Lane\&amp;quot;},\&amp;quot;longitude\&amp;quot;:\&amp;quot;-3.182295\&amp;quot;},\&amp;quot;context\&amp;quot;:\&amp;quot;\&amp;quot;,\&amp;quot;outcome_status\&amp;quot;:{\&amp;quot;category\&amp;quot;:\&amp;quot;Investigation complete; no suspect identified\&amp;quot;,\&amp;quot;date\&amp;quot;:\&amp;quot;2020-02\&amp;quot;},\&amp;quot;persistent_id\&amp;quot;:\&amp;quot;4d918317cd772b800243401b2deba7a91f11a86f9da0080d6dd9d84d4b9ef83f\&amp;quot;,\&amp;quot;id\&amp;quot;:81239441,\&amp;quot;location_subtype\&amp;quot;:\&amp;quot;\&amp;quot;,\&amp;quot;month\&amp;quot;:\&amp;quot;2020-02\&amp;quot;},{\&amp;quot;category\&amp;quot;:\&amp;quot;vehicle-crime\&amp;quot;,\&amp;quot;location_type\&amp;quot;:\&amp;quot;Force\&amp;quot;,\&amp;quot;location\&amp;quot;:{\&amp;quot;latitude\&amp;quot;:\&amp;quot;51.497118\&amp;quot;,\&amp;quot;street\&amp;quot;:{\&amp;quot;id\&amp;quot;:1081632,\&amp;quot;name\&amp;quot;:\&amp;quot;On or near Petrol Station\&amp;quot;},\&amp;quot;longitude\&amp;quot;:\&amp;quot;-3.192711\&amp;quot;},\&amp;quot;context\&amp;quot;:\&amp;quot;\&amp;quot;,\&amp;quot;outcome_status\&amp;quot;:{\&amp;quot;category\&amp;quot;:\&amp;quot;Under investigation\&amp;quot;,\&amp;quot;date\&amp;quot;:\&amp;quot;2020-02\&amp;quot;},\&amp;quot;persistent_id\&amp;quot;:\&amp;quot;2b2163a342579acc4b7d457b1a270a26acb7cc116ff948c8e35628bddd4e005a\&amp;quot;,\&amp;quot;id\&amp;quot;:81238244,\&amp;quot;location_subtype\&amp;quot;:\&amp;quot;\&amp;quot;,\&amp;quot;month\&amp;quot;:\&amp;quot;2020-02\&amp;quot;},{\&amp;quot;category\&amp;quot;:\&amp;quot;vehicle-crime\&amp;quot;,\&amp;quot;location_type\&amp;quot;:\&amp;quot;Force\&amp;quot;,\&amp;quot;location\&amp;quot;:{\&amp;quot;latitude\&amp;quot;:\&amp;quot;51.497118\&amp;quot;,\&amp;quot;street\&amp;quot;:{\&amp;quot;id\&amp;quot;:1081632,\&amp;quot;name\&amp;quot;:\&amp;quot;On or near Petrol Station\&amp;quot;},\&amp;quot;longitude\&amp;quot;:\&amp;quot;-3.192711\&amp;quot;},\&amp;quot;context\&amp;quot;:\&amp;quot;\&amp;quot;,\&amp;quot;outcome_status\&amp;quot;:{\&amp;quot;category\&amp;quot;:\&amp;quot;Investigation complete; no suspect identified\&amp;quot;,\&amp;quot;date\&amp;quot;:\&amp;quot;2020-02\&amp;quot;},\&amp;quot;persistent_id\&amp;quot;:\&amp;quot;3df4e80f4bcd590c1760c5df0be5755ec90d7acb5711e23ecc1b07c4d263ba6b\&amp;quot;,\&amp;quot;id\&amp;quot;:81239576,\&amp;quot;location_subtype\&amp;quot;:\&amp;quot;\&amp;quot;,\&amp;quot;month\&amp;quot;:\&amp;quot;2020-02\&amp;quot;},{\&amp;quot;category\&amp;quot;:\&amp;quot;vehicle-crime\&amp;quot;,\&amp;quot;location_type\&amp;quot;:\&amp;quot;Force\&amp;quot;,\&amp;quot;location\&amp;quot;:{\&amp;quot;latitude\&amp;quot;:\&amp;quot;51.496468\&amp;quot;,\&amp;quot;street\&amp;quot;:{\&amp;quot;id\&amp;quot;:1081601,\&amp;quot;name\&amp;quot;:\&amp;quot;On or near Rhygoes Street\&amp;quot;},\&amp;quot;longitude\&amp;quot;:\&amp;quot;-3.184972\&amp;quot;},\&amp;quot;context\&amp;quot;:\&amp;quot;\&amp;quot;,\&amp;quot;outcome_status\&amp;quot;:{\&amp;quot;category\&amp;quot;:\&amp;quot;Investigation complete; no suspect identified\&amp;quot;,\&amp;quot;date\&amp;quot;:\&amp;quot;2020-02\&amp;quot;},\&amp;quot;persistent_id\&amp;quot;:\&amp;quot;e13bff04cc19a9f8331d4e1cff06ec4d132ca636e728f465f802aa8a187835ae\&amp;quot;,\&amp;quot;id\&amp;quot;:81239620,\&amp;quot;location_subtype\&amp;quot;:\&amp;quot;\&amp;quot;,\&amp;quot;month\&amp;quot;:\&amp;quot;2020-02\&amp;quot;},{\&amp;quot;category\&amp;quot;:\&amp;quot;vehicle-crime\&amp;quot;,\&amp;quot;location_type\&amp;quot;:\&amp;quot;Force\&amp;quot;,\&amp;quot;location\&amp;quot;:{\&amp;quot;latitude\&amp;quot;:\&amp;quot;51.496485\&amp;quot;,\&amp;quot;street\&amp;quot;:{\&amp;quot;id\&amp;quot;:1081626,\&amp;quot;name\&amp;quot;:\&amp;quot;On or near Brithdir Street\&amp;quot;},\&amp;quot;longitude\&amp;quot;:\&amp;quot;-3.184180\&amp;quot;},\&amp;quot;context\&amp;quot;:\&amp;quot;\&amp;quot;,\&amp;quot;outcome_status\&amp;quot;:{\&amp;quot;category\&amp;quot;:\&amp;quot;Investigation complete; no suspect identified\&amp;quot;,\&amp;quot;date\&amp;quot;:\&amp;quot;2020-02\&amp;quot;},\&amp;quot;persistent_id\&amp;quot;:\&amp;quot;f9443b6ebbb08eb279883f4cfd79947c988edccda3b2615dcc5d30e698eeb496\&amp;quot;,\&amp;quot;id\&amp;quot;:81238098,\&amp;quot;location_subtype\&amp;quot;:\&amp;quot;\&amp;quot;,\&amp;quot;month\&amp;quot;:\&amp;quot;2020-02\&amp;quot;},{\&amp;quot;category\&amp;quot;:\&amp;quot;vehicle-crime\&amp;quot;,\&amp;quot;location_type\&amp;quot;:\&amp;quot;Force\&amp;quot;,\&amp;quot;location\&amp;quot;:{\&amp;quot;latitude\&amp;quot;:\&amp;quot;51.495872\&amp;quot;,\&amp;quot;street\&amp;quot;:{\&amp;quot;id\&amp;quot;:1081618,\&amp;quot;name\&amp;quot;:\&amp;quot;On or near Gelligaer Gardens\&amp;quot;},\&amp;quot;longitude\&amp;quot;:\&amp;quot;-3.187881\&amp;quot;},\&amp;quot;context\&amp;quot;:\&amp;quot;\&amp;quot;,\&amp;quot;outcome_status\&amp;quot;:{\&amp;quot;category\&amp;quot;:\&amp;quot;Investigation complete; no suspect identified\&amp;quot;,\&amp;quot;date\&amp;quot;:\&amp;quot;2020-02\&amp;quot;},\&amp;quot;persistent_id\&amp;quot;:\&amp;quot;a0e5ca870b8a6c756b28529e7e6554ae499810a12ccf0e3e33be946fd48eb18c\&amp;quot;,\&amp;quot;id\&amp;quot;:81238168,\&amp;quot;location_subtype\&amp;quot;:\&amp;quot;\&amp;quot;,\&amp;quot;month\&amp;quot;:\&amp;quot;2020-02\&amp;quot;}]&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;That&amp;rsquo;s great, notice how each individual reported crime is wrapped in &lt;code&gt;{}&lt;/code&gt;? We can get that out of JSON and into a dataframe like this:
+We&amp;rsquo;ll use &lt;code&gt;fromJSON()&lt;/code&gt; and tell it what object to work on, and we want to flatten it. We can use a pipe &lt;code&gt;%&amp;gt;%&lt;/code&gt; to add another command and this one will be to set it up as a &lt;code&gt;data.frame()&lt;/code&gt;.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;vehicle_crimes &amp;lt;- fromJSON(response, flatten = TRUE) %&amp;gt;% 
+  data.frame()
+
+# let&#39;s have a look at the structure of the dataframe
+str(vehicle_crimes)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## &#39;data.frame&#39;:	9 obs. of  13 variables:
+##  $ category               : chr  &amp;quot;vehicle-crime&amp;quot; &amp;quot;vehicle-crime&amp;quot; &amp;quot;vehicle-crime&amp;quot; &amp;quot;vehicle-crime&amp;quot; ...
+##  $ location_type          : chr  &amp;quot;Force&amp;quot; &amp;quot;Force&amp;quot; &amp;quot;Force&amp;quot; &amp;quot;Force&amp;quot; ...
+##  $ context                : chr  &amp;quot;&amp;quot; &amp;quot;&amp;quot; &amp;quot;&amp;quot; &amp;quot;&amp;quot; ...
+##  $ persistent_id          : chr  &amp;quot;cb7458646b734199c1728e7ba2b0cc375cb792a1d181092c30e3a8a217838c32&amp;quot; &amp;quot;1b5a72e887633314e5f0f570e97a8112bc99781745db1b3c54f3a0815117628f&amp;quot; &amp;quot;b66c1dcefad0ced8cffde6924ae86bf36df004c84c48389c15db6e44a99baff6&amp;quot; &amp;quot;4d918317cd772b800243401b2deba7a91f11a86f9da0080d6dd9d84d4b9ef83f&amp;quot; ...
+##  $ id                     : int  81238108 81238172 81238305 81239441 81238244 81239576 81239620 81238098 81238168
+##  $ location_subtype       : chr  &amp;quot;&amp;quot; &amp;quot;&amp;quot; &amp;quot;&amp;quot; &amp;quot;&amp;quot; ...
+##  $ month                  : chr  &amp;quot;2020-02&amp;quot; &amp;quot;2020-02&amp;quot; &amp;quot;2020-02&amp;quot; &amp;quot;2020-02&amp;quot; ...
+##  $ location.latitude      : chr  &amp;quot;51.510986&amp;quot; &amp;quot;51.504594&amp;quot; &amp;quot;51.497118&amp;quot; &amp;quot;51.515486&amp;quot; ...
+##  $ location.longitude     : chr  &amp;quot;-3.207382&amp;quot; &amp;quot;-3.169997&amp;quot; &amp;quot;-3.192711&amp;quot; &amp;quot;-3.182295&amp;quot; ...
+##  $ location.street.id     : int  1082838 1083004 1081632 1083744 1081632 1081632 1081601 1081626 1081618
+##  $ location.street.name   : chr  &amp;quot;On or near Heol Wernlas&amp;quot; &amp;quot;On or near Dovedale Close&amp;quot; &amp;quot;On or near Petrol Station&amp;quot; &amp;quot;On or near Heath Park Lane&amp;quot; ...
+##  $ outcome_status.category: chr  &amp;quot;Under investigation&amp;quot; &amp;quot;Investigation complete; no suspect identified&amp;quot; &amp;quot;Investigation complete; no suspect identified&amp;quot; &amp;quot;Investigation complete; no suspect identified&amp;quot; ...
+##  $ outcome_status.date    : chr  &amp;quot;2020-02&amp;quot; &amp;quot;2020-03&amp;quot; &amp;quot;2020-03&amp;quot; &amp;quot;2020-02&amp;quot; ...
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;We can now start looking at what we&amp;rsquo;ve got going on in our dataset. First off, we&amp;rsquo;re going to get rid of some of the columns we don&amp;rsquo;t need. We&amp;rsquo;ll be overwriting the data by storing it in the same dataframe. dplyr&amp;rsquo;s &lt;code&gt;select()&lt;/code&gt; allows us to pick what we want and give it a new name into the bargain - we used &lt;code&gt;rename()&lt;/code&gt; last time. Both work.&lt;/p&gt;
+&lt;p&gt;I tend to keep IDs for matching with things later, to check crime outcomes - but today for one time only we&amp;rsquo;ll get rid of it.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;vehicle_crimes &amp;lt;- select(vehicle_crimes,
+             month, category,
+             location = location.street.name,
+             long = location.longitude,
+             lat = location.latitude,
+             outcome = outcome_status.category)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Great, so we&amp;rsquo;ll group the crimes to see what is happening - we could do this on any one of the columns but for now we&amp;rsquo;ll do it on outcome.&lt;/p&gt;
+&lt;p&gt;We&amp;rsquo;ll use &lt;code&gt;mutate()&lt;/code&gt; and &lt;code&gt;recode()&lt;/code&gt; to simplify one of the descriptions (old = new), then we&amp;rsquo;ll z to get the unique objects and s&lt;code&gt;ummarise()&lt;/code&gt; by counting (&lt;code&gt;n()&lt;/code&gt;) the number of times it occurs before we &lt;code&gt;arrange()&lt;/code&gt; in descending (&lt;code&gt;desc()&lt;/code&gt;) order.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;outcomes &amp;lt;- vehicle_crimes %&amp;gt;%
+  mutate(outcome = recode(outcome, 
+                          &amp;quot;Investigation complete; no suspect identified&amp;quot; = &amp;quot;No suspect identified&amp;quot;)) %&amp;gt;%
+  group_by(outcome) %&amp;gt;%
+  summarise(outcome_count = n()) %&amp;gt;%
+  arrange(desc(outcome_count))
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;a-really-simple-chart&#34;&gt;A really simple chart&lt;/h3&gt;
+&lt;p&gt;One of the tools I use a lot, and get all of my students to use, is the 
+&lt;a href=&#34;https://ft-interactive.github.io/visual-vocabulary/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;FT&amp;rsquo;s Visual Vocabulary&lt;/a&gt; which was designed to help the FT&amp;rsquo;s team pick the right kind of tool for the job. I&amp;rsquo;ll be posting more about data visualisation soon.&lt;/p&gt;
+&lt;p&gt;I&amp;rsquo;m going to build a really simple column chart, using ggplot2. &lt;code&gt;ggplot()&lt;/code&gt; has a &lt;code&gt;+&lt;/code&gt; symbol which is like the pipe from dplyr and means &lt;em&gt;AND THEN&lt;/em&gt;. So, we tell &lt;code&gt;ggplot()&lt;/code&gt; what dataframe to work on, and what data to work on for the axes (&lt;code&gt;aes()&lt;/code&gt;) and then what type of chart to work with.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;ggplot(outcomes, aes(x = outcome, y = outcome_count)) +
+  geom_col()
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/tutorial/tidyverse/first-graph_files/figure-html/unnamed-chunk-10-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;ggplot2 has loads of options to play with to make a better looking chart, but this will give you an idea and an introduction to it. We&amp;rsquo;ll look at this more in due course.&lt;/p&gt;
+&lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
+&lt;p&gt;As well as importing files, it is possible to get data straight from a web server that allows it using an API - here we&amp;rsquo;ve built an API call, got JSON data back and turned it into a dataframe before going over the pivot table (group by function) and introducing a simple chart.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

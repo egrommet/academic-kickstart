@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Jonathan Cable on Glyn Mottershead</title>
-    <link>https://www.glynmottershead.com/authors/jonathan-cable/</link>
-    <description>Recent content in Jonathan Cable on Glyn Mottershead</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en-gb</language>
-    <lastBuildDate>Fri, 09 Mar 2018 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="https://www.glynmottershead.com/authors/jonathan-cable/index.xml" rel="self" type="application/rss+xml" />
-    
+    <title>Jonathan Cable | Glyn Mottershead</title>
+    <link>/authors/jonathan-cable/</link>
+      <atom:link href="/authors/jonathan-cable/index.xml" rel="self" type="application/rss+xml" />
+    <description>Jonathan Cable</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Fri, 09 Mar 2018 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>img/map[gravatar:%!s(bool=true) shape:circle]</url>
+      <title>Jonathan Cable</title>
+      <link>/authors/jonathan-cable/</link>
+    </image>
     
     <item>
       <title>&#39;Can I click it? Yes you can&#39;: Football journalism, Twitter and clickbait</title>
-      <link>https://www.glynmottershead.com/publication/can-i-click-it/</link>
+      <link>/publication/can-i-click-it/</link>
       <pubDate>Fri, 09 Mar 2018 00:00:00 +0000</pubDate>
-      
-      <guid>https://www.glynmottershead.com/publication/can-i-click-it/</guid>
-      <description>Does the sports media just use clickbait to generate traffic, and is this is reducing the quality of football journalism?</description>
+      <guid>/publication/can-i-click-it/</guid>
+      <description></description>
     </item>
     
   </channel>

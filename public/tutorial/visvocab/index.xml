@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Overview | Glyn Mottershead</title>
+    <link>/tutorial/visvocab/</link>
+      <atom:link href="/tutorial/visvocab/index.xml" rel="self" type="application/rss+xml" />
+    <description>Overview</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Wed, 15 Apr 2020 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>img/map[gravatar:%!s(bool=true) shape:circle]</url>
+      <title>Overview</title>
+      <link>/tutorial/visvocab/</link>
+    </image>
+    
+    <item>
+      <title>Pivot tables</title>
+      <link>/tutorial/visvocab/diverging_bar/</link>
+      <pubDate>Mon, 27 Apr 2020 00:00:00 +0000</pubDate>
+      <guid>/tutorial/visvocab/diverging_bar/</guid>
+      <description>&lt;h2 id=&#34;what-does-the-visual-vocabulary-say&#34;&gt;What does the Visual Vocabulary say?&lt;/h2&gt;
+&lt;p&gt;Deviation -&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&amp;ldquo;Emphasise variations (+/-) from a fixed reference point. Typically the reference point is zero but it can also be a target or a long-term average. Can also be used to show sentiment (positive/neutral/negative).
+Example FT uses
+Trade surplus/deficit, climate change&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;The diverging bar is:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&amp;ldquo;A simple standard bar chart that can handle both negative and positive magnitude values.&amp;rdquo;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Ok, so let&amp;rsquo;s look at how to make one as bar charts are quite simple to make.&lt;/p&gt;
+&lt;p&gt;We&amp;rsquo;ll be using data from the 
+&lt;a href=&#34;https://cran.r-project.org/web/packages/gapminder/README.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;gampinder package&lt;/a&gt; - which gives an excerpt from the gapminder dataset. If you don&amp;rsquo;t know about gapminder and the work of Hans Rosling and the rest of the gampinder team - then 
+&lt;a href=&#34;https://www.ted.com/talks/hans_rosling_the_best_stats_you_ve_ever_seen?language=en&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;watch this video&lt;/a&gt; - to be fair, I&amp;rsquo;d recommend watching anything that Hans did.&lt;/p&gt;
+&lt;p&gt;The spec from the gapminder pacakge read-me shows the data includes:&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th align=&#34;left&#34;&gt;Variable&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;Meaning&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;country&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;continent&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;year&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;lifeExp&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;life expectancy at birth&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;pop	total&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;population&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;gdpPercap&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;per-capita GDP&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;We&amp;rsquo;re going to have a look at lifeExp to see if there have been any changes. We&amp;rsquo;ll load up the tidyverse (I could just load up the dplyr, tidyr and ggplot2 packages here) and gapminder.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;library(tidyverse)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## ── Attaching packages ────────────────────────────────────────────────────────────────────────────────────────────────────── tidyverse 1.3.0 ──
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## ✓ ggplot2 3.3.0     ✓ purrr   0.3.3
+## ✓ tibble  3.0.0     ✓ dplyr   0.8.5
+## ✓ tidyr   1.0.2     ✓ stringr 1.4.0
+## ✓ readr   1.3.1     ✓ forcats 0.5.0
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## ── Conflicts ───────────────────────────────────────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
+## x dplyr::filter() masks stats::filter()
+## x dplyr::lag()    masks stats::lag()
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;library(gapminder)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The library loads the gapminder data as a dataframe but it will not show in your global evironment - let&amp;rsquo;s have a look at it.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;str(gapminder)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## tibble [1,704 × 6] (S3: tbl_df/tbl/data.frame)
+##  $ country  : Factor w/ 142 levels &amp;quot;Afghanistan&amp;quot;,..: 1 1 1 1 1 1 1 1 1 1 ...
+##  $ continent: Factor w/ 5 levels &amp;quot;Africa&amp;quot;,&amp;quot;Americas&amp;quot;,..: 3 3 3 3 3 3 3 3 3 3 ...
+##  $ year     : int [1:1704] 1952 1957 1962 1967 1972 1977 1982 1987 1992 1997 ...
+##  $ lifeExp  : num [1:1704] 28.8 30.3 32 34 36.1 ...
+##  $ pop      : int [1:1704] 8425333 9240934 10267083 11537966 13079460 14880372 12881816 13867957 16317921 22227415 ...
+##  $ gdpPercap: num [1:1704] 779 821 853 836 740 ...
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The latest year we have data for is 2007 - so let&amp;rsquo;s do a comparison across 10 years for countries in Africa and see if life expectancy has gone up or down.&lt;/p&gt;
+&lt;p&gt;I&amp;rsquo;m also going to use pivot_wider() to 
+&lt;a href=&#34;https://tidyr.tidyverse.org/articles/pivot.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;change the shape of the dataframe&lt;/a&gt; and I&amp;rsquo;ll use mutate to calculate the difference in years from our new columns.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;gapminder_africa &amp;lt;- gapminder %&amp;gt;%
+  filter(year == 1997 | year == 2007) %&amp;gt;%
+  filter(continent == &amp;quot;Africa&amp;quot;) %&amp;gt;%
+  select(country, year, lifeExp) %&amp;gt;%
+  pivot_wider(id_cols =  country, names_from = year, values_from = lifeExp) %&amp;gt;%
+  mutate(life_change = `2007` - `1997`)
+
+str(gapminder_africa)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## tibble [52 × 4] (S3: tbl_df/tbl/data.frame)
+##  $ country    : Factor w/ 142 levels &amp;quot;Afghanistan&amp;quot;,..: 3 4 11 14 17 18 20 22 23 27 ...
+##  $ 1997       : num [1:52] 69.2 41 54.8 52.6 50.3 ...
+##  $ 2007       : num [1:52] 72.3 42.7 56.7 50.7 52.3 ...
+##  $ life_change: num [1:52] 3.15 1.77 1.95 -1.83 1.97 ...
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;the-first-chart&#34;&gt;The first chart&lt;/h3&gt;
+&lt;p&gt;We could create a new column which says the data is above or below zero - but we can use the &lt;code&gt;fill = life_change &amp;gt; 0&lt;/code&gt; within &lt;code&gt;aes()&lt;/code&gt; to do that for us. Have a look at the code below.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;ggplot(data = gapminder_africa,
+       aes(x = country, y = life_change, fill = life_change &amp;gt; 0))+
+  geom_bar(stat = &amp;quot;identity&amp;quot;)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/tutorial/visvocab/diverging_bar_files/figure-html/unnamed-chunk-5-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;It has done what we wanted, but the order is set by the x axis, not what we want. Also, the x axis looks a mess - lots of names that are running into one another.&lt;/p&gt;
+&lt;p&gt;So, we&amp;rsquo;ll take the data set we want to work with and set the aes() like this:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;reorder the x axis by the life_change column - set it to the second argument in the reorder function&lt;/li&gt;
+&lt;li&gt;set the y axis using the life_change values&lt;/li&gt;
+&lt;li&gt;the fill line (life_change &amp;gt; 0) will set the data into two groups - above and below 0&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;We&amp;rsquo;ll also add coord_flip() to change it from a horizontal to a vertical chart.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;ggplot(data = gapminder_africa,
+       aes(x = reorder(country, life_change), y = life_change, fill = life_change &amp;gt; 0))+
+  geom_bar(stat = &amp;quot;identity&amp;quot;) +
+  coord_flip()
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/tutorial/visvocab/diverging_bar_files/figure-html/unnamed-chunk-6-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;h3 id=&#34;mutating-the-data&#34;&gt;Mutating the data&lt;/h3&gt;
+&lt;p&gt;In the second version I&amp;rsquo;m going to create a column that contains the information about the changes using mutate().
+This means the aes() can be filled by the life_change_pos column we&amp;rsquo;ll create. This is just to show how it is done.&lt;/p&gt;
+&lt;p&gt;I&amp;rsquo;ve also added a few more stylistic points to make it look nicer. Have a look at the section after coord_flip() to see what is going on.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;gapminder_africa2 &amp;lt;- gapminder_africa %&amp;gt;%
+  mutate(life_change_pos = life_change &amp;gt; 0)
+
+ggplot(data = gapminder_africa2,
+       aes(x = reorder(country, life_change), y = life_change, fill = life_change_pos))+
+  geom_bar(stat = &amp;quot;identity&amp;quot;) +
+  coord_flip() + 
+  labs(x = &amp;quot;Country&amp;quot;, y = &amp;quot;Change in Life Expectancy (years)&amp;quot;,
+       title = &amp;quot;Life Expectancy change in Africa&amp;quot;,
+       subtitles = &amp;quot;Comparing 2007 to 1997 using Gapminder data&amp;quot;)+
+  theme_minimal()+
+  guides(fill = FALSE) +
+  theme(panel.border = element_blank(),
+        panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank()) 
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/tutorial/visvocab/diverging_bar_files/figure-html/unnamed-chunk-7-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

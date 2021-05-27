@@ -1,0 +1,1005 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="generator" content="Source Themes Academic 4.8.0">
+
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  <meta name="author" content="Glyn Mottershead">
+
+  
+  
+  
+    
+  
+  <meta name="description" content="Getting the data We can, of course, download the data set we want and then use tools such as readr (if it is a csv file) to import the data. But that misses out on quite a powerful way of grabbing information.">
+
+  
+  <link rel="alternate" hreflang="en-us" href="/tutorial/tidyverse/first-graph/">
+
+  
+
+
+  
+  
+  
+  <meta name="theme-color" content="#2962ff">
+  
+
+  
+  
+
+  
+  
+  
+  
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css" integrity="sha256-uFVgMKfistnJAfoCUQigIl+JfUaP47GrRKjf6CTPVmw=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-1/css/all.min.css" integrity="sha256-4w9DunooKSr3MFXHXWyFER38WmPdm361bQS/2KUWZbU=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+
+    
+    
+    
+      
+    
+    
+      
+      
+        
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/github.min.css" crossorigin="anonymous" title="hl-light">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/dracula.min.css" crossorigin="anonymous" title="hl-dark" disabled>
+        
+      
+    
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.5.1/leaflet.css" integrity="sha256-SHMGCYmST46SoyGgo4YR/9AlK1vf3ff84Aq9yK4hdqM=" crossorigin="anonymous">
+    
+
+    
+
+    
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.1.2/lazysizes.min.js" integrity="sha256-Md1qLToewPeKjfAHU1zyPwOutccPAm5tahnaw7Osw0A=" crossorigin="anonymous" async></script>
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+        
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700%7CRoboto:400,400italic,700%7CRoboto+Mono&display=swap">
+  
+
+  
+  
+  
+  
+  <link rel="stylesheet" href="/css/academic.css">
+
+  
+
+
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-136339819-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+
+  function gtag() {
+      dataLayer.push(arguments);
+  }
+
+  function trackOutboundLink(url, target) {
+    gtag('event', 'click', {
+         'event_category': 'outbound',
+         'event_label': url,
+         'transport_type': 'beacon',
+         'event_callback': function () {
+           if (target !== '_blank') {
+             document.location = url;
+           }
+         }
+    });
+    console.debug("Outbound link clicked: " + url);
+  }
+
+  function onClickCallback(event) {
+    if ((event.target.tagName !== 'A') || (event.target.host === window.location.host)) {
+      return;
+    }
+    trackOutboundLink(event.target, event.target.getAttribute('target'));  
+  }
+
+  gtag('js', new Date());
+  gtag('config', 'UA-136339819-1', { 'anonymize_ip': true });
+
+  
+  document.addEventListener('click', onClickCallback, false);
+</script>
+
+
+  
+
+
+  
+
+  <link rel="manifest" href="/index.webmanifest">
+  <link rel="icon" type="image/png" href="/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_32x32_fill_lanczos_center_2.png">
+  <link rel="apple-touch-icon" type="image/png" href="/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_192x192_fill_lanczos_center_2.png">
+
+  <link rel="canonical" href="/tutorial/tidyverse/first-graph/">
+
+  
+  
+  
+  
+  
+    
+    
+  
+  
+  <meta property="twitter:card" content="summary">
+  
+  <meta property="twitter:site" content="@glynmottershead">
+  <meta property="twitter:creator" content="@glynmottershead">
+  
+  <meta property="og:site_name" content="Glyn Mottershead">
+  <meta property="og:url" content="/tutorial/tidyverse/first-graph/">
+  <meta property="og:title" content="First graph in ggplot | Glyn Mottershead">
+  <meta property="og:description" content="Getting the data We can, of course, download the data set we want and then use tools such as readr (if it is a csv file) to import the data. But that misses out on quite a powerful way of grabbing information."><meta property="og:image" content="img/map[gravatar:%!s(bool=true) shape:circle]">
+  <meta property="twitter:image" content="img/map[gravatar:%!s(bool=true) shape:circle]"><meta property="og:locale" content="en-us">
+  
+    
+      <meta property="article:published_time" content="2020-04-15T00:00:00&#43;00:00">
+    
+    <meta property="article:modified_time" content="2020-04-15T00:00:00&#43;00:00">
+  
+
+  
+
+
+
+  
+
+
+  
+  
+  
+  
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.1/cookieconsent.min.js" integrity="sha256-5VhCqFam2Cn+yjw61zbBNrbHVJ6SRydPeKopYlngbiQ=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.1/cookieconsent.min.css" integrity="sha256-zQ0LblD/Af8vOppw18+2anxsuaz3pWYyVWi+bTvTH8Q=" crossorigin="anonymous">
+  
+  <script>
+  window.addEventListener("load", function(){
+    window.cookieconsent.initialise({
+      "palette": {
+        "popup": {
+          "background": "#2962ff",
+          "text": "#fff"
+        },
+        "button": {
+          "background": "#fff",
+          "text": "#2962ff"
+        }
+      },
+      "theme": "classic",
+      "content": {
+        "message": "This website uses cookies to ensure you get the best experience on our website.",
+        "dismiss": "Got it!",
+        "link": "Learn more",
+        "href": "https://www.cookiesandyou.com"
+      }
+    })});
+  </script>
+
+
+
+  
+
+
+
+
+
+  <title>First graph in ggplot | Glyn Mottershead</title>
+
+</head>
+
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" >
+
+  <aside class="search-results" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        <input name="q" id="search-query" placeholder="Search..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" spellcheck="false" type="search">
+        
+      </div>
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+  
+
+
+
+
+
+
+
+<nav class="navbar navbar-expand-lg navbar-light compensate-for-scrollbar" id="navbar-main">
+  <div class="container">
+
+    
+    <div class="d-none d-lg-inline-flex">
+      <a class="navbar-brand" href="/">Glyn Mottershead</a>
+    </div>
+    
+
+    
+    <button type="button" class="navbar-toggler" data-toggle="collapse"
+            data-target="#navbar-content" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+    <span><i class="fas fa-bars"></i></span>
+    </button>
+    
+
+    
+    <div class="navbar-brand-mobile-wrapper d-inline-flex d-lg-none">
+      <a class="navbar-brand" href="/">Glyn Mottershead</a>
+    </div>
+    
+
+    
+    
+    <div class="navbar-collapse main-menu-item collapse justify-content-start" id="navbar-content">
+
+      
+      <ul class="navbar-nav d-md-inline-flex">
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#about"><span>Home</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#posts"><span>Posts</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#featured"><span>Publications</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#experience"><span>Experience</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#contact"><span>Contact</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link  active" href="/tutorial/"><span>Tutorials</span></a>
+        </li>
+
+        
+        
+
+      
+
+        
+      </ul>
+    </div>
+
+    <ul class="nav-icons navbar-nav flex-row ml-auto d-flex pl-md-2">
+      
+      <li class="nav-item">
+        <a class="nav-link js-search" href="#"><i class="fas fa-search" aria-hidden="true"></i></a>
+      </li>
+      
+
+      
+
+      
+
+    </ul>
+
+  </div>
+</nav>
+
+
+  
+
+<div class="container-fluid docs">
+  <div class="row flex-xl-nowrap">
+    <div class="col-12 col-md-3 col-xl-2 docs-sidebar">
+      
+
+
+
+
+
+  
+    
+  
+
+
+
+
+<form class="docs-search d-flex align-items-center">
+  <button class="btn docs-toggle d-md-none p-0 mr-3" type="button" data-toggle="collapse" data-target="#docs-nav" aria-controls="docs-nav" aria-expanded="false" aria-label="Toggle section navigation">
+    <span><i class="fas fa-bars"></i></span>
+  </button>
+
+  
+  <input name="q" type="search" class="form-control" placeholder="Search..." autocomplete="off">
+  
+</form>
+
+<nav class="collapse docs-links" id="docs-nav">
+  
+
+  
+  
+  
+  
+  <div class="docs-toc-item">
+    <a class="docs-toc-link" href="/tutorial/tidyverse/">Overview</a>
+
+  </div>
+  
+  <div class="docs-toc-item">
+    <a class="docs-toc-link" href="/tutorial/tidyverse/pivot-tables-in-r/">Tidyverse tools</a>
+    <ul class="nav docs-sidenav">
+      
+      <li >
+        <a href="/tutorial/tidyverse/pivot-tables-in-r/">Pivot tables</a>
+      </li>
+      
+      <li class="active">
+        <a href="/tutorial/tidyverse/first-graph/">First graph</a>
+      </li>
+      
+    </ul>
+    
+
+  </div>
+  
+  
+</nav>
+
+    </div>
+
+    
+    <div class="d-none d-xl-block col-xl-2 docs-toc">
+      <ul class="nav toc-top">
+        <li><a href="#" id="back_to_top" class="docs-toc-title">Contents</a></li>
+      </ul>
+
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#getting-the-data">Getting the data</a>
+      <ul>
+        <li><a href="#tools-for-the-job">Tools for the job</a></li>
+        <li><a href="#what-are-we-looking-for">What are we looking for?</a></li>
+        <li><a href="#building-our-query-web-address">Building our query web address</a></li>
+        <li><a href="#a-really-simple-chart">A really simple chart</a></li>
+      </ul>
+    </li>
+    <li><a href="#conclusion">Conclusion</a></li>
+  </ul>
+</nav>
+
+      
+    </div>
+    
+
+    <main class="col-12 col-md-9 col-xl-8 py-md-3 pl-md-5 docs-content" role="main">
+
+      <article class="article">
+
+        <div class="docs-article-container">
+          <h1>First graph in ggplot</h1>
+
+          <div class="article-style">
+            <h2 id="getting-the-data">Getting the data</h2>
+<p>We can, of course, download the data set we want and then use tools such as readr (if it is a csv file) to import the data. But that misses out on quite a powerful way of grabbing information. Many organisations have set up a way of asking questions directly to their database - think about it like a machine-to-machine conversation.</p>
+<p>This is called an 
+<a href="https://www.freecodecamp.org/news/what-is-an-api-in-english-please-b880a3214a82/" target="_blank" rel="noopener">API (Application Programming Interface)</a>, and there are lots of them about. So, a basic understanding of how to get that information into an R dataframe for analysis is really important.</p>
+<p>And just for an added bonus, we&rsquo;re going to build on the concepts from the 
+<a href="/tutorial/tidyverse/pivot-tables-in-r/">pivot table session</a> to add in a graph using ggplot2 (again a tidyverse tool).</p>
+<h3 id="tools-for-the-job">Tools for the job</h3>
+<p>We&rsquo;ll be using httr to work with our APIs - it makes it much easier to construct a question. I&rsquo;ve tried using the paste() function to do this in the past and didn&rsquo;t find it easy, httr is much nicer in comparison.</p>
+<p>The response from our questions is often in the form of either 
+<a href="https://www.w3schools.com/js/js_json_xml.asp" target="_blank" rel="noopener">JSON or XML</a>. The documentation for the API will tell you about what form it is in and that will tell us what tools we need to deal with the particular formats.</p>
+<p>We&rsquo;ll be using an API from the 
+<a href="https://data.police.uk" target="_blank" rel="noopener">data.police site</a>, which returns data from queries as JSON - we&rsquo;ll need the jsonlite package to help us with that.</p>
+<p>The final package is the tidyverse to allow us to do some data changes, in a similar way to what we&rsquo;ve done before and to generate the chart we are going to make at the end.</p>
+<p>So, usual rules create an R script file in RStudio and we can get working.</p>
+<pre><code class="language-r">library(httr)
+library(jsonlite)
+library(tidyverse)
+</code></pre>
+<h3 id="what-are-we-looking-for">What are we looking for?</h3>
+<p>The first step is to look at what kind of crimes we can investigate.
+The 
+<a href="https://data.police.uk/docs/" target="_blank" rel="noopener">documentation for the data.police site&rsquo;s API</a> gives this examples of the different API queries that are available. You can just copy and paste one of the examples into a web browser to see what is going on. I&rsquo;ve picked the 
+<a href="https://data.police.uk/docs/method/crime-categories/" target="_blank" rel="noopener">crime categories API page</a> - which shows an example that looks like this -  <a href="https://data.police.uk/api/crime-categories?date=2020-03">https://data.police.uk/api/crime-categories?date=2020-03</a>. Copy and paste that into a web browser to get a JSON view of the data.</p>
+<p>I&rsquo;ve had a look at the webpage and inspired by what I&rsquo;ve seen in the news recently, I&rsquo;m going to look at car crime around the main hospital in Cardiff. You could swap any category in this.</p>
+<h3 id="building-our-query-web-address">Building our query web address</h3>
+<p>We&rsquo;ll be looking at 
+<a href="https://data.police.uk/docs/method/crime-street/" target="_blank" rel="noopener">street level crimes</a>, this call is built is in three parts:</p>
+<ul>
+<li>The basic structure <code>https://data.police.uk/api/crimes-street/</code></li>
+<li>The crime type <code>vehicle-crime</code></li>
+<li>The query <code>lat= long= date=</code></li>
+</ul>
+<p>I&rsquo;ll go onto Google Maps in Chrome and search for University Hospital of Wales - the hospital mentioned in the story I read. If you right click on the point you searched for in the browser window, you can pick <code>What's here?</code> and you&rsquo;ll get a little pop-up with the latitude and longitude on the bottom. Copy that over to your script.</p>
+<p>We&rsquo;re going to store the first part of the address in an object called <code>url</code>. I&rsquo;ve copied an example from the documentation but changed it from the usual <code>all-crimes?</code> to <code>vehicle-crime?</code>.</p>
+<p>We&rsquo;ll wrap the web address in double quotes and use the <code>&lt;-</code> assign symbol.</p>
+<pre><code class="language-r">url &lt;- &quot;https://data.police.uk/api/crimes-street/vehicle-crime?&quot;
+</code></pre>
+<p>We&rsquo;ll now start structuring our request to the data.police server. We&rsquo;ll be using <code>GET()</code> from httr - it does what it says. We&rsquo;ll tell it what the url is that we are using and then give it a <code>list()</code> with our query elements inside it. Have a play with the dates and see what is going on - you may get error messages. If so, Google them and find out what they mean.</p>
+<p>An important point in checking your code is watching out for how many brackets you have. This is a real source of broken code for beginners, so watch out for it. This section below has two opening brackets - one for <code>GET</code> and one for <code>list</code>, so we must have matching closing brackets. If it isn&rsquo;t matched the code will not run.</p>
+<p>In mock structure it looks like this - <code>our_stored_call &lt;- GET(base_address, query = list(some queries, separated by commas))</code>. I&rsquo;ve hit return at points below to make it easier to read, it will be treated as one line of code like this.</p>
+<pre><code class="language-r">api_call &lt;- GET(url = url,
+               query = list(
+                 lat = 51.50724,
+                 lng = -3.190278,
+                 date = &quot;2020-02&quot;)
+)
+</code></pre>
+<p>The key thing to do when you make a call to an API is to check what has happened - they all have a status code built into the return. We can access this by running one line of code - <code>api_call$status_code</code>.
+It will return a number - 200 means all is well, numbers in the 400s usually mean you haven&rsquo;t structured your call properly and 500s means their API isn&rsquo;t working.</p>
+<p>We&rsquo;ve got a 200 - all is well.</p>
+<pre><code class="language-r">api_call$status_code
+</code></pre>
+<pre><code>## [1] 200
+</code></pre>
+<p>The way JSON is structured means there is a header with lots of background information (metadata) and content - which is what we want. We&rsquo;ll use jsonlite&rsquo;s <code>content()</code> function and specify how we want it back.</p>
+<pre><code class="language-r">response &lt;- content(api_call, as = &quot;text&quot;, encoding = &quot;UTF-8&quot;)
+</code></pre>
+<p>I wouldn&rsquo;t normally use <code>head()</code> to look at the top of this kind of object but, let&rsquo;s do it here to see what we get back. You can call <code>head()</code> on many types of data object in R to see what you&rsquo;ve got at the head (top) of it. You can even tell it how many to look at by adding an n = * argument eg <code>head(object, n = 6)</code>.</p>
+<pre><code class="language-r">head(response)
+</code></pre>
+<pre><code>## [1] &quot;[{\&quot;category\&quot;:\&quot;vehicle-crime\&quot;,\&quot;location_type\&quot;:\&quot;Force\&quot;,\&quot;location\&quot;:{\&quot;latitude\&quot;:\&quot;51.510986\&quot;,\&quot;street\&quot;:{\&quot;id\&quot;:1082838,\&quot;name\&quot;:\&quot;On or near Heol Wernlas\&quot;},\&quot;longitude\&quot;:\&quot;-3.207382\&quot;},\&quot;context\&quot;:\&quot;\&quot;,\&quot;outcome_status\&quot;:{\&quot;category\&quot;:\&quot;Under investigation\&quot;,\&quot;date\&quot;:\&quot;2020-02\&quot;},\&quot;persistent_id\&quot;:\&quot;cb7458646b734199c1728e7ba2b0cc375cb792a1d181092c30e3a8a217838c32\&quot;,\&quot;id\&quot;:81238108,\&quot;location_subtype\&quot;:\&quot;\&quot;,\&quot;month\&quot;:\&quot;2020-02\&quot;},{\&quot;category\&quot;:\&quot;vehicle-crime\&quot;,\&quot;location_type\&quot;:\&quot;Force\&quot;,\&quot;location\&quot;:{\&quot;latitude\&quot;:\&quot;51.504594\&quot;,\&quot;street\&quot;:{\&quot;id\&quot;:1083004,\&quot;name\&quot;:\&quot;On or near Dovedale Close\&quot;},\&quot;longitude\&quot;:\&quot;-3.169997\&quot;},\&quot;context\&quot;:\&quot;\&quot;,\&quot;outcome_status\&quot;:{\&quot;category\&quot;:\&quot;Investigation complete; no suspect identified\&quot;,\&quot;date\&quot;:\&quot;2020-03\&quot;},\&quot;persistent_id\&quot;:\&quot;1b5a72e887633314e5f0f570e97a8112bc99781745db1b3c54f3a0815117628f\&quot;,\&quot;id\&quot;:81238172,\&quot;location_subtype\&quot;:\&quot;\&quot;,\&quot;month\&quot;:\&quot;2020-02\&quot;},{\&quot;category\&quot;:\&quot;vehicle-crime\&quot;,\&quot;location_type\&quot;:\&quot;Force\&quot;,\&quot;location\&quot;:{\&quot;latitude\&quot;:\&quot;51.497118\&quot;,\&quot;street\&quot;:{\&quot;id\&quot;:1081632,\&quot;name\&quot;:\&quot;On or near Petrol Station\&quot;},\&quot;longitude\&quot;:\&quot;-3.192711\&quot;},\&quot;context\&quot;:\&quot;\&quot;,\&quot;outcome_status\&quot;:{\&quot;category\&quot;:\&quot;Investigation complete; no suspect identified\&quot;,\&quot;date\&quot;:\&quot;2020-03\&quot;},\&quot;persistent_id\&quot;:\&quot;b66c1dcefad0ced8cffde6924ae86bf36df004c84c48389c15db6e44a99baff6\&quot;,\&quot;id\&quot;:81238305,\&quot;location_subtype\&quot;:\&quot;\&quot;,\&quot;month\&quot;:\&quot;2020-02\&quot;},{\&quot;category\&quot;:\&quot;vehicle-crime\&quot;,\&quot;location_type\&quot;:\&quot;Force\&quot;,\&quot;location\&quot;:{\&quot;latitude\&quot;:\&quot;51.515486\&quot;,\&quot;street\&quot;:{\&quot;id\&quot;:1083744,\&quot;name\&quot;:\&quot;On or near Heath Park Lane\&quot;},\&quot;longitude\&quot;:\&quot;-3.182295\&quot;},\&quot;context\&quot;:\&quot;\&quot;,\&quot;outcome_status\&quot;:{\&quot;category\&quot;:\&quot;Investigation complete; no suspect identified\&quot;,\&quot;date\&quot;:\&quot;2020-02\&quot;},\&quot;persistent_id\&quot;:\&quot;4d918317cd772b800243401b2deba7a91f11a86f9da0080d6dd9d84d4b9ef83f\&quot;,\&quot;id\&quot;:81239441,\&quot;location_subtype\&quot;:\&quot;\&quot;,\&quot;month\&quot;:\&quot;2020-02\&quot;},{\&quot;category\&quot;:\&quot;vehicle-crime\&quot;,\&quot;location_type\&quot;:\&quot;Force\&quot;,\&quot;location\&quot;:{\&quot;latitude\&quot;:\&quot;51.497118\&quot;,\&quot;street\&quot;:{\&quot;id\&quot;:1081632,\&quot;name\&quot;:\&quot;On or near Petrol Station\&quot;},\&quot;longitude\&quot;:\&quot;-3.192711\&quot;},\&quot;context\&quot;:\&quot;\&quot;,\&quot;outcome_status\&quot;:{\&quot;category\&quot;:\&quot;Under investigation\&quot;,\&quot;date\&quot;:\&quot;2020-02\&quot;},\&quot;persistent_id\&quot;:\&quot;2b2163a342579acc4b7d457b1a270a26acb7cc116ff948c8e35628bddd4e005a\&quot;,\&quot;id\&quot;:81238244,\&quot;location_subtype\&quot;:\&quot;\&quot;,\&quot;month\&quot;:\&quot;2020-02\&quot;},{\&quot;category\&quot;:\&quot;vehicle-crime\&quot;,\&quot;location_type\&quot;:\&quot;Force\&quot;,\&quot;location\&quot;:{\&quot;latitude\&quot;:\&quot;51.497118\&quot;,\&quot;street\&quot;:{\&quot;id\&quot;:1081632,\&quot;name\&quot;:\&quot;On or near Petrol Station\&quot;},\&quot;longitude\&quot;:\&quot;-3.192711\&quot;},\&quot;context\&quot;:\&quot;\&quot;,\&quot;outcome_status\&quot;:{\&quot;category\&quot;:\&quot;Investigation complete; no suspect identified\&quot;,\&quot;date\&quot;:\&quot;2020-02\&quot;},\&quot;persistent_id\&quot;:\&quot;3df4e80f4bcd590c1760c5df0be5755ec90d7acb5711e23ecc1b07c4d263ba6b\&quot;,\&quot;id\&quot;:81239576,\&quot;location_subtype\&quot;:\&quot;\&quot;,\&quot;month\&quot;:\&quot;2020-02\&quot;},{\&quot;category\&quot;:\&quot;vehicle-crime\&quot;,\&quot;location_type\&quot;:\&quot;Force\&quot;,\&quot;location\&quot;:{\&quot;latitude\&quot;:\&quot;51.496468\&quot;,\&quot;street\&quot;:{\&quot;id\&quot;:1081601,\&quot;name\&quot;:\&quot;On or near Rhygoes Street\&quot;},\&quot;longitude\&quot;:\&quot;-3.184972\&quot;},\&quot;context\&quot;:\&quot;\&quot;,\&quot;outcome_status\&quot;:{\&quot;category\&quot;:\&quot;Investigation complete; no suspect identified\&quot;,\&quot;date\&quot;:\&quot;2020-02\&quot;},\&quot;persistent_id\&quot;:\&quot;e13bff04cc19a9f8331d4e1cff06ec4d132ca636e728f465f802aa8a187835ae\&quot;,\&quot;id\&quot;:81239620,\&quot;location_subtype\&quot;:\&quot;\&quot;,\&quot;month\&quot;:\&quot;2020-02\&quot;},{\&quot;category\&quot;:\&quot;vehicle-crime\&quot;,\&quot;location_type\&quot;:\&quot;Force\&quot;,\&quot;location\&quot;:{\&quot;latitude\&quot;:\&quot;51.496485\&quot;,\&quot;street\&quot;:{\&quot;id\&quot;:1081626,\&quot;name\&quot;:\&quot;On or near Brithdir Street\&quot;},\&quot;longitude\&quot;:\&quot;-3.184180\&quot;},\&quot;context\&quot;:\&quot;\&quot;,\&quot;outcome_status\&quot;:{\&quot;category\&quot;:\&quot;Investigation complete; no suspect identified\&quot;,\&quot;date\&quot;:\&quot;2020-02\&quot;},\&quot;persistent_id\&quot;:\&quot;f9443b6ebbb08eb279883f4cfd79947c988edccda3b2615dcc5d30e698eeb496\&quot;,\&quot;id\&quot;:81238098,\&quot;location_subtype\&quot;:\&quot;\&quot;,\&quot;month\&quot;:\&quot;2020-02\&quot;},{\&quot;category\&quot;:\&quot;vehicle-crime\&quot;,\&quot;location_type\&quot;:\&quot;Force\&quot;,\&quot;location\&quot;:{\&quot;latitude\&quot;:\&quot;51.495872\&quot;,\&quot;street\&quot;:{\&quot;id\&quot;:1081618,\&quot;name\&quot;:\&quot;On or near Gelligaer Gardens\&quot;},\&quot;longitude\&quot;:\&quot;-3.187881\&quot;},\&quot;context\&quot;:\&quot;\&quot;,\&quot;outcome_status\&quot;:{\&quot;category\&quot;:\&quot;Investigation complete; no suspect identified\&quot;,\&quot;date\&quot;:\&quot;2020-02\&quot;},\&quot;persistent_id\&quot;:\&quot;a0e5ca870b8a6c756b28529e7e6554ae499810a12ccf0e3e33be946fd48eb18c\&quot;,\&quot;id\&quot;:81238168,\&quot;location_subtype\&quot;:\&quot;\&quot;,\&quot;month\&quot;:\&quot;2020-02\&quot;}]&quot;
+</code></pre>
+<p>That&rsquo;s great, notice how each individual reported crime is wrapped in <code>{}</code>? We can get that out of JSON and into a dataframe like this:
+We&rsquo;ll use <code>fromJSON()</code> and tell it what object to work on, and we want to flatten it. We can use a pipe <code>%&gt;%</code> to add another command and this one will be to set it up as a <code>data.frame()</code>.</p>
+<pre><code class="language-r">vehicle_crimes &lt;- fromJSON(response, flatten = TRUE) %&gt;% 
+  data.frame()
+
+# let's have a look at the structure of the dataframe
+str(vehicle_crimes)
+</code></pre>
+<pre><code>## 'data.frame':	9 obs. of  13 variables:
+##  $ category               : chr  &quot;vehicle-crime&quot; &quot;vehicle-crime&quot; &quot;vehicle-crime&quot; &quot;vehicle-crime&quot; ...
+##  $ location_type          : chr  &quot;Force&quot; &quot;Force&quot; &quot;Force&quot; &quot;Force&quot; ...
+##  $ context                : chr  &quot;&quot; &quot;&quot; &quot;&quot; &quot;&quot; ...
+##  $ persistent_id          : chr  &quot;cb7458646b734199c1728e7ba2b0cc375cb792a1d181092c30e3a8a217838c32&quot; &quot;1b5a72e887633314e5f0f570e97a8112bc99781745db1b3c54f3a0815117628f&quot; &quot;b66c1dcefad0ced8cffde6924ae86bf36df004c84c48389c15db6e44a99baff6&quot; &quot;4d918317cd772b800243401b2deba7a91f11a86f9da0080d6dd9d84d4b9ef83f&quot; ...
+##  $ id                     : int  81238108 81238172 81238305 81239441 81238244 81239576 81239620 81238098 81238168
+##  $ location_subtype       : chr  &quot;&quot; &quot;&quot; &quot;&quot; &quot;&quot; ...
+##  $ month                  : chr  &quot;2020-02&quot; &quot;2020-02&quot; &quot;2020-02&quot; &quot;2020-02&quot; ...
+##  $ location.latitude      : chr  &quot;51.510986&quot; &quot;51.504594&quot; &quot;51.497118&quot; &quot;51.515486&quot; ...
+##  $ location.longitude     : chr  &quot;-3.207382&quot; &quot;-3.169997&quot; &quot;-3.192711&quot; &quot;-3.182295&quot; ...
+##  $ location.street.id     : int  1082838 1083004 1081632 1083744 1081632 1081632 1081601 1081626 1081618
+##  $ location.street.name   : chr  &quot;On or near Heol Wernlas&quot; &quot;On or near Dovedale Close&quot; &quot;On or near Petrol Station&quot; &quot;On or near Heath Park Lane&quot; ...
+##  $ outcome_status.category: chr  &quot;Under investigation&quot; &quot;Investigation complete; no suspect identified&quot; &quot;Investigation complete; no suspect identified&quot; &quot;Investigation complete; no suspect identified&quot; ...
+##  $ outcome_status.date    : chr  &quot;2020-02&quot; &quot;2020-03&quot; &quot;2020-03&quot; &quot;2020-02&quot; ...
+</code></pre>
+<p>We can now start looking at what we&rsquo;ve got going on in our dataset. First off, we&rsquo;re going to get rid of some of the columns we don&rsquo;t need. We&rsquo;ll be overwriting the data by storing it in the same dataframe. dplyr&rsquo;s <code>select()</code> allows us to pick what we want and give it a new name into the bargain - we used <code>rename()</code> last time. Both work.</p>
+<p>I tend to keep IDs for matching with things later, to check crime outcomes - but today for one time only we&rsquo;ll get rid of it.</p>
+<pre><code class="language-r">vehicle_crimes &lt;- select(vehicle_crimes,
+             month, category,
+             location = location.street.name,
+             long = location.longitude,
+             lat = location.latitude,
+             outcome = outcome_status.category)
+</code></pre>
+<p>Great, so we&rsquo;ll group the crimes to see what is happening - we could do this on any one of the columns but for now we&rsquo;ll do it on outcome.</p>
+<p>We&rsquo;ll use <code>mutate()</code> and <code>recode()</code> to simplify one of the descriptions (old = new), then we&rsquo;ll z to get the unique objects and s<code>ummarise()</code> by counting (<code>n()</code>) the number of times it occurs before we <code>arrange()</code> in descending (<code>desc()</code>) order.</p>
+<pre><code class="language-r">outcomes &lt;- vehicle_crimes %&gt;%
+  mutate(outcome = recode(outcome, 
+                          &quot;Investigation complete; no suspect identified&quot; = &quot;No suspect identified&quot;)) %&gt;%
+  group_by(outcome) %&gt;%
+  summarise(outcome_count = n()) %&gt;%
+  arrange(desc(outcome_count))
+</code></pre>
+<h3 id="a-really-simple-chart">A really simple chart</h3>
+<p>One of the tools I use a lot, and get all of my students to use, is the 
+<a href="https://ft-interactive.github.io/visual-vocabulary/" target="_blank" rel="noopener">FT&rsquo;s Visual Vocabulary</a> which was designed to help the FT&rsquo;s team pick the right kind of tool for the job. I&rsquo;ll be posting more about data visualisation soon.</p>
+<p>I&rsquo;m going to build a really simple column chart, using ggplot2. <code>ggplot()</code> has a <code>+</code> symbol which is like the pipe from dplyr and means <em>AND THEN</em>. So, we tell <code>ggplot()</code> what dataframe to work on, and what data to work on for the axes (<code>aes()</code>) and then what type of chart to work with.</p>
+<pre><code class="language-r">ggplot(outcomes, aes(x = outcome, y = outcome_count)) +
+  geom_col()
+</code></pre>
+<p><img src="/tutorial/tidyverse/first-graph_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<p>ggplot2 has loads of options to play with to make a better looking chart, but this will give you an idea and an introduction to it. We&rsquo;ll look at this more in due course.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>As well as importing files, it is possible to get data straight from a web server that allows it using an API - here we&rsquo;ve built an API call, got JSON data back and turned it into a dataframe before going over the pivot table (group by function) and introducing a simple chart.</p>
+
+          </div>
+
+          
+
+
+
+          
+          <div class="article-widget">
+            
+<div class="post-nav">
+  
+  
+  
+  <div class="post-nav-item">
+    <div class="meta-nav">Previous</div>
+    <a href="/tutorial/tidyverse/pivot-tables-in-r/" rel="next">Pivot tables</a>
+  </div>
+  
+  
+</div>
+
+          </div>
+          
+        </div>
+
+        <div class="body-footer">
+          <p>Last updated on Apr 15, 2020</p>
+
+          
+
+
+          
+
+        </div>
+
+      </article>
+
+      <footer class="site-footer">
+  
+
+  <p class="powered-by">
+    
+
+    Powered by the
+    <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
+    <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
+
+    
+  </p>
+</footer>
+
+
+    </main>
+  </div>
+</div>
+
+
+      
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+
+      
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/highlight.min.js" integrity="sha256-eOgo0OtLL4cdq7RdwRUiGKLX9XsIJ7nGhWEKbohmVAQ=" crossorigin="anonymous"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/languages/r.min.js"></script>
+        
+      
+
+    
+
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.5.1/leaflet.js" integrity="sha256-EErZamuLefUnbMBQbsEqu1USa+btR2oIlCpBJbyD4/g=" crossorigin="anonymous"></script>
+    
+
+    
+    
+    <script>const code_highlighting = true;</script>
+    
+
+    
+    
+    <script>const isSiteThemeDark = false;</script>
+    
+
+    
+    
+    
+    
+    
+    
+    <script>
+      const search_config = {"indexURI":"/index.json","minLength":1,"threshold":0.3};
+      const i18n = {"no_results":"No results found","placeholder":"Search...","results":"results found"};
+      const content_type = {
+        'post': "Posts",
+        'project': "Projects",
+        'publication' : "Publications",
+        'talk' : "Talks"
+        };
+    </script>
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.1.1/anchor.min.js" integrity="sha256-pB/deHc9CGfFpJRjC43imB29Rse8tak+5eXqntO94ck=" crossorigin="anonymous"></script>
+    <script>
+      anchors.add();
+    </script>
+    
+
+    
+    
+    <script id="search-hit-fuse-template" type="text/x-template">
+      <div class="search-hit" id="summary-{{key}}">
+      <div class="search-hit-content">
+        <div class="search-hit-name">
+          <a href="{{relpermalink}}">{{title}}</a>
+          <div class="article-metadata search-hit-type">{{type}}</div>
+          <p class="search-hit-description">{{snippet}}</p>
+        </div>
+      </div>
+      </div>
+    </script>
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.1/fuse.min.js" integrity="sha256-VzgmKYmhsGNNN4Ph1kMW+BjoYJM2jV5i4IlFoeZA9XI=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
+    
+
+    
+    
+
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+    
+    
+    <script src="/js/academic.min.37431be2d92d7fb0160054761ab79602.js"></script>
+
+    
+
+
+
+
+
+
+  
+  
+
+  
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

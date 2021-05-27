@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>5 on Glyn Mottershead</title>
-    <link>https://www.glynmottershead.com/publication_types/5/</link>
-    <description>Recent content in 5 on Glyn Mottershead</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en-gb</language>
-    <lastBuildDate>Sun, 01 Jul 2012 00:00:00 +0100</lastBuildDate>
-    
-	<atom:link href="https://www.glynmottershead.com/publication_types/5/index.xml" rel="self" type="application/rss+xml" />
-    
+    <title>5 | Glyn Mottershead</title>
+    <link>/publication_types/5/</link>
+      <atom:link href="/publication_types/5/index.xml" rel="self" type="application/rss+xml" />
+    <description>5</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Sun, 01 Jul 2012 00:00:00 +0100</lastBuildDate>
+    <image>
+      <url>img/map[gravatar:%!s(bool=true) shape:circle]</url>
+      <title>5</title>
+      <link>/publication_types/5/</link>
+    </image>
     
     <item>
       <title>21st Century Journalism Handbook</title>
-      <link>https://www.glynmottershead.com/publication/21st-century-journalism-handbook/</link>
+      <link>/publication/21st-century-journalism-handbook/</link>
       <pubDate>Sun, 01 Jul 2012 00:00:00 +0100</pubDate>
-      
-      <guid>https://www.glynmottershead.com/publication/21st-century-journalism-handbook/</guid>
-      <description>The 21st Century Journalism Handbook is a comprehensive guide to the core principles and practices essential to the modern journalist.</description>
+      <guid>/publication/21st-century-journalism-handbook/</guid>
+      <description></description>
     </item>
     
   </channel>

@@ -1,59 +1,16 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Overview on Glyn Mottershead</title>
-    <link>https://www.glynmottershead.com/tutorial/</link>
-    <description>Recent content in Overview on Glyn Mottershead</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en-gb</language>
-    <lastBuildDate>Wed, 20 Mar 2019 13:53:00 +0000</lastBuildDate>
-    
-	<atom:link href="https://www.glynmottershead.com/tutorial/index.xml" rel="self" type="application/rss+xml" />
-    
-    
-    <item>
-      <title>Hex Mapping</title>
-      <link>https://www.glynmottershead.com/tutorial/hex-mapping/</link>
-      <pubDate>Fri, 07 Jun 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://www.glynmottershead.com/tutorial/hex-mapping/</guid>
-      <description>Mapping and convenient lies Size isn&amp;rsquo;t everything When thinking about maps, it is important to understand what we are trying to show. In the last tutorial
-&amp;ldquo;The largest constituency is Ross, Skye and Lochaber. It measures approximately 12,000 square kilometres. The smallest constituency is Islington North at 7.35 square kilometres.&amp;rdquo; [From the UK Parliament site](&amp;ldquo;https://www.parliament.uk/about/how/elections-and-voting/constituencies/#jump-link-2&amp;quot;)</description>
-    </item>
-    
-    <item>
-      <title>Pivot tables in R - looking at police data</title>
-      <link>https://www.glynmottershead.com/tutorial/pivot-tables-in-r-looking-at-police-data/</link>
-      <pubDate>Tue, 09 Apr 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://www.glynmottershead.com/tutorial/pivot-tables-in-r-looking-at-police-data/</guid>
-      <description>Looking at police data using Tidyverse tools The Tidyverse tools are one of my favourite things and made my R coding experience much simpler. Most of the things I&amp;rsquo;ll be posting will use them in one way or another.
-We&amp;rsquo;re going to find out what happens when someone reports a stolen bicycle - a friend seems to believe the police do nothing, so let&amp;rsquo;s investigate what actually happens.
-Downloading the data I&amp;rsquo;ve downloaded a month&amp;rsquo;s worth of data for South Wales Police from data.</description>
-    </item>
-    
-    <item>
-      <title>Mapping the article 50 petition in R and ggplot - part 2</title>
-      <link>https://www.glynmottershead.com/tutorial/mapping-the-article-50-petition-in-r-and-ggplot-part-2/</link>
-      <pubDate>Mon, 01 Apr 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://www.glynmottershead.com/tutorial/mapping-the-article-50-petition-in-r-and-ggplot-part-2/</guid>
-      <description>Mapping in R - using ggplot2, part two In the previous tutorial we looked at getting data from web APIs in JSON and GeoJSON formats to create a simple map.
-This time we&amp;rsquo;ll be adapting code from Timo Grossenbacher to make our map more attractive.
-Getting started We need to reload the data again, so we&amp;rsquo;re going to get a different number of signatures than last time.
-I&amp;rsquo;m going to run this in one block and assume you can follow along, if not go back to the previous post.</description>
-    </item>
-    
-    <item>
-      <title>Mapping the article 50 petition in R and ggplot</title>
-      <link>https://www.glynmottershead.com/tutorial/mapping-the-article-50-petition-in-r-and-ggplot/</link>
-      <pubDate>Fri, 29 Mar 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://www.glynmottershead.com/tutorial/mapping-the-article-50-petition-in-r-and-ggplot/</guid>
-      <description>Mapping in R - using ggplot2 The Revoke Article 50 petition got my colleague and all-round codemeister Dr Martin Chorley and I talking.
-We started thinking about ways that we could see what the patterns for people signing were like.
-It was well into the millions when I started playing with ways of visualising where people who voted were located. The site can map all of the signatures (5,962,824 at the time of writing), but it also has an option to get the data in a machine-friendly json format.</description>
-    </item>
+    <title>Data Journalism | Glyn Mottershead</title>
+    <link>/tutorial/</link>
+      <atom:link href="/tutorial/index.xml" rel="self" type="application/rss+xml" />
+    <description>Data Journalism</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Mon, 27 Apr 2020 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>img/map[gravatar:%!s(bool=true) shape:circle]</url>
+      <title>Data Journalism</title>
+      <link>/tutorial/</link>
+    </image>
     
   </channel>
 </rss>

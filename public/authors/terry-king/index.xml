@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Terry King on Glyn Mottershead</title>
-    <link>https://www.glynmottershead.com/authors/terry-king/</link>
-    <description>Recent content in Terry King on Glyn Mottershead</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en-gb</language>
-    <lastBuildDate>Sat, 01 Aug 2009 00:00:00 +0100</lastBuildDate>
-    
-	<atom:link href="https://www.glynmottershead.com/authors/terry-king/index.xml" rel="self" type="application/rss+xml" />
-    
+    <title>Terry King | Glyn Mottershead</title>
+    <link>/authors/terry-king/</link>
+      <atom:link href="/authors/terry-king/index.xml" rel="self" type="application/rss+xml" />
+    <description>Terry King</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Sat, 01 Aug 2009 00:00:00 +0100</lastBuildDate>
+    <image>
+      <url>img/map[gravatar:%!s(bool=true) shape:circle]</url>
+      <title>Terry King</title>
+      <link>/authors/terry-king/</link>
+    </image>
     
     <item>
       <title>Learning and Knowledge Building with Web 2.0 Technologies: Implications for Teacher Education</title>
-      <link>https://www.glynmottershead.com/publication/learning-and-knowledge-building/</link>
+      <link>/publication/learning-and-knowledge-building/</link>
       <pubDate>Sat, 01 Aug 2009 00:00:00 +0100</pubDate>
-      
-      <guid>https://www.glynmottershead.com/publication/learning-and-knowledge-building/</guid>
-      <description>This paper seeks to draw together findings from a number of research studies to discuss the implications for the development of educational practices in Higher Education towards a student experience which is rich in authenticity.</description>
+      <guid>/publication/learning-and-knowledge-building/</guid>
+      <description></description>
     </item>
     
   </channel>
